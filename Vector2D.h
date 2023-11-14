@@ -29,6 +29,12 @@ public:
   friend bool operator==(const Vector2D &v1, const Vector2D &v2);
 
   friend std::ostream &operator<<(std::ostream &os, const Vector2D &v);
+
+  static Vector2D zero();
+  static Vector2D left(); 
+  static Vector2D right();
+  static Vector2D up();
+  static Vector2D down();
 };
 
 #endif /* !VECTOR2D_H_ */
