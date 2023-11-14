@@ -1,5 +1,6 @@
 # How to use:
 #   mkdir build
+#   mkdir resources
 #   cd build
 #   cmake ..
 #   make
