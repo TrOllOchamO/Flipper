@@ -19,7 +19,7 @@ find_package(SFML 2.5 COMPONENTS graphics window audio system REQUIRED)
 
 add_executable(Flipper
     #Tout nos executable
-    Flipper.cc
+    main.cc
     Vector2D.cc
     #TestFlipper.cc
     #googletest/googletest/src/gtest-all.cc
