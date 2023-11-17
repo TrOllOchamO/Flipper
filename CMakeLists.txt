@@ -21,6 +21,7 @@ add_executable(Flipper
     #Tout nos executable
     main.cc
     Vector2D.cc
+    Ball.cc
     #TestFlipper.cc
     #googletest/googletest/src/gtest-all.cc
 )

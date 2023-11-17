@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 #ifndef VECTOR2D_H_
 #define VECTOR2D_H_
@@ -15,7 +16,7 @@ public:
   Vector2D &operator*=(const float &f);
   Vector2D &normalize();
 
-  float lenght(const Vector2D &vect);
+  float length();
   float dot(const Vector2D &vect1, const Vector2D &vect2);
   Vector2D triple_cross_product(const Vector2D &vect1, const Vector2D &vect2, const Vector2D &vect3);
   Vector2D normal_clockwise(const Vector2D &vect);
@@ -35,6 +36,8 @@ public:
   static Vector2D right();
   static Vector2D up();
   static Vector2D down();
+
+  sf::Vector2f to_sfml(); 
 };
 
 #endif /* !VECTOR2D_H_ */

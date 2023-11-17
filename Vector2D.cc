@@ -87,8 +87,8 @@ Vector2D Vector2D::normal_counter_clockwise(const Vector2D &vect) {
     return Vector2D(-vect.y, vect.x);
 }
 
-float Vector2D::lenght(const Vector2D &vect) {
-    return sqrt(vect.x*vect.x + vect.y*vect.y);
+float Vector2D::length() {
+    return sqrt(x*x + y*y);
 }
 
 Vector2D Vector2D::zero() {
@@ -109,4 +109,8 @@ Vector2D Vector2D::up() {
 
 Vector2D Vector2D::down() {
     return Vector2D(0, -1);
+}
+
+sf::Vector2f Vector2D::to_sfml() {
+    return sf::Vector2f(x,y);
 }
