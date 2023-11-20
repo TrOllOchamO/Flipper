@@ -21,7 +21,6 @@ int main() {
         }
         ball.move(dt);
         ball.render(window);
-        std::cout << ball.get_center_position() << "\n";
         window.display();
     }
 

@@ -29,3 +29,11 @@ std::vector<Vector2D> Rectangle::get_vertices() {
           Vector2D(pos.x, pos.y + height),
           Vector2D(pos.x + width, pos.y + height)};
 }
+
+void Rectangle::render(sf::RenderWindow &window){
+  sf::Vector2f size(width, height);
+  sf::RectangleShape shape(size);
+  shape.setFillColor(sf::Color::Green);
+  shape.setPosition(get_pos().to_sfml());
+  window.draw(shape);
+}

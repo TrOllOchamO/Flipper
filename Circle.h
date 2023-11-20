@@ -14,6 +14,8 @@ public:
 
   Vector2D get_center();
   Vector2D get_futhest_point(const Vector2D &direction);
+
+  void render(sf::RenderWindow &window);
 };
 
 #endif /* !CIRCLE_H_ */

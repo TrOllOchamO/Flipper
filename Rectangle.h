@@ -16,6 +16,8 @@ public:
   Vector2D get_center();
   Vector2D get_futhest_point(const Vector2D &direction);
   std::vector<Vector2D> get_vertices();
+
+  void render(sf::RenderWindow &window);
 };
 
 #endif /* !RECTANGLE_H_ */
