@@ -1,7 +1,7 @@
 #include "Rectangle.h"
 
 Vector2D Rectangle::get_center() {
-  return Vector2D(pos.x + width / 2, pos.y + height / 2);
+  return Vector2D(this->get_pos().x + width / 2, this->get_pos().y + height / 2);
 }
 
 Vector2D Rectangle::get_futhest_point(const Vector2D &direction) {
@@ -22,6 +22,7 @@ Vector2D Rectangle::get_futhest_point(const Vector2D &direction) {
 }
 
 std::vector<Vector2D> Rectangle::get_vertices() {
+  const Vector2D pos = this->get_pos();
   return {
           pos,
           Vector2D(pos.x + width, pos.y), 

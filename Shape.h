@@ -5,7 +5,7 @@
 #define SHAPE_H_
 
 class Shape{
-protected:
+private:
   Vector2D pos;
 
 public:

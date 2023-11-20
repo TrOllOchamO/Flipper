@@ -1,6 +1,7 @@
 #include "Circle.h"
 
 Vector2D Circle::get_center() {
+  const Vector2D pos = this->get_pos();
   return Vector2D(pos.x + radius, pos.y + radius);
 }
 
