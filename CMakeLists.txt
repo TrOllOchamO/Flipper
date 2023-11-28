@@ -22,6 +22,10 @@ add_executable(Flipper
     main.cc
     Vector2D.cc
     Ball.cc
+    Circle.cc
+    Polygone.cc
+    Rectangle.cc
+    Shape.cc
     #TestFlipper.cc
     #googletest/googletest/src/gtest-all.cc
 )
