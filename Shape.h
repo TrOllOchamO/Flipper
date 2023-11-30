@@ -11,7 +11,7 @@ private:
 public:
   Shape(Vector2D pos) : pos(pos) {};
 
-  Vector2D get_pos();
+  Vector2D get_pos() const;
   void set_pos(Vector2D new_pos);
 
   virtual Vector2D get_center() const = 0;

@@ -1,10 +1,10 @@
 #include "Rectangle.h"
 
-Vector2D Rectangle::get_center() {
+Vector2D Rectangle::get_center() const {
   return Vector2D(this->get_pos().x + width / 2, this->get_pos().y + height / 2);
 }
 
-Vector2D Rectangle::get_futhest_point(const Vector2D &direction) {
+Vector2D Rectangle::get_futhest_point(const Vector2D &direction) const{
   const std::vector<Vector2D> vertices = get_vertices();
   Vector2D futhest_point = vertices[0];
   float best_score = direction.dot(futhest_point);
@@ -21,7 +21,7 @@ Vector2D Rectangle::get_futhest_point(const Vector2D &direction) {
   return futhest_point;
 }
 
-std::vector<Vector2D> Rectangle::get_vertices() {
+std::vector<Vector2D> Rectangle::get_vertices() const {
   const Vector2D pos = this->get_pos();
   return {
           pos,

@@ -12,8 +12,9 @@ private:
 public:
   Circle(Vector2D pos, float radius): Shape(pos), radius(radius) {};
 
-  Vector2D get_center();
-  Vector2D get_futhest_point(const Vector2D &direction);
+  Vector2D get_center() const override;
+  Vector2D get_futhest_point(const Vector2D &direction) const override;
+  float get_radius() const;
 
   void render(sf::RenderWindow &window);
 };

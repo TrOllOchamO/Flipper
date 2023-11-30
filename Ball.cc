@@ -55,3 +55,7 @@ void Ball::check_if_outside(){
         bounceX();
     }
 }
+
+const Shape * Ball::get_shape() const {
+    return &this->shape;
+}
