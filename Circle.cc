@@ -16,7 +16,7 @@ Vector2D Circle::get_futhest_point(const Vector2D &direction) const {
 void Circle::render(sf::RenderWindow &window, sf::Color color){
   sf::CircleShape shape(radius);
   shape.setFillColor(color);
-  shape.setPosition(get_pos().to_sfml());
+  shape.setPosition(get_pos());
   window.draw(shape);
 }
 

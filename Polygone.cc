@@ -39,9 +39,7 @@ Vector2D Polygone::get_center() const {
     sum_center += b * w;
     sum_weight += w;
   }
-  sum_center.x/=sum_weight;
-  sum_center.y/=sum_weight;
-  return sum_center;
+  return sum_center / sum_weight;
 }
 
 Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
@@ -69,10 +67,10 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   int n = points.size();
   sf::ConvexShape convex;
   convex.setPointCount(n);
-  convex.setPosition(get_pos().to_sfml());
+  convex.setPosition(get_pos());
   convex.setFillColor(color);
   for (int i=0; i<n; ++i) {
-    convex.setPoint(i, points[i].to_sfml());
+    convex.setPoint(i, points[i]);
   }
   window.draw(convex);
 } 

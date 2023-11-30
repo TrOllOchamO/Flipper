@@ -11,7 +11,7 @@ void Ball::update_shape() {
 void Ball::render(sf::RenderWindow &window, sf::Color color){
     sf::CircleShape shape(radius);
     shape.setFillColor(color);
-    shape.setPosition(pos.to_sfml());
+    shape.setPosition(pos);
     window.draw(shape);
 }
 

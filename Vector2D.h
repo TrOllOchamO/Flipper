@@ -14,7 +14,6 @@ public:
   Vector2D& normalize();
   float length() const;
   float dot(const Vector2D &other) const;
-  sf::Vector2f to_sfml(); 
 
   // static methods operations
   static float length(const Vector2D &v);
@@ -35,14 +34,17 @@ public:
   Vector2D &operator+=(const Vector2D &v);
   Vector2D &operator-=(const Vector2D &v);
   Vector2D &operator*=(const float &f);
+  Vector2D &operator/=(const float &f);
   friend Vector2D operator-(const Vector2D &v);
   friend Vector2D operator-(const Vector2D &v1, const Vector2D &v2);
   friend Vector2D operator+(const Vector2D &v1, const Vector2D &v2);
   friend Vector2D operator*(const Vector2D &v, float f);
   friend Vector2D operator*(float f, const Vector2D &v);
+  friend Vector2D operator/(const Vector2D &v, float f);
   friend bool operator==(const Vector2D &v1, const Vector2D &v2);
   friend std::ostream &operator<<(std::ostream &os, const Vector2D &v);
   friend std::ostream &operator<<(std::ostream& os, const std::vector<Vector2D> &vector);
+  operator sf::Vector2f();
 };
 
 #endif /* !VECTOR2D_H_ */

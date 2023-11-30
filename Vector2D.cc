@@ -19,8 +19,6 @@ Vector2D Vector2D::get_normalized_vector(const Vector2D &v) {
   return copy.normalize();
 }
 
-sf::Vector2f Vector2D::to_sfml() { return sf::Vector2f(x, y); }
-
 float Vector2D::length(const Vector2D &v) {
   return sqrt(v.x * v.x + v.y * v.y);
 }
@@ -65,6 +63,12 @@ Vector2D &Vector2D::operator*=(const float &f) {
   return *this;
 }
 
+Vector2D &Vector2D::operator/=(const float &f) {
+  this->x /= f;
+  this->y /= f;
+  return *this;
+}
+
 Vector2D operator-(const Vector2D &v) {
   Vector2D result = {-v.x, -v.y};
 
@@ -90,6 +94,11 @@ Vector2D operator+(const Vector2D &v1, const Vector2D &v2) {
 }
 
 Vector2D operator*(const Vector2D &v, float f) {
+  Vector2D result = v;
+  return result *= f;
+}
+
+Vector2D operator/(const Vector2D &v, float f) {
   Vector2D result = v;
   return result *= f;
 }
@@ -121,3 +130,10 @@ std::ostream& operator<<(std::ostream& os, const std::vector<Vector2D> &vector) 
 bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
 }
+<<<<<<< HEAD
+=======
+
+Vector2D::operator sf::Vector2f(){
+  return sf::Vector2f(x, y);
+}
+>>>>>>> 58dbb6dc8345e9ec6b0d90f9472f8580a49d8ddd
