@@ -104,6 +104,21 @@ std::ostream &operator<<(std::ostream &os, const Vector2D &v) {
   return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const std::vector<Vector2D> &vector) {
+    os << "[";
+
+    size_t vectorSize = vector.size();
+    for (size_t i = 0; i < vectorSize; ++i) {
+        os << vector[i];
+        if (i != vectorSize -1) {
+            os << ", ";
+        }
+    }
+    os << "]";
+    return os;
+}
+
 bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
 }
+
