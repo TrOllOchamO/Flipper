@@ -16,7 +16,7 @@ public:
   Vector2D get_futhest_point(const Vector2D &direction) const override;
   float get_radius() const;
 
-  void render(sf::RenderWindow &window);
+  void render(sf::RenderWindow &window, sf::Color color);
 };
 
 #endif /* !CIRCLE_H_ */

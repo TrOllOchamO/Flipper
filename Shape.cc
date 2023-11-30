@@ -1,6 +1,6 @@
 #include "Shape.h"
 
-Vector2D Shape::get_pos() {
+Vector2D Shape::get_pos() const {
   return pos;
 }
 

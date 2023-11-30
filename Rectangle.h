@@ -17,7 +17,7 @@ public:
   Vector2D get_futhest_point(const Vector2D &direction) const override;
   std::vector<Vector2D> get_vertices() const;
 
-  void render(sf::RenderWindow &window);
+  void render(sf::RenderWindow &window, sf::Color color);
 };
 
 #endif /* !RECTANGLE_H_ */

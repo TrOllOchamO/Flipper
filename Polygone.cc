@@ -70,6 +70,7 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   sf::ConvexShape convex;
   convex.setPointCount(n);
   convex.setPosition(get_pos().to_sfml());
+  convex.setFillColor(color);
   for (int i=0; i<n; ++i) {
     convex.setPoint(i, points[i].to_sfml());
   }

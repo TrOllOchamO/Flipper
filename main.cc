@@ -3,6 +3,8 @@
 #include "Ball.h"
 #include "Vector2D.h"
 #include "Polygone.h"
+#include "Rectangle.h"
+#include "Collision.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(400, 800), "Flipper");
@@ -17,6 +19,10 @@ int main() {
     p.add_point(Vector2D(250,600));
     p.add_point(Vector2D(100,400));
 
+    sf::Color c = sf::Color::Green; 
+
+    Rectangle r(Vector2D(50,300),200,50);
+
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
 
@@ -28,8 +34,14 @@ int main() {
             }
         }
         ball.move(dt);
-        ball.render(window);
-        p.render(window);
+        c = sf::Color::Green;
+        if(Collision::is_colliding(ball.get_shape(),&r)){
+            std::cout << "oui\n";
+            c=sf::Color::Red;
+        }
+        r.render(window, c);
+        ball.render(window, c);
+        // p.render(window, c);
         window.display();
     }
 
