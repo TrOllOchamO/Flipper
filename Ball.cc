@@ -1,10 +1,11 @@
 #include "Ball.h"
 #include "Vector2D.h"
+#include <SFML/Graphics/Color.hpp>
 #include <stdio.h>
 
-void Ball::render(sf::RenderWindow &window){
+void Ball::render(sf::RenderWindow &window, sf::Color color){
     sf::CircleShape shape(radius);
-    shape.setFillColor(sf::Color::Green);
+    shape.setFillColor(color);
     shape.setPosition(pos.to_sfml());
     window.draw(shape);
 }

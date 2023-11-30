@@ -61,7 +61,7 @@ Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
   return futhest_point;
 }
 
-void Polygone::render(sf::RenderWindow &window){
+void Polygone::render(sf::RenderWindow &window, sf::Color color){
   if(!is_convex()){
     std::cerr << "Polygone non convex\n";
     return;

@@ -16,7 +16,7 @@ public:
   //CONSTRUCTEUR MODIFIER A CAUSE DE L4EXEMPLE                           Vector2D::zero()
   Ball(Vector2D pos, float radius) : pos(pos), radius(radius), velocity(Vector2D(150,-750)), gravity(Vector2D::down()*750) {};
   
-  void render(sf::RenderWindow &window);
+  void render(sf::RenderWindow &window, sf::Color color);
   void move(float dt);
   void apply_gravity(float dt);
   void bounceX();
