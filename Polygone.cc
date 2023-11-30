@@ -22,7 +22,6 @@ bool Polygone::is_convex(){
     Vector2D b = points[i+1%n];
     Vector2D c = points[i+2%n];
     double res = (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
-    std::cout << res << "\n";
     if((comp && res<0) || (!comp && res>=0)) return false;  
   }
   return true;
@@ -63,10 +62,14 @@ Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
 }
 
 void Polygone::render(sf::RenderWindow &window){
-  if(!is_convex()) return;
+  if(!is_convex()){
+    std::cerr << "Polygone non convex\n";
+    return;
+  } 
   int n = points.size();
   sf::ConvexShape convex;
   convex.setPointCount(n);
+  convex.setPosition(get_pos().to_sfml());
   for (int i=0; i<n; ++i) {
     convex.setPoint(i, points[i].to_sfml());
   }
