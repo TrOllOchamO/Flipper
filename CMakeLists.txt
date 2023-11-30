@@ -39,7 +39,7 @@ target_include_directories(Flipper
 )
 
 # Lier l'exécutable avec les bibliothèques SFML
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-audio sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-audio sfml-system gtest)
 
 target_compile_options(Flipper
   PRIVATE
@@ -49,10 +49,13 @@ target_compile_options(Flipper
 # Copiez les fichiers de ressources dans le répertoire de build 
 file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
 
+if(BUILD_TESTS)
+    enable_testing()
+    add_test(NAME FlipperTest COMMAND Flipper)
+endif()
 
 set_target_properties(Flipper
   PROPERTIES
     CXX_STANDARD 17
     CXX_EXTENSIONS OFF
 )
-
