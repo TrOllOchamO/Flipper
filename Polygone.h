@@ -17,6 +17,8 @@ public:
 
     Vector2D get_center() const override ;
     Vector2D get_futhest_point(const Vector2D &direction) const override;
+
+    void render(sf::RenderWindow &window);
 };
 
 #endif /* !POLYGONE_H_ */

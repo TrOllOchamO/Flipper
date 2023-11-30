@@ -46,5 +46,29 @@ Vector2D Polygone::get_center() const {
 }
 
 Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
-  return Vector2D(0,0);
+  const std::vector<Vector2D> vertices = points;
+  Vector2D futhest_point = vertices[0];
+  float best_score = direction.dot(futhest_point);
+
+  // search for a point with a superior score
+  for (int i = 1; i < 4; ++i) {
+    const float new_score = direction.dot(vertices[i]);
+    if (new_score > best_score) {
+      best_score = new_score;
+      futhest_point = vertices[i];
+    }
+  }
+
+  return futhest_point;
 }
+
+void Polygone::render(sf::RenderWindow &window){
+  if(!is_convex()) return;
+  int n = points.size();
+  sf::ConvexShape convex;
+  convex.setPointCount(n);
+  for (int i=0; i<n; ++i) {
+    convex.setPoint(i, points[i].to_sfml());
+  }
+  window.draw(convex);
+} 
