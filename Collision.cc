@@ -1,4 +1,5 @@
 #include "Collision.h"
+#include <iostream>
 
 bool Collision::is_colliding(const Shape *s1, const Shape *s2) {
   // get the first direction vector
@@ -15,7 +16,7 @@ bool Collision::is_colliding(const Shape *s1, const Shape *s2) {
 
   while (true) {
     // get an other point on the Minkowski difference
-    Vector2D A = Collision::get_support_point(s1, s2, direction);
+    const Vector2D A = Collision::get_support_point(s1, s2, direction);
 
     // if the new point didn't pass the origin then the origin can't be inside
     // the Minkowski difference and by extention the 2 shapes aren't colliding,
@@ -40,19 +41,17 @@ Vector2D Collision::get_support_point(const Shape *s1, const Shape *s2, Vector2D
   return s1->get_futhest_point(direction) - s2->get_futhest_point(-direction);
 }
 
-bool Collision::handle_simplex(std::vector<Vector2D> &simplex, Vector2D &direction)
-{
+bool Collision::handle_simplex(std::vector<Vector2D> &simplex, Vector2D &direction) {
     if (simplex.size() == 2) { return handle_line_simplex(simplex, direction); }
     return handle_triangle_simplex(simplex, direction);
 }
 
-bool Collision::handle_line_simplex(std::vector<Vector2D> &simplex, Vector2D &direction)
-{
-    Vector2D B = simplex[0];
-    Vector2D A = simplex[1];
+bool Collision::handle_line_simplex(std::vector<Vector2D> &simplex, Vector2D &direction) {
+    const Vector2D B = simplex[0];
+    const Vector2D A = simplex[1];
 
-    Vector2D AB = B - A;
-    Vector2D OA = -A; // == (0, 0) - A
+    const Vector2D AB = B - A;
+    const Vector2D OA = -A; // == (0, 0) - A
 
     // get the vector perpendicular to AB and pointing toward the origin
     Vector2D ABPerp = Vector2D::triple_cross_product(AB, OA, AB);
@@ -65,15 +64,14 @@ bool Collision::handle_line_simplex(std::vector<Vector2D> &simplex, Vector2D &di
     return false;
 }
 
-bool Collision::handle_triangle_simplex(std::vector<Vector2D> &simplex, Vector2D &direction)
-{
-    Vector2D A = simplex[2];
-    Vector2D B = simplex[1];
-    Vector2D C = simplex[0];
+bool Collision::handle_triangle_simplex(std::vector<Vector2D> &simplex, Vector2D &direction) {
+    const Vector2D A = simplex[2];
+    const Vector2D B = simplex[1];
+    const Vector2D C = simplex[0];
 
-    Vector2D AB = B - A;
-    Vector2D AC = C - A;
-    Vector2D AO = -A; // == (0, 0) - A
+    const Vector2D AB = B - A;
+    const Vector2D AC = C - A;
+    const Vector2D AO = -A; // == (0, 0) - A
 
     Vector2D ABPerp = Vector2D::triple_cross_product(AC, AB, AB);
     if (Vector2D::dot(ABPerp, AO) > 0) // if the origin is in the region AB

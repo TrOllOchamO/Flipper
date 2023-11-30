@@ -3,6 +3,11 @@
 #include <SFML/Graphics/Color.hpp>
 #include <stdio.h>
 
+  
+void Ball::update_shape() {
+    shape.set_pos(pos);
+}
+
 void Ball::render(sf::RenderWindow &window, sf::Color color){
     sf::CircleShape shape(radius);
     shape.setFillColor(color);
@@ -18,6 +23,7 @@ void Ball::move(float dt){
     apply_gravity(dt);
     check_if_outside();
     pos += velocity * dt;
+    update_shape();
 }
 
 void Ball::apply_gravity(float dt){

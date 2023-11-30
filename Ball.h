@@ -14,6 +14,8 @@ private:
   Vector2D velocity;
   Vector2D gravity;
 
+  void update_shape();
+
 public:
   //CONSTRUCTEUR MODIFIER A CAUSE DE L'EXEMPLE                                  Vector2D::zero()
   Ball(Vector2D pos, float radius) : pos(pos), radius(radius), shape(pos, radius), velocity(Vector2D(150,-750)), gravity(Vector2D::down()*750) {};

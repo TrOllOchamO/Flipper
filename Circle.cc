@@ -7,9 +7,9 @@ Vector2D Circle::get_center() const {
 }
 
 Vector2D Circle::get_futhest_point(const Vector2D &direction) const {
-  const Vector2D center = get_center();
-  const Vector2D direction_unit = Vector2D(direction).normalize();
-  const Vector2D futhest_point = center + direction_unit * radius;
+  const Vector2D center = this->get_center();
+  const Vector2D direction_unit = Vector2D::get_normalized_vector(direction);
+  const Vector2D futhest_point = center + (direction_unit * radius);
   return futhest_point;
 }
 

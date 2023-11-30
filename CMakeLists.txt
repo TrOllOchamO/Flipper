@@ -27,8 +27,8 @@ add_executable(Flipper
     Rectangle.cc
     Shape.cc
     Collision.cc
-    #TestFlipper.cc
-    #googletest/googletest/src/gtest-all.cc
+    # TestFlipper.cc
+    # googletest/googletest/src/gtest-all.cc
 )
 
 #Pour les tests qu'on devra faire
