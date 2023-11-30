@@ -122,3 +122,4 @@ bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
 }
 
+sf::Vector2f Vector2D::to_sfml() { return sf::Vector2f(x, y); }

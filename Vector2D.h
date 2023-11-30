@@ -42,7 +42,7 @@ public:
   friend Vector2D operator*(float f, const Vector2D &v);
   friend bool operator==(const Vector2D &v1, const Vector2D &v2);
   friend std::ostream &operator<<(std::ostream &os, const Vector2D &v);
-  // TODO overload stream operator for vector<Vectro2D>
+  friend std::ostream &operator<<(std::ostream& os, const std::vector<Vector2D> &vector);
 };
 
 #endif /* !VECTOR2D_H_ */
