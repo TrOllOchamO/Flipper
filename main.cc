@@ -5,11 +5,18 @@
 #include "Polygone.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(400, 800), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(400, 800), "Flipper");
 
     sf::Clock clock;
     Ball ball(Vector2D(100, 500), 8);
- 
+    
+    Polygone p(Vector2D(10,10));
+
+    p.add_point(Vector2D(0,0));
+    p.add_point(Vector2D(250,500));
+    p.add_point(Vector2D(250,600));
+    p.add_point(Vector2D(100,400));
+
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
 
@@ -22,6 +29,7 @@ int main() {
         }
         ball.move(dt);
         ball.render(window);
+        p.render(window);
         window.display();
     }
 
