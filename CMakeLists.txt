@@ -26,6 +26,7 @@ add_executable(Flipper
     Polygone.cc
     Rectangle.cc
     Shape.cc
+    Collision.cc
     #TestFlipper.cc
     #googletest/googletest/src/gtest-all.cc
 )
