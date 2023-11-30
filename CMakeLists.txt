@@ -1,24 +1,17 @@
-# How to use:
-#   mkdir build
-#   cd build
-#   cmake ..
-#   make
-#   ./Flipper
-
 cmake_minimum_required(VERSION 3.10)
 
 project(Flipper)
- 
+
 set(SFML_PATH "/usr/include/")
-#Les deux truc là c'est le chemin vers le répertoir ou vous avez installer sfml 
 set(SFML_DIR "${SFML_PATH}SFML/cmake/Modules")
 set(CMAKE_PREFIX_PATH "${SFML_PATH}/usr/include/SFML")
 
 find_package(SFML 2.5 COMPONENTS graphics window audio system REQUIRED)
 
+# Add the googletest library
+add_subdirectory(googletest)
 
 add_executable(Flipper
-    #Tout nos executable
     main.cc
     Vector2D.cc
     Ball.cc
@@ -27,35 +20,56 @@ add_executable(Flipper
     Rectangle.cc
     Shape.cc
     Collision.cc
-    # TestFlipper.cc
-    # googletest/googletest/src/gtest-all.cc
 )
 
-#Pour les tests qu'on devra faire
 target_include_directories(Flipper
-  PRIVATE
+    PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest"
 )
 
-# Lier l'exécutable avec les bibliothèques SFML
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-audio sfml-system gtest)
+# Link the executable with SFML libraries
+target_link_libraries(Flipper sfml-graphics sfml-window sfml-audio sfml-system)
 
 target_compile_options(Flipper
-  PRIVATE
+    PRIVATE
     "-Wall" "-Wextra" "-pedantic" "-g" "-O2"
 )
 
-# Copiez les fichiers de ressources dans le répertoire de build 
 file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
 
-if(BUILD_TESTS)
-    enable_testing()
-    add_test(NAME FlipperTest COMMAND Flipper)
-endif()
-
 set_target_properties(Flipper
-  PROPERTIES
+    PROPERTIES
     CXX_STANDARD 17
     CXX_EXTENSIONS OFF
 )
+
+# Add test executable and link with gtest
+add_executable(TestFlipper
+    TestFlipper.cc
+    # Add other test files as needed
+)
+
+target_include_directories(TestFlipper
+    PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest"
+)
+
+target_link_libraries(TestFlipper gtest gtest_main)
+
+# Add test executable and link with gtest
+add_executable(TestMain
+    TestMain.cc
+    # Add other test files as needed
+)
+
+target_include_directories(TestMain
+    PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest"
+)
+
+target_link_libraries(TestMain gtest gtest_main)
+
+
