@@ -39,9 +39,7 @@ Vector2D Polygone::get_center() const {
     sum_center += b * w;
     sum_weight += w;
   }
-  sum_center.x/=sum_weight;
-  sum_center.y/=sum_weight;
-  return sum_center;
+  return sum_center / sum_weight;
 }
 
 Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {

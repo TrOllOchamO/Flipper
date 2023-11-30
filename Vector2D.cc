@@ -65,6 +65,12 @@ Vector2D &Vector2D::operator*=(const float &f) {
   return *this;
 }
 
+Vector2D &Vector2D::operator/=(const float &f) {
+  this->x /= f;
+  this->y /= f;
+  return *this;
+}
+
 Vector2D operator-(const Vector2D &v) {
   Vector2D result = {-v.x, -v.y};
 
@@ -90,6 +96,11 @@ Vector2D operator+(const Vector2D &v1, const Vector2D &v2) {
 }
 
 Vector2D operator*(const Vector2D &v, float f) {
+  Vector2D result = v;
+  return result *= f;
+}
+
+Vector2D operator/(const Vector2D &v, float f) {
   Vector2D result = v;
   return result *= f;
 }
@@ -122,4 +133,3 @@ bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
 }
 
-sf::Vector2f Vector2D::to_sfml() { return sf::Vector2f(x, y); }
