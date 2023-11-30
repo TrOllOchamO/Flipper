@@ -19,8 +19,6 @@ Vector2D Vector2D::get_normalized_vector(const Vector2D &v) {
   return copy.normalize();
 }
 
-sf::Vector2f Vector2D::to_sfml() { return sf::Vector2f(x, y); }
-
 float Vector2D::length(const Vector2D &v) {
   return sqrt(v.x * v.x + v.y * v.y);
 }
@@ -133,3 +131,6 @@ bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
 }
 
+Vector2D::operator sf::Vector2f(){
+  return sf::Vector2f(x, y);
+}

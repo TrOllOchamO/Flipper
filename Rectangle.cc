@@ -34,6 +34,6 @@ void Rectangle::render(sf::RenderWindow &window, sf::Color color){
   sf::Vector2f size(width, height);
   sf::RectangleShape shape(size);
   shape.setFillColor(color);
-  shape.setPosition(get_pos().to_sfml());
+  shape.setPosition(get_pos());
   window.draw(shape);
 }
