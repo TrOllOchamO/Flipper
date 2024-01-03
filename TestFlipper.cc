@@ -5,6 +5,7 @@
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Polygone.h"
+#include "Collision.h"
 
 
 // =========================================================
@@ -321,6 +322,81 @@ TEST(POLYGONE___is_convex, Also_True) {
 
   EXPECT_FALSE(p.is_convex());
 }
+
+
+// =========================================================
+//
+// COLLISION
+//
+// =========================================================
+
+// are_colliding
+
+TEST(COLLISION___are_colliding, True) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(0, 0), 2, 2);
+
+  EXPECT_TRUE(Collision::are_colliding(&r1,&r2));
+}
+
+TEST(COLLISION___are_colliding, False) {
+  Rectangle r1(Vector2D(10, 0), 2, 2);
+  Rectangle r2(Vector2D(0, 0), 2, 2);
+
+  EXPECT_FALSE(Collision::are_colliding(&r1,&r2));
+}
+
+TEST(COLLISION___are_colliding, Almost) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(2, 0), 2, 2);
+
+  EXPECT_TRUE(Collision::are_colliding(&r1,&r2));
+}
+
+TEST(COLLISION___are_colliding, Almost_None) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(2.01, 0), 2, 2);
+
+  EXPECT_FALSE(Collision::are_colliding(&r1,&r2));
+}
+
+// get_minimum_dist
+
+// TEST(COLLISION___get_minimum_dist, True) {
+//   Rectangle r1(Vector2D(0, 0), 2, 2);
+//   Rectangle r2(Vector2D(0, 0), 2, 2);
+
+//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), sqrt(8));
+// }
+
+// TEST(COLLISION___get_minimum_dist, False) {
+//   Rectangle r1(Vector2D(10, 0), 2, 2);
+//   Rectangle r2(Vector2D(0, 0), 2, 2);
+
+//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 8);
+// }
+
+// TEST(COLLISION___get_minimum_dist, Almost) {
+//   Rectangle r1(Vector2D(0, 0), 2, 2);
+//   Rectangle r2(Vector2D(2, 0), 2, 2);
+
+//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 0);
+// }
+
+// TEST(COLLISION___get_minimum_dist, Almost_None) {
+//   Rectangle r1(Vector2D(0, 0), 2, 2);
+//   Rectangle r2(Vector2D(2.01, 0), 2, 2);
+
+//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 0.01);
+// }
+
+
+
+// get_minimum_dist_and_direction
+
+
+
+
 
 
 // =========================================================

@@ -52,6 +52,7 @@ add_executable(TestFlipper
     Rectangle.cc 
     Polygone.cc 
     Shape.cc
+    Collision.cc
     # Add other test files as needed
 )
 

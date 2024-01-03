@@ -143,16 +143,14 @@ bool Collision::handle_triangle_simplex(std::vector<Vector2D> &simplex, Vector2D
     const Vector2D AO = -A; // == (0, 0) - A
 
     Vector2D ABPerp = Vector2D::triple_cross_product(AC, AB, AB);
-    if (Vector2D::dot(ABPerp, AO) > 0) // if the origin is in the region AB
-    {
+    if (Vector2D::dot(ABPerp, AO) > 0) { // if the origin is in the region AB
         simplex.erase(simplex.begin()); // remove the point C of the simplex
         direction = Vector2D::get_normalized_vector(ABPerp); // setting the new direction toward the region AB
         return false; // since the point is contain in the region AB then it's not contain in the simplex
     }
 
     Vector2D ACPerp = Vector2D::triple_cross_product(AB, AC, AC);
-    if (Vector2D::dot(ACPerp, AO) > 0) // if the origin is in the region AC
-    {
+    if (Vector2D::dot(ACPerp, AO) > 0) {// if the origin is in the region AC
         simplex.erase(std::next(simplex.begin())); // remove the point B of the simplex
         direction = Vector2D::get_normalized_vector(ACPerp); // setting the new direction toward the region AC
         return false; // since the point is contain in the region AC then it's not contain in the simplex
@@ -163,16 +161,14 @@ bool Collision::handle_triangle_simplex(std::vector<Vector2D> &simplex, Vector2D
     return true;
 }
 
-unsigned long Collision::get_closest_edge_infos(const std::vector<Vector2D> &polytope, float &minDistance, Vector2D &minNormal)
-{
+unsigned long Collision::get_closest_edge_infos(const std::vector<Vector2D> &polytope, float &minDistance, Vector2D &minNormal) {
     // making sure the politype is valid
     assert(polytope.size() > 2);
 
-    unsigned long closestEdgeIndex;
+    unsigned long closestEdgeIndex = 0;
     minDistance = INFINIT_DISTANCE;
 
-    for (unsigned long i = 0; i < polytope.size(); ++i)
-    {
+    for (unsigned long i = 0; i < polytope.size(); ++i) {
         // determine the index j wich is the second point of the tested edge (i being the first one)
         unsigned long j = (i+1) % polytope.size();
 
@@ -188,8 +184,7 @@ unsigned long Collision::get_closest_edge_infos(const std::vector<Vector2D> &pol
         float currentDistance = Vector2D::dot(currentNormal, vertexI);
 
         // if the new distance is smaller than the actual smallest replace the smallest
-        if (currentDistance < minDistance)
-        {
+        if (currentDistance < minDistance) {
             minDistance = currentDistance;
             minNormal = currentNormal;
             closestEdgeIndex = j;

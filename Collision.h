@@ -7,15 +7,17 @@
 
 class Collision {
 public:
-  // return true if the 2 shapes are overlapping
+  // return true if the 2 shapes in contact
   static bool are_colliding(const Shape *s1, const Shape *s2);
 
-  // return the minimum distance between the 2 shapes, if the 2 shapes are
-  // ovrelapping return the maximum depth penetration distance
+  // return the minimum distance between the 2 shapes
+  // if the 2 shapes are ovrelapping : return the maximum depth penetration distance (negative value)
+  // if the 2 shapes are not ovrelapping : return the minimal distance between this 2 shapes (positive value)
   static float get_minimum_dist(const Shape *s1, const Shape *s2);
 
   // return the minimum distance between the 2 shapes
-  // if the 2 shapes are ovrelapping return the maximum depth penetration distance
+  // if the 2 shapes are ovrelapping : return the maximum depth penetration distance (negative value)
+  // if the 2 shapes are not ovrelapping : return the minimal distance between this 2 shapes (positive value)
   // fill the direction argument with the direction along the shortest distance between the 2 shapes
   static float get_minimum_dist_and_direction(const Shape *s1, const Shape *s2, Vector2D &direction);
 
