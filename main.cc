@@ -38,7 +38,7 @@ int main() {
 
         // Check collision and render based on collision
         sf::Color c = sf::Color::Green;
-        if (Collision::is_colliding(ball.get_shape(), &p)) {
+        if (Collision::are_colliding(ball.get_shape(), &p)) {
             c = sf::Color::Red;
         }
 

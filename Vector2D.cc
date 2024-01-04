@@ -14,6 +14,10 @@ float Vector2D::dot(const Vector2D &other) const {
   return Vector2D::dot(*this, other);
 }
 
+float Vector2D::cross_product(const Vector2D &other) const {
+  return Vector2D::cross_product(*this, other);
+}
+
 Vector2D Vector2D::get_normalized_vector(const Vector2D &v) {
   Vector2D copy = v;
   return copy.normalize();
@@ -25,6 +29,10 @@ float Vector2D::length(const Vector2D &v) {
 
 float Vector2D::dot(const Vector2D &v1, const Vector2D &v2) {
   return v1.x * v2.x + v1.y * v2.y;
+}
+
+float Vector2D::cross_product(const Vector2D &v1, const Vector2D &v2) {
+  return v1.x * v2.y - v1.y * v2.x;
 }
 
 Vector2D Vector2D::triple_cross_product(const Vector2D &v1, const Vector2D &v2, const Vector2D &v3) {
@@ -100,7 +108,7 @@ Vector2D operator*(const Vector2D &v, float f) {
 
 Vector2D operator/(const Vector2D &v, float f) {
   Vector2D result = v;
-  return result *= f;
+  return result /= f;
 }
 
 Vector2D operator*(float f, const Vector2D &v) {

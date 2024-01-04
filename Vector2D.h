@@ -14,10 +14,12 @@ public:
   Vector2D& normalize();
   float length() const;
   float dot(const Vector2D &other) const;
+  float cross_product(const Vector2D &other) const;
 
   // static methods operations
   static float length(const Vector2D &v);
   static float dot(const Vector2D &v1, const Vector2D &v2);
+  static float cross_product(const Vector2D &v1, const Vector2D &v2);
   static Vector2D get_normalized_vector(const Vector2D &v);
   static Vector2D triple_cross_product(const Vector2D &v1, const Vector2D &v2, const Vector2D &v3);
   static Vector2D normal_clockwise(const Vector2D &v);
