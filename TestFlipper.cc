@@ -362,33 +362,40 @@ TEST(COLLISION___are_colliding, Almost_None) {
 
 // get_minimum_dist
 
-// TEST(COLLISION___get_minimum_dist, True) {
-//   Rectangle r1(Vector2D(0, 0), 2, 2);
-//   Rectangle r2(Vector2D(0, 0), 2, 2);
+TEST(COLLISION___get_minimum_dist, True) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(1, 0), 2, 2);
+  
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), -1.0, 0.01);
+}
 
-//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), sqrt(8));
-// }
+TEST(COLLISION___get_minimum_dist, PerfectlyOverlap) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(0, 0), 2, 2);
+  
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), -sqrt(8), 0.01);
+}
 
-// TEST(COLLISION___get_minimum_dist, False) {
-//   Rectangle r1(Vector2D(10, 0), 2, 2);
-//   Rectangle r2(Vector2D(0, 0), 2, 2);
+TEST(COLLISION___get_minimum_dist, False) {
+  Rectangle r1(Vector2D(10, 0), 2, 2);
+  Rectangle r2(Vector2D(0, 0), 2, 2);
 
-//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 8);
-// }
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), 8, 0.01);
+}
 
-// TEST(COLLISION___get_minimum_dist, Almost) {
-//   Rectangle r1(Vector2D(0, 0), 2, 2);
-//   Rectangle r2(Vector2D(2, 0), 2, 2);
+TEST(COLLISION___get_minimum_dist, Almost) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(2, 0), 2, 2);
 
-//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 0);
-// }
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), 0, 0.01);
+}
 
-// TEST(COLLISION___get_minimum_dist, Almost_None) {
-//   Rectangle r1(Vector2D(0, 0), 2, 2);
-//   Rectangle r2(Vector2D(2.01, 0), 2, 2);
+TEST(COLLISION___get_minimum_dist, Almost_None) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(2.01, 0), 2, 2);
 
-//   EXPECT_EQ(Collision::get_minimum_dist(&r1,&r2), 0.01);
-// }
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), 0.01, 0.01);
+}
 
 
 
