@@ -15,34 +15,57 @@
  * EPA :
  * https://dyn4j.org/2010/05/epa-expanding-polytope-algorithm/
  * https://blog.winter.dev/2020/epa-algorithm/
+ *
+ * Both GJK and EPA :
+ * https://cs.brown.edu/courses/cs195u/lectures/04_advancedCollisionsAndPhysics.pdf
  */
 class Collision {
 public:
-  // return true if the 2 shapes are in contact
+  // Takes two convex shapes as input
+  // Return true if the 2 shapes are in contact or overlapping
   static bool are_colliding(const Shape *s1, const Shape *s2);
 
-  // return the minimum distance between the 2 shapes
-  // if the 2 shapes are ovrelapping : return the maximum depth penetration distance (negative value)
-  // if the 2 shapes are not ovrelapping : return the minimal distance between this 2 shapes (positive value)
+  // Takes two convex shapes as input,
+  // If the shapes ARE overlapping or in contact :
+  // -> return the minimum distance of travel needed to remove overalapping
+  //    between the two shapes, the distance is returned as a NEGATIVE value
+  // If the shapes ARE NOT overlapping or in contact
+  // -> return the minimum distance between the two shapes as a POSITIVE value
   static float get_minimum_dist(const Shape *s1, const Shape *s2);
 
-  // return the minimum distance between the 2 shapes
-  // if the 2 shapes are ovrelapping : return the maximum depth penetration distance (negative value)
-  // if the 2 shapes are not ovrelapping : return the minimal distance between this 2 shapes (positive value)
-  // fill the direction argument with the direction along the shortest distance between the 2 shapes
+  // Takes two convex shapes as input and a ref to a Vector2D
+  // direction is an output parameter his initial value has no impact on the function outcome
+  // If the shapes ARE overlapping or in contact :
+  // -> return the minimum distance of travel needed to remove overalapping
+  //    between the two shapes, the distance is returned as a negative value
+  //    The direction parameter is filled with the direction in wich the shape two (s2) should be moved
+  //    to remove overlapping with the shape one (s1)
+  // If the shapes ARE NOT overlapping or in contact
+  // -> return the minimum distance between the two shapes as a positive value
+  //    /!\ The direction parameter is filled with garbage data
   static float get_minimum_dist_and_direction(const Shape *s1, const Shape *s2, Vector2D &direction);
 
-private:
-  // return true if the 2 shapes are overlapping, takes an empty vector and fill it
-  // with all the points forming the final simplex
+  // Takes two convex shapes and a vector that must be empty as input
+  // Return true if the 2 shapes are in contact or overlapping
+  // The simplex vector is an output parameter, it will be filled
+  // with all the points forming the final simplex (can come out empty)
   static bool GJK(const Shape *s1, const Shape *s2, std::vector<Vector2D> &simplex);
 
-  // return the minimum distance between the 2 shapes
-  // if the 2 shapes are ovrelapping return the maximum depth penetration distance
-  // fill the direction argument with the direction along the shortest distance between the 2 shapes
-  // take the simplex produced by GJK as his starting point polytope
+  // Takes two convex shapes, a ref to a Vector2D and a vector as input
+  // direction is an output parameter his initial value has no impact on the function outcome
+  // polytope can be empty, though, a non empty vector speed up the process, 
+  // the simplex produced by GJK is generaly a good starting point
+  // If the shapes ARE overlapping or in contact :
+  // -> return the minimum distance of travel needed to remove overalapping
+  //    between the two shapes, the distance is returned as a negative value
+  //    The direction parameter is filled with the direction in wich the shape two (s2) should be moved
+  //    to remove overlapping with the shape one (s1)
+  // If the shapes ARE NOT overlapping or in contact
+  // -> return the minimum distance between the two shapes as a positive value
+  //    /!\ The direction parameter is filled with garbage data
   static float EPA(const Shape *s1, const Shape *s2, Vector2D &direction, std::vector<Vector2D> polytope);
 
+private:
   // generate a 2 point polytope to bootstrap EPA when GJK exit too early
   static std::vector<Vector2D> generate_minimal_polytope(const Shape *s1, const Shape *s2);
 

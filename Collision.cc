@@ -14,16 +14,14 @@ bool Collision::are_colliding(const Shape *s1, const Shape *s2) {
   return Collision::GJK(s1, s2, simplex);
 }
 
-float Collision::get_minimum_dist(const Shape *s1, const Shape *s2)
-{
+float Collision::get_minimum_dist(const Shape *s1, const Shape *s2) {
     std::vector<Vector2D> polytope;
     Collision::GJK(s1, s2, polytope);
     Vector2D direction = Vector2D::zero();
     return Collision::EPA(s1, s2, direction, polytope);
 }
 
-float Collision::get_minimum_dist_and_direction(const Shape *s1, const Shape *s2, Vector2D &direction)
-{
+float Collision::get_minimum_dist_and_direction(const Shape *s1, const Shape *s2, Vector2D &direction) {
     std::vector<Vector2D> polytope;
     Collision::GJK(s1, s2, polytope);
     return Collision::EPA(s1, s2, direction, polytope);
@@ -46,6 +44,7 @@ bool Collision::GJK(const Shape *s1, const Shape *s2, std::vector<Vector2D> &sim
   assert(simplex.size() == 0);
   simplex.push_back(Collision::get_support_point(s1, s2, direction));
 
+  // one edge of the  Minkowski difference lies on the origin
   if (simplex[0].is_zero()) {
     return true;
   }
@@ -97,7 +96,6 @@ float Collision::EPA(const Shape *s1, const Shape *s2, Vector2D &direction, std:
     
     // the difference between the 2 distance is less then the precision then we 
     // there is no need to expand the polytope any futher, so we return 
-    std::cout << polytope << std::endl;
     if(support_distance - closest_edge_distance < EPA_PRECISION_WANTED) {
         direction = closest_edge_normal;
         return -closest_edge_distance; // negate the distance to correct the winding probleme
@@ -242,7 +240,7 @@ unsigned long Collision::get_closest_edge_infos(const std::vector<Vector2D> &pol
 
     // get the normal vector by swapping coordinates and negating one
     // avoid to use the triple product wich can cause troubles when dealing with really tiny vectors
-    Vector2D currentNormal = Vector2D::normal_clockwise(IJ).normalize();
+    Vector2D currentNormal = Vector2D::normal_counter_clockwise(IJ).normalize();
 
     float currentDistance = Vector2D::dot(currentNormal, vertexI);
 
