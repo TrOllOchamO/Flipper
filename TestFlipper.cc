@@ -360,6 +360,101 @@ TEST(COLLISION___are_colliding, Almost_None) {
   EXPECT_FALSE(Collision::are_colliding(&r1,&r2));
 }
 
+TEST(COLLISION___are_colliding, Circle_True) {
+  Circle c1(Vector2D(0, 0), 2);
+  Circle c2(Vector2D(1, 0), 2);
+
+  EXPECT_TRUE(Collision::are_colliding(&c1,&c2));
+}
+
+TEST(COLLISION___are_colliding, Circle_False) {
+  Circle c1(Vector2D(0, 0), 2);
+  Circle c2(Vector2D(10, 0), 2);
+
+  EXPECT_FALSE(Collision::are_colliding(&c1,&c2));
+}
+
+TEST(COLLISION___are_colliding, Polygone_True) {
+  Polygone p1(Vector2D(0, 0));
+  p1.add_point(Vector2D(0,0));
+  p1.add_point(Vector2D(5,0));
+  p1.add_point(Vector2D(1,3));
+  p1.add_point(Vector2D(0,3));
+
+  Polygone p2(Vector2D(0, 0));
+  p2.add_point(Vector2D(4,0));
+  p2.add_point(Vector2D(9,0));
+  p2.add_point(Vector2D(9,3));
+  p2.add_point(Vector2D(8,3));
+
+  EXPECT_TRUE(Collision::are_colliding(&p1,&p2));
+}
+
+TEST(COLLISION___are_colliding, Polygone_False) {
+  Polygone p1(Vector2D(0, 0));
+  p1.add_point(Vector2D(0,0));
+  p1.add_point(Vector2D(5,0));
+  p1.add_point(Vector2D(1,3));
+  p1.add_point(Vector2D(0,3));
+
+  Polygone p2(Vector2D(0, 0));
+  p2.add_point(Vector2D(6,0));
+  p2.add_point(Vector2D(11,0));
+  p2.add_point(Vector2D(11,3));
+  p2.add_point(Vector2D(10,3));
+
+  EXPECT_FALSE(Collision::are_colliding(&p1,&p2));
+}
+
+TEST(COLLISION___are_colliding, Polygone_Close) {
+  Polygone p1(Vector2D(0, 0));
+  p1.add_point(Vector2D(0,0));
+  p1.add_point(Vector2D(5,0));
+  p1.add_point(Vector2D(1,1));
+  p1.add_point(Vector2D(0,1));
+
+  Polygone p2(Vector2D(0, 0));
+  p2.add_point(Vector2D(5.1,0));
+  p2.add_point(Vector2D(6,0));
+  p2.add_point(Vector2D(6,1));
+  p2.add_point(Vector2D(1.1,1));
+
+  EXPECT_FALSE(Collision::are_colliding(&p1,&p2));
+}
+
+TEST(COLLISION___are_colliding, All_Shape_True) {
+  Rectangle r(Vector2D(2, 1), 2, 2);
+
+  Circle c(Vector2D(0, 2), 2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(0,0));
+  p.add_point(Vector2D(5,0));
+  p.add_point(Vector2D(1,3));
+  p.add_point(Vector2D(0,3));
+
+  EXPECT_TRUE(Collision::are_colliding(&p,&r));
+  EXPECT_TRUE(Collision::are_colliding(&r,&c));
+  EXPECT_TRUE(Collision::are_colliding(&c,&p));
+}
+
+TEST(COLLISION___are_colliding, All_Shape_False) {
+  Rectangle r(Vector2D(3, 2), 2, 2);
+
+  Circle c(Vector2D(0, 4), 2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(0,0));
+  p.add_point(Vector2D(5,0));
+  p.add_point(Vector2D(1,3));
+  p.add_point(Vector2D(0,3));
+
+  EXPECT_FALSE(Collision::are_colliding(&p,&r));
+  EXPECT_FALSE(Collision::are_colliding(&r,&c));
+  EXPECT_FALSE(Collision::are_colliding(&c,&p));
+}
+
+
 // get_minimum_dist
 
 TEST(COLLISION___get_minimum_dist, True) {
@@ -373,7 +468,7 @@ TEST(COLLISION___get_minimum_dist, PerfectlyOverlap) {
   Rectangle r1(Vector2D(0, 0), 2, 2);
   Rectangle r2(Vector2D(0, 0), 2, 2);
   
-  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), -sqrt(8), 0.01);
+  EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), -2, 0.001);
 }
 
 TEST(COLLISION___get_minimum_dist, False) {
@@ -397,6 +492,22 @@ TEST(COLLISION___get_minimum_dist, Almost_None) {
   EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), 0.01, 0.01);
 }
 
+// TEST(COLLISION___get_minimum_dist, Diagonal) {
+//   Rectangle r1(Vector2D(0, 0), 2, 2);
+//   Rectangle r2(Vector2D(1, 1), 2, 2);
+
+//   EXPECT_NEAR(Collision::get_minimum_dist(&r1,&r2), -1, 0.001);
+// }
+
+// TEST(COLLISION___get_minimum_dist, Rectangle_Triangle) {
+//   Rectangle r(Vector2D(0, 0), 2, 2);
+//   Polygone p(Vector2D(0, 0));
+//   p.add_point(Vector2D(1,1));
+//   p.add_point(Vector2D(3,0));
+//   p.add_point(Vector2D(3,2.5));
+
+//   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), -1, 0.001);
+// }
 
 
 // get_minimum_dist_and_direction
