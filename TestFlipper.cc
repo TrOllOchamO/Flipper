@@ -398,6 +398,25 @@ TEST(COLLISION___are_colliding, Polygone_False) {
   EXPECT_FALSE(Collision::are_colliding(&p1, &p2));
 }
 
+TEST(COLLISION___are_colliding, Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+
+  EXPECT_TRUE(Collision::are_colliding(&p, &r));
+}
+
+TEST(COLLISION___are_colliding, Line) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+  p.add_point(Vector2D(3, 1));
+
+  EXPECT_TRUE(Collision::are_colliding(&p, &r));
+}
+
 TEST(COLLISION___are_colliding, Polygone_Close) {
   Polygone p1(Vector2D(0, 0));
   p1.add_point(Vector2D(0, 0));
@@ -445,6 +464,7 @@ TEST(COLLISION___are_colliding, All_Shape_False) {
   EXPECT_FALSE(Collision::are_colliding(&r, &c));
   EXPECT_FALSE(Collision::are_colliding(&c, &p));
 }
+
 
 // get_minimum_dist
 
@@ -500,24 +520,174 @@ TEST(COLLISION___get_minimum_dist, Rectangle_Triangle) {
   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), -1, 0.001);
 }
 
+TEST(COLLISION___get_minimum_dist, Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+
+  EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
+}
+
+TEST(COLLISION___get_minimum_dist, Line) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+  p.add_point(Vector2D(3, 1));
+
+  EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
+}
+
+TEST(COLLISION___get_minimum_dist, Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(1, 0));
+
+  EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
+}
+
+TEST(COLLISION___get_minimum_dist, Other_Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(1, 2));
+
+  EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
+}
+
+TEST(COLLISION___get_minimum_dist, Other_Other_Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(0, 1));
+
+  EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
+}
+
 // get_minimum_dist_and_direction
 
 TEST(COLLISION___get_minimum_dist_and_direction, Collide) {
   Rectangle r1(Vector2D(0, 0), 2, 2);
   Rectangle r2(Vector2D(1, 0), 2, 2);
 
-  Vector2D direction = Vector2D::zero();
-  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, direction), -1.0, 0.01);
-  EXPECT_EQ(direction, Vector2D(1, 0));
+  Vector2D v = Vector2D::zero();
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, v), -1.0, 0.01);
+  EXPECT_EQ(v, Vector2D(1, 0));
 }
 
 TEST(COLLISION___get_minimum_dist_and_direction, Do_Not_Collide) {
   Rectangle r1(Vector2D(0, 0), 2, 2);
   Rectangle r2(Vector2D(3, 0), 2, 2);
 
-  Vector2D direction = Vector2D::zero();
-  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, direction), 1.0, 0.01);
+  Vector2D v = Vector2D::zero();
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, v), 1.0, 0.01);
 }
+
+TEST(COLLISION___get_minimum_dist_and_direction, Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), 0, 0.001);
+  EXPECT_EQ(v,Vector2D(1,0));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(1, 0));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), 0, 0.001);
+  EXPECT_EQ(v,Vector2D(0,-1));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(1, 2));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), 0, 0.001);
+  EXPECT_EQ(v,Vector2D(0,1));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Other_Point) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(0, 1));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), 0, 0.001);
+  EXPECT_EQ(v,Vector2D(-1,0));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Line) {
+  Rectangle r(Vector2D(0, 0),2,2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(2, 1));
+  p.add_point(Vector2D(3, 1));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), 0, 0.001);
+  EXPECT_EQ(v,Vector2D(1,0));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Same) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(0, 0), 2, 2);
+
+  Vector2D v = Vector2D::zero();
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, v), -2.0, 0.01);
+  EXPECT_EQ(v, Vector2D(-1, 0));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Diagonal) {
+  Rectangle r1(Vector2D(0, 0), 2, 2);
+  Rectangle r2(Vector2D(1, 1), 2, 2);
+
+  Vector2D v = Vector2D::zero();
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1, &r2, v), -1, 0.01);
+  EXPECT_EQ(v, Vector2D(0, 1));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Rectangle_Triangle) {
+  Rectangle r(Vector2D(0, 0), 2, 2);
+
+  Polygone p(Vector2D(0, 0));
+  p.add_point(Vector2D(1,1));
+  p.add_point(Vector2D(3,0));
+  p.add_point(Vector2D(3,2.5));
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r,&p,v), -1, 0.001);
+  EXPECT_EQ(v, Vector2D(1, 0));
+}
+
+TEST(COLLISION___get_minimum_dist_and_direction, Big) {
+  Rectangle r1(Vector2D(0, 0), 20, 20);
+  Rectangle r2(Vector2D(10, 10), 20, 20);
+
+  Vector2D v = Vector2D::zero();
+
+  EXPECT_NEAR(Collision::get_minimum_dist_and_direction(&r1,&r2,v), -10, 0.001);
+  EXPECT_EQ(v, Vector2D(0, 1));
+}
+
 
 // =========================================================
 //
