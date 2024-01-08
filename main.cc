@@ -4,35 +4,30 @@
 #include "Rectangle.h"
 #include "Vector2D.h"
 #include "Wall.h"
+#include "Input.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(400, 800), "Flipper");
-
     sf::Clock clock;
+
     Ball ball(Vector2D(100, 500), 8);
 
     Polygone p(Vector2D(10, 10));
-    
-
     p.add_point(Vector2D(0, 0));
     p.add_point(Vector2D(250, 500));
     p.add_point(Vector2D(270, 650));
     p.add_point(Vector2D(100, 400));
+
     Wall wall(p.get_pos(), "resources/Test.jpg");
-    Rectangle r(Vector2D(50, 300), 400, 50);
+
+    Input input;
 
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
-
-        sf::Event event;
         window.clear(sf::Color::Black);
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-        }
+        input.update(window);
 
         ball.move(dt);
 
@@ -44,8 +39,11 @@ int main() {
         p.render(window, c);
         ball.render(window, c);
 
-        window.display();
+        if(input.left_flipper) { std::cout << "left "; }
+        if(input.right_flipper) { std::cout << "right "; }
+        std::cout << "\n------------------\n";
 
+        window.display();
     }
     return 0;
 }
