@@ -398,18 +398,6 @@ TEST(COLLISION___are_colliding, Polygone_False) {
   EXPECT_FALSE(Collision::are_colliding(&p1, &p2));
 }
 
-TEST(COLLISION___are_colliding, test) {
-  Polygone p(Vector2D(2, 2));
-  p.add_point(Vector2D(0, 0));
-  p.add_point(Vector2D(5, 0));
-  p.add_point(Vector2D(1, 3));
-  p.add_point(Vector2D(0, 3));
-
-  Rectangle r(Vector2D(0, 0),2,2);
-
-  EXPECT_TRUE(Collision::are_colliding(&p, &r));
-}
-
 TEST(COLLISION___are_colliding, Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 

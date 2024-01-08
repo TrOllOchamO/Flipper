@@ -12,8 +12,7 @@ private:
     Vector2D rotation_point;
 
 public:
-    Polygone(Vector2D pos, Vector2D rotation_p): Shape(pos), rotation_point(rotation_p) {};
-    Polygone(Vector2D pos): Shape(pos), rotation_point(pos) {};
+    Polygone(Vector2D rotation_p): Shape(Vector2D(0,0)), rotation_point(rotation_p) {};
     void add_point(Vector2D point);
     bool is_convex();
 

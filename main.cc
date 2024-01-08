@@ -15,11 +15,11 @@ int main() {
 
     Ball ball(Vector2D(100, 500), 8);
 
-    Polygone p(Vector2D(90, 500), Vector2D(100, 525));
-    p.add_point(Vector2D(10, 10));
-    p.add_point(Vector2D(25, 50));
-    p.add_point(Vector2D(27, 65));
-    p.add_point(Vector2D(10, 40));
+    Polygone p(Vector2D(100, 525));
+    p.add_point(Vector2D(100, 510));
+    p.add_point(Vector2D(115, 550));
+    p.add_point(Vector2D(117, 565));
+    p.add_point(Vector2D(100, 540));
 
     // Wall wall(p.get_pos(), "resources/Test.jpg");
 

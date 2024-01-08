@@ -1,7 +1,7 @@
 #include "Polygone.h"
 
 void Polygone::add_point(Vector2D point) {
-  points.push_back(point+get_pos());
+  points.push_back(point);
 }
 
 void Polygone::clear(){
@@ -88,7 +88,7 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   window.draw(convex);
 } 
 
-void Polygone::rotate(float angle, float dt) {
+void Polygone::rotate(float angle, float dt=1) {
   std::vector<Vector2D> new_points;
   float a = angle * dt;
   for (auto p : points){
