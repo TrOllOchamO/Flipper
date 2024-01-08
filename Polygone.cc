@@ -1,11 +1,7 @@
 #include "Polygone.h"
 
-bool Polygone::add_point(Vector2D point) {
-  if(point.x<0 || point.y<0){
-    return false;
-  }
-  points.push_back(point);
-  return true;
+void Polygone::add_point(Vector2D point) {
+  points.push_back(point+get_pos());
 }
 
 void Polygone::clear(){
@@ -84,10 +80,23 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   int n = points.size();
   sf::ConvexShape convex;
   convex.setPointCount(n);
-  convex.setPosition(get_pos());
+  convex.setPosition(Vector2D(0,0));
   convex.setFillColor(color);
   for (int i=0; i<n; ++i) {
     convex.setPoint(i, points[i]);
   }
   window.draw(convex);
 } 
+
+void Polygone::rotate(float angle, float dt) {
+  std::vector<Vector2D> new_points;
+  float a = angle * dt;
+  for (auto p : points){
+    float x = (p.x-rotation_point.x) * std::cos(a) - (p.y-rotation_point.y) * std::sin(a);
+    float y = (p.y-rotation_point.y) * std::cos(a) + (p.x-rotation_point.x) * std::sin(a);
+    Vector2D np(x,y);
+    new_points.push_back(np+rotation_point);
+  }
+  points.clear();
+  points = new_points;
+}

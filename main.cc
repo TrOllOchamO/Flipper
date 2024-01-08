@@ -15,13 +15,13 @@ int main() {
 
     Ball ball(Vector2D(100, 500), 8);
 
-    Polygone p(Vector2D(10, 10));
-    p.add_point(Vector2D(0, 0));
-    p.add_point(Vector2D(250, 500));
-    p.add_point(Vector2D(270, 650));
-    p.add_point(Vector2D(100, 400));
+    Polygone p(Vector2D(90, 500), Vector2D(100, 525));
+    p.add_point(Vector2D(10, 10));
+    p.add_point(Vector2D(25, 50));
+    p.add_point(Vector2D(27, 65));
+    p.add_point(Vector2D(10, 40));
 
-    Wall wall(p.get_pos(), "resources/Test.jpg");
+    // Wall wall(p.get_pos(), "resources/Test.jpg");
 
     Input input;
     Flipper flipper;
@@ -34,13 +34,16 @@ int main() {
         flipper.upate(input.left_flipper, input.right_flipper);
         flipper.render(window, sf::Color::Red);
 
-        ball.move(dt);
+        // ball.move(dt);
+        p.rotate(1,dt);
 
         sf::Color c = sf::Color::Green;
         if (Collision::are_colliding(ball.get_shape(), &p)) {
             c = sf::Color::Red;
         }
-        wall.draw(window);
+
+
+        // wall.draw(window);
         p.render(window, c);
         ball.render(window, c);
 
