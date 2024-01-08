@@ -22,6 +22,7 @@ add_executable(Flipper
     Collision.cc
     Wall.cc
     Input.cc
+    Flipper.cc
 )
 
 target_include_directories(Flipper

@@ -8,6 +8,10 @@ bool Polygone::add_point(Vector2D point) {
   return true;
 }
 
+void Polygone::clear(){
+  points.clear();
+}
+
 bool Polygone::is_convex(){
   int n = points.size();
   if(n<4){

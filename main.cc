@@ -5,6 +5,7 @@
 #include "Vector2D.h"
 #include "Wall.h"
 #include "Input.h"
+#include "Flipper.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -23,11 +24,15 @@ int main() {
     Wall wall(p.get_pos(), "resources/Test.jpg");
 
     Input input;
+    Flipper flipper;
 
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
         window.clear(sf::Color::Black);
         input.update(window);
+
+        flipper.upate(input.left_flipper, input.right_flipper);
+        flipper.render(window, sf::Color::Red);
 
         ball.move(dt);
 
@@ -38,10 +43,6 @@ int main() {
         wall.draw(window);
         p.render(window, c);
         ball.render(window, c);
-
-        if(input.left_flipper) { std::cout << "left "; }
-        if(input.right_flipper) { std::cout << "right "; }
-        std::cout << "\n------------------\n";
 
         window.display();
     }
