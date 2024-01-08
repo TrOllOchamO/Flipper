@@ -36,21 +36,16 @@ int main() {
 
         ball.move(dt);
 
-        // Check collision and render based on collision
         sf::Color c = sf::Color::Green;
         if (Collision::are_colliding(ball.get_shape(), &p)) {
             c = sf::Color::Red;
         }
-
-        // Render the wall with the texture
         wall.draw(window);
-
-        // Render the polygone and ball
         p.render(window, c);
         ball.render(window, c);
 
         window.display();
-    }
 
+    }
     return 0;
 }
