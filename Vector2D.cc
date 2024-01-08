@@ -1,7 +1,14 @@
 #include "Vector2D.h"
 #include <math.h>
+#include <assert.h>
+
+bool Vector2D::is_zero() {
+  return this->x == 0 && this->y == 0;
+}
 
 Vector2D &Vector2D::normalize() {
+  assert(!this->is_zero()); // cant normalise a zero vector
+
   const float vectorLength = std::sqrt(this->x * this->x + this->y * this->y);
   this->x = this->x / vectorLength;
   this->y = this->y / vectorLength;
@@ -137,6 +144,10 @@ std::ostream& operator<<(std::ostream& os, const std::vector<Vector2D> &vector) 
 
 bool operator==(const Vector2D &v1, const Vector2D &v2) {
   return (v1.x == v2.x && v1.y == v2.y);
+}
+
+bool operator!=(const Vector2D &v1, const Vector2D &v2) {
+  return !(v1 == v2);
 }
 
 Vector2D::operator sf::Vector2f(){

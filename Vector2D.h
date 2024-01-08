@@ -12,6 +12,7 @@ public:
   Vector2D(float inputX, float inputY) : x(inputX), y(inputY) {};
 
   Vector2D& normalize();
+  bool is_zero();
   float length() const;
   float dot(const Vector2D &other) const;
   float cross_product(const Vector2D &other) const;
@@ -44,6 +45,7 @@ public:
   friend Vector2D operator*(float f, const Vector2D &v);
   friend Vector2D operator/(const Vector2D &v, float f);
   friend bool operator==(const Vector2D &v1, const Vector2D &v2);
+  friend bool operator!=(const Vector2D &v1, const Vector2D &v2);
   friend std::ostream &operator<<(std::ostream &os, const Vector2D &v);
   friend std::ostream &operator<<(std::ostream& os, const std::vector<Vector2D> &vector);
   operator sf::Vector2f();
