@@ -13,18 +13,7 @@ private:
     bool right_up = false;
 
 public:
-    Flipper() : left(Polygone(Vector2D(85,740))), right(Polygone(Vector2D(315,740))) {
-        // left.add_point(Vector2D(80, 740));
-        // left.add_point(Vector2D(80, 710));
-        // left.add_point(Vector2D(180, 740));
-        // left.add_point(Vector2D(180, 745));
-        // left.rotate(0.1);
-        // right.add_point(Vector2D(320, 740));
-        // right.add_point(Vector2D(320, 710));
-        // right.add_point(Vector2D(220, 740));
-        // right.add_point(Vector2D(220, 745));
-        // right.rotate(-0.1);
-
+    Flipper() : left(Polygone()), right(Polygone()) {
         left.add_point(Vector2D(160, 735));
         left.add_point(Vector2D(180, 740));
         left.add_point(Vector2D(160, 745));
@@ -32,7 +21,7 @@ public:
         left.add_point(Vector2D(75, 745));
         left.add_point(Vector2D(75, 735));
         left.add_point(Vector2D(80, 730));
-        left.rotate(0.3);
+        left.rotate(0.3, Vector2D(85,740));
 
         right.add_point(Vector2D(240, 735));
         right.add_point(Vector2D(220, 740));
@@ -41,7 +30,7 @@ public:
         right.add_point(Vector2D(325, 745));
         right.add_point(Vector2D(325, 735));
         right.add_point(Vector2D(320, 730));
-        right.rotate(-0.3);
+        right.rotate(-0.3, Vector2D(315,740));
     };
 
     void upate(bool left, bool right);

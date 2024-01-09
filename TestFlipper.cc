@@ -135,7 +135,7 @@ TEST(RECTANGLE___get_futhest_point, Random) {
 // get_center
 
 TEST(POLYGONE___get_center, small) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(5, 0));
   p.add_point(Vector2D(2.5, 3));
@@ -145,7 +145,7 @@ TEST(POLYGONE___get_center, small) {
 }
 
 TEST(POLYGONE___get_center, big) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(3, 0));
   p.add_point(Vector2D(4, 3));
@@ -157,7 +157,7 @@ TEST(POLYGONE___get_center, big) {
 }
 
 TEST(POLYGONE___get_center, One) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1, 1));
 
   auto center = p.get_center();
@@ -165,14 +165,14 @@ TEST(POLYGONE___get_center, One) {
 }
 
 TEST(POLYGONE___get_center, Zero) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
 
   auto center = p.get_center();
   EXPECT_EQ(center, Vector2D(0, 0));
 }
 
 TEST(POLYGONE___get_center, Multiple_Same_Point) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(3, 1));
   p.add_point(Vector2D(3, 1));
   p.add_point(Vector2D(3, 1));
@@ -184,7 +184,7 @@ TEST(POLYGONE___get_center, Multiple_Same_Point) {
 // get_futhest_point
 
 TEST(POLYGONE___get_futhest_point, small) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(5, 0));
   p.add_point(Vector2D(2.5, 3));
@@ -196,7 +196,7 @@ TEST(POLYGONE___get_futhest_point, small) {
 }
 
 TEST(POLYGONE___get_futhest_point, big) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(3, 0));
   p.add_point(Vector2D(4, 3));
@@ -213,14 +213,14 @@ TEST(POLYGONE___get_futhest_point, big) {
 // is_convex
 
 TEST(POLYGONE___is_convex, Point) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
 
   EXPECT_TRUE(p.is_convex());
 }
 
 TEST(POLYGONE___is_convex, Line) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
 
@@ -228,7 +228,7 @@ TEST(POLYGONE___is_convex, Line) {
 }
 
 TEST(POLYGONE___is_convex, Triangle) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(1, 1));
@@ -237,7 +237,7 @@ TEST(POLYGONE___is_convex, Triangle) {
 }
 
 TEST(POLYGONE___is_convex, Square) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
 
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
@@ -248,7 +248,7 @@ TEST(POLYGONE___is_convex, Square) {
 }
 
 TEST(POLYGONE___is_convex, False_Square) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(1, 1));
@@ -258,7 +258,7 @@ TEST(POLYGONE___is_convex, False_Square) {
 }
 
 TEST(POLYGONE___is_convex, Big_Line) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(2, 0));
@@ -268,7 +268,7 @@ TEST(POLYGONE___is_convex, Big_Line) {
 }
 
 TEST(POLYGONE___is_convex, Other_Big_Line) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(0, 1));
   p.add_point(Vector2D(0, 2));
@@ -278,7 +278,7 @@ TEST(POLYGONE___is_convex, Other_Big_Line) {
 }
 
 TEST(POLYGONE___is_convex, False) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(1, 1));
@@ -290,7 +290,7 @@ TEST(POLYGONE___is_convex, False) {
 }
 
 TEST(POLYGONE___is_convex, True) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(1.5, 1));
@@ -303,7 +303,7 @@ TEST(POLYGONE___is_convex, True) {
 }
 
 TEST(POLYGONE___is_convex, Also_True) {
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(1, 0));
   p.add_point(Vector2D(1.5, 1));
@@ -367,13 +367,13 @@ TEST(COLLISION___are_colliding, Circle_False) {
 }
 
 TEST(COLLISION___are_colliding, Polygone_True) {
-  Polygone p1(Vector2D(0, 0));
+  Polygone p1;
   p1.add_point(Vector2D(0, 0));
   p1.add_point(Vector2D(5, 0));
   p1.add_point(Vector2D(1, 3));
   p1.add_point(Vector2D(0, 3));
 
-  Polygone p2(Vector2D(0, 0));
+  Polygone p2;
   p2.add_point(Vector2D(4, 0));
   p2.add_point(Vector2D(9, 0));
   p2.add_point(Vector2D(9, 3));
@@ -383,13 +383,13 @@ TEST(COLLISION___are_colliding, Polygone_True) {
 }
 
 TEST(COLLISION___are_colliding, Polygone_False) {
-  Polygone p1(Vector2D(0, 0));
+  Polygone p1;
   p1.add_point(Vector2D(0, 0));
   p1.add_point(Vector2D(5, 0));
   p1.add_point(Vector2D(1, 3));
   p1.add_point(Vector2D(0, 3));
 
-  Polygone p2(Vector2D(0, 0));
+  Polygone p2;
   p2.add_point(Vector2D(6, 0));
   p2.add_point(Vector2D(11, 0));
   p2.add_point(Vector2D(11, 3));
@@ -401,7 +401,7 @@ TEST(COLLISION___are_colliding, Polygone_False) {
 TEST(COLLISION___are_colliding, Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
 
   EXPECT_TRUE(Collision::are_colliding(&p, &r));
@@ -410,7 +410,7 @@ TEST(COLLISION___are_colliding, Point) {
 TEST(COLLISION___are_colliding, Line) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
   p.add_point(Vector2D(3, 1));
 
@@ -418,13 +418,13 @@ TEST(COLLISION___are_colliding, Line) {
 }
 
 TEST(COLLISION___are_colliding, Polygone_Close) {
-  Polygone p1(Vector2D(0, 0));
+  Polygone p1;
   p1.add_point(Vector2D(0, 0));
   p1.add_point(Vector2D(5, 0));
   p1.add_point(Vector2D(1, 1));
   p1.add_point(Vector2D(0, 1));
 
-  Polygone p2(Vector2D(0, 0));
+  Polygone p2;
   p2.add_point(Vector2D(5.1, 0));
   p2.add_point(Vector2D(6, 0));
   p2.add_point(Vector2D(6, 1));
@@ -438,7 +438,7 @@ TEST(COLLISION___are_colliding, All_Shape_True) {
 
   Circle c(Vector2D(0, 2), 2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(5, 0));
   p.add_point(Vector2D(1, 3));
@@ -454,7 +454,7 @@ TEST(COLLISION___are_colliding, All_Shape_False) {
 
   Circle c(Vector2D(0, 4), 2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 0));
   p.add_point(Vector2D(5, 0));
   p.add_point(Vector2D(1, 3));
@@ -512,7 +512,7 @@ TEST(COLLISION___get_minimum_dist, Diagonal) {
 
 TEST(COLLISION___get_minimum_dist, Rectangle_Triangle) {
   Rectangle r(Vector2D(0, 0), 2, 2);
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1,1));
   p.add_point(Vector2D(3,0));
   p.add_point(Vector2D(3,2.5));
@@ -523,7 +523,7 @@ TEST(COLLISION___get_minimum_dist, Rectangle_Triangle) {
 TEST(COLLISION___get_minimum_dist, Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
 
   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
@@ -532,7 +532,7 @@ TEST(COLLISION___get_minimum_dist, Point) {
 TEST(COLLISION___get_minimum_dist, Line) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
   p.add_point(Vector2D(3, 1));
 
@@ -542,7 +542,7 @@ TEST(COLLISION___get_minimum_dist, Line) {
 TEST(COLLISION___get_minimum_dist, Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1, 0));
 
   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
@@ -551,7 +551,7 @@ TEST(COLLISION___get_minimum_dist, Other_Point) {
 TEST(COLLISION___get_minimum_dist, Other_Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1, 2));
 
   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
@@ -560,7 +560,7 @@ TEST(COLLISION___get_minimum_dist, Other_Other_Point) {
 TEST(COLLISION___get_minimum_dist, Other_Other_Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 1));
 
   EXPECT_NEAR(Collision::get_minimum_dist(&r,&p), 0, 0.001);
@@ -588,7 +588,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Do_Not_Collide) {
 TEST(COLLISION___get_minimum_dist_and_direction, Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
 
   Vector2D v = Vector2D::zero();
@@ -600,7 +600,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Point) {
 TEST(COLLISION___get_minimum_dist_and_direction, Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1, 0));
 
   Vector2D v = Vector2D::zero();
@@ -612,7 +612,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Other_Point) {
 TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1, 2));
 
   Vector2D v = Vector2D::zero();
@@ -624,7 +624,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Point) {
 TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Other_Point) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(0, 1));
 
   Vector2D v = Vector2D::zero();
@@ -636,7 +636,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Other_Other_Other_Point) {
 TEST(COLLISION___get_minimum_dist_and_direction, Line) {
   Rectangle r(Vector2D(0, 0),2,2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(2, 1));
   p.add_point(Vector2D(3, 1));
 
@@ -667,7 +667,7 @@ TEST(COLLISION___get_minimum_dist_and_direction, Diagonal) {
 TEST(COLLISION___get_minimum_dist_and_direction, Rectangle_Triangle) {
   Rectangle r(Vector2D(0, 0), 2, 2);
 
-  Polygone p(Vector2D(0, 0));
+  Polygone p;
   p.add_point(Vector2D(1,1));
   p.add_point(Vector2D(3,0));
   p.add_point(Vector2D(3,2.5));

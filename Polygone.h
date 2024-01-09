@@ -9,10 +9,9 @@
 class Polygone: public Shape {
 private:
     std::vector<Vector2D> points;
-    Vector2D rotation_point;
-
+    
 public:
-    Polygone(Vector2D rotation_p): Shape(Vector2D(0,0)), rotation_point(rotation_p) {};
+    Polygone(): Shape(Vector2D(0,0)) {};
     void add_point(Vector2D point);
     bool is_convex();
 
@@ -21,7 +20,7 @@ public:
 
     void clear();
     void render(sf::RenderWindow &window, sf::Color color);
-    void rotate(float angle, float dt = 1);
+    void rotate(float angle, Vector2D rotation_point, float dt = 1);
 };
 
 #endif /* !POLYGONE_H_ */

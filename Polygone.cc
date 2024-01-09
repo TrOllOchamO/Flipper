@@ -88,7 +88,7 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   window.draw(convex);
 } 
 
-void Polygone::rotate(float angle, float dt) {
+void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
   std::vector<Vector2D> new_points;
   float a = angle * dt;
   for (auto p : points){

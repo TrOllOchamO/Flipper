@@ -15,7 +15,7 @@ int main() {
 
     Ball ball(Vector2D(100, 500), 8);
 
-    Polygone p(Vector2D(100, 525));
+    Polygone p;
     p.add_point(Vector2D(100, 510));
     p.add_point(Vector2D(115, 550));
     p.add_point(Vector2D(117, 565));
@@ -35,7 +35,7 @@ int main() {
         flipper.render(window, sf::Color::Red);
 
         // ball.move(dt);
-        p.rotate(1,dt);
+        p.rotate(1, Vector2D(100, 525), dt);
 
         sf::Color c = sf::Color::Green;
         if (Collision::are_colliding(ball.get_shape(), &p)) {
