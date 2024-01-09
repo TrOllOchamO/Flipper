@@ -21,7 +21,7 @@ public:
 
     void clear();
     void render(sf::RenderWindow &window, sf::Color color);
-    void rotate(float angle, float dt);
+    void rotate(float angle, float dt = 1);
 };
 
 #endif /* !POLYGONE_H_ */
