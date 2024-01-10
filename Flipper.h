@@ -9,8 +9,8 @@ class Flipper {
 private:
     Polygone left;
     Polygone right;
-    bool left_up = false;
-    bool right_up = false;
+    float left_rotation = 0;
+    float right_rotation = 0;
 
 public:
     Flipper() : left(Polygone()), right(Polygone()) {
