@@ -23,6 +23,7 @@ add_executable(Flipper
     Wall.cc
     Input.cc
     Flipper.cc
+    Launcher.cc
 )
 
 target_include_directories(Flipper

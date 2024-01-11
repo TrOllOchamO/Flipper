@@ -35,8 +35,6 @@ public:
 
     void upate(bool left, bool right);
     void render(sf::RenderWindow &window, sf::Color color);
-
-
 };
 
 #endif /* !FLIPPER_H_ */

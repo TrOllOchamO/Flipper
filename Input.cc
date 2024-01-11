@@ -3,6 +3,10 @@
 #define LEFT_FLIPPER sf::Keyboard::Q
 #define RIGHT_FLIPPER sf::Keyboard::D
 
+#define DOWN_LAUNCHER sf::Keyboard::Up
+#define UP_LAUNCHER sf::Keyboard::Down
+#define ENTER_LAUNCHER sf::Keyboard::Enter
+
 void Input::update(sf::RenderWindow &window) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -31,9 +35,23 @@ void Input::key_down(sf::Keyboard::Key key){
         case LEFT_FLIPPER:
             left_flipper = true;
             break;
+
         case RIGHT_FLIPPER:
             right_flipper = true;
             break;
+
+        case DOWN_LAUNCHER:
+            down_launcher = true;
+            break;
+
+        case UP_LAUNCHER:
+            up_launcher = true;
+            break;
+
+        case ENTER_LAUNCHER:
+            enter_launcher = true;
+            break;
+
         default:
             break;
     }
@@ -44,9 +62,23 @@ void Input::key_up(sf::Keyboard::Key key){
         case LEFT_FLIPPER:
             left_flipper = false;
             break;
+
         case RIGHT_FLIPPER:
             right_flipper = false;
             break;
+
+        case DOWN_LAUNCHER:
+            down_launcher = false;
+            break;
+
+        case UP_LAUNCHER:
+            up_launcher  = false;
+            break;
+
+        case ENTER_LAUNCHER:
+            enter_launcher = false;
+            break;
+
         default:
             break;
     }
