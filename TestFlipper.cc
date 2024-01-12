@@ -316,6 +316,74 @@ TEST(POLYGONE___is_convex, Also_True) {
   EXPECT_FALSE(p.is_convex());
 }
 
+// triangulate
+
+TEST(POLYGONE___triangulate, Simple) {
+  Polygone p;
+  p.add_point(Vector2D(3, 0));
+  p.add_point(Vector2D(5, 0));
+  p.add_point(Vector2D(5, 5));
+  p.add_point(Vector2D(0, 5));
+  p.add_point(Vector2D(0, 3));
+  p.add_point(Vector2D(3, 3));
+  p.add_point(Vector2D(3, 2));
+  p.add_point(Vector2D(2, 2));
+  p.add_point(Vector2D(2, 1));
+  p.add_point(Vector2D(3, 1));
+
+  auto x = p.triangulate();
+  for (auto poly : x) {
+    poly.print();
+  }
+}
+
+TEST(POLYGONE___triangulate, Other) {
+  Polygone p;
+  p.add_point(Vector2D(0, 0));
+  p.add_point(Vector2D(5, 0));
+  p.add_point(Vector2D(2.5, 2.5));
+  p.add_point(Vector2D(5, 5));
+  p.add_point(Vector2D(0, 5));
+
+  auto x = p.triangulate();
+  for (auto poly : x) {
+    poly.print();
+  }
+}
+
+TEST(POLYGONE___triangulate, Other_Other) {
+  Polygone p;
+  p.add_point(Vector2D(0, 0));
+  p.add_point(Vector2D(3, 0));
+  p.add_point(Vector2D(0.5, 1.5));
+  p.add_point(Vector2D(3, 3));
+  p.add_point(Vector2D(0, 3));
+
+  auto x = p.triangulate();
+  for (auto poly : x) {
+    poly.print();
+  }
+}
+
+TEST(POLYGONE___triangulate, Complexe) {
+  Polygone p;
+  p.add_point(Vector2D(2, 1.5));
+  p.add_point(Vector2D(4, 0));
+  p.add_point(Vector2D(3, 1));
+  p.add_point(Vector2D(4, 2));
+  p.add_point(Vector2D(3, 2));
+  p.add_point(Vector2D(2, 3));
+  p.add_point(Vector2D(1, 2));
+  p.add_point(Vector2D(0, 2));
+  p.add_point(Vector2D(1, 1));
+  p.add_point(Vector2D(0, 0));
+
+  auto x = p.triangulate();
+  for (auto poly : x) {
+    poly.print();
+  }
+}
+
 // =========================================================
 //
 // COLLISION

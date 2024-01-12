@@ -1,5 +1,10 @@
 #include "Polygone.h"
 
+
+// CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
+// CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
+// CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
+// CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
 void Polygone::add_point(Vector2D point) {
   points.push_back(point);
 }
@@ -99,4 +104,88 @@ void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
   }
   points.clear();
   points = new_points;
+}
+
+Polygone create_triangle(Vector2D a, Vector2D b, Vector2D c){
+  Polygone p;
+  p.add_point(a);
+  p.add_point(b);
+  p.add_point(c);
+  return p;
+}
+
+std::vector<Polygone> Polygone::triangulate(){
+  std::vector<Polygone> all_triangle;
+  std::vector<Vector2D> all_points;
+  all_points = points;
+
+  int n = all_points.size();
+  int i = 0;
+
+  while (n > 3) {
+    Polygone p = create_triangle(all_points[i], all_points[(i+n-1)%n], all_points[(i+1)%n]); 
+    if (is_ear(all_points, i)) {
+      all_triangle.push_back(p);
+      all_points.erase(all_points.begin() + i);
+      n--;
+    } else {
+      i = (i + 1) % n;
+    }
+  }
+
+  all_triangle.push_back(create_triangle(all_points[0], all_points[1], all_points[2]));
+  return all_triangle;
+}
+
+bool Polygone::is_ear(std::vector<Vector2D> polygon, int index) {
+  int n = polygon.size();
+  int previous = (index - 1) % n;
+  int next = (index + 1) % n;
+
+  Vector2D a = polygon[previous];
+  Vector2D b = polygon[index];
+  Vector2D c = polygon[next];
+
+  for (int i = 0; i < n; i++) {
+    if (i != previous && i != index && i != next) {
+      if (point_inside_triangle(a, b, c, polygon[i]) || is_outside(a,b,c)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool Polygone::point_inside_triangle(Vector2D a, Vector2D b, Vector2D c, Vector2D point) {
+  float ab = (b-a).cross_product(point-a);
+  float bc = (c-b).cross_product(point-b);
+  float ca = (a-c).cross_product(point-c);
+
+  if((ab>=0 && bc>=0 && ca>=0) || (ab<=0 && bc<=0 && ca<=0)){
+    std::cout << "est dedans \n";
+  }
+
+  return (ab>=0 && bc>=0 && ca>=0) || (ab<=0 && bc<=0 && ca<=0);
+}
+
+void Polygone::print(){
+  std::cout << "[  ";
+  for(auto p : points){
+    std::cout << p << " ";
+  }
+  std::cout << " ]\n";
+}
+
+bool Polygone::is_outside(Vector2D a, Vector2D b, Vector2D c){
+  Vector2D edge1 = b - a;
+  Vector2D edge2 = c - b;
+
+  float crossProduct = edge1.cross_product(edge2);
+
+  if (crossProduct > 0) {
+    return false;
+  } 
+
+  return true;
 }

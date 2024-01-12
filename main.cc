@@ -22,8 +22,6 @@ int main() {
     p.add_point(Vector2D(117, 565));
     p.add_point(Vector2D(100, 540));
 
-    // Wall wall(p.get_pos(), "resources/Test.jpg");
-
     Input input;
     Flipper flipper;
     Launcher launcher;
