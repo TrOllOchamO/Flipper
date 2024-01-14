@@ -14,22 +14,10 @@ private:
 
 public:
     Flipper() : left(Polygone()), right(Polygone()) {
-        left.add_point(Vector2D(160, 735));
-        left.add_point(Vector2D(180, 740));
-        left.add_point(Vector2D(160, 745));
-        left.add_point(Vector2D(80, 750));
-        left.add_point(Vector2D(75, 745));
-        left.add_point(Vector2D(75, 735));
-        left.add_point(Vector2D(80, 730));
+        left.add_point( {Vector2D(160, 735), Vector2D(180, 740), Vector2D(160, 745), Vector2D(80, 750), Vector2D(75, 745), Vector2D(75, 735), Vector2D(80, 730)} );
         left.rotate(0.3, Vector2D(85,740));
 
-        right.add_point(Vector2D(240, 735));
-        right.add_point(Vector2D(220, 740));
-        right.add_point(Vector2D(240, 745));
-        right.add_point(Vector2D(320, 750));
-        right.add_point(Vector2D(325, 745));
-        right.add_point(Vector2D(325, 735));
-        right.add_point(Vector2D(320, 730));
+        right.add_point( {Vector2D(220, 740), Vector2D(240, 735), Vector2D(320, 730), Vector2D(325, 735), Vector2D(325, 745), Vector2D(320, 750), Vector2D(240, 745)} );
         right.rotate(-0.3, Vector2D(315,740));
     };
 

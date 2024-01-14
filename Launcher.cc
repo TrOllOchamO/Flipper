@@ -31,19 +31,13 @@ void Launcher::update_value(int value){
 
     force += value*3;
     launcher.clear();
-    launcher.add_point(Vector2D(370, 790));
-    launcher.add_point(Vector2D(390, 790));
-    launcher.add_point(Vector2D(390, 750+force));
-    launcher.add_point(Vector2D(370, 750+force));
+    launcher.add_point( {Vector2D(370, 750+force), Vector2D(390, 750+force), Vector2D(390, 790), Vector2D(370, 790)} );
 }
 
 void Launcher::launch(){
     force = 0;
     launcher.clear();
-    launcher.add_point(Vector2D(370, 790));
-    launcher.add_point(Vector2D(390, 790));
-    launcher.add_point(Vector2D(390, 750));
-    launcher.add_point(Vector2D(370, 750));
+    launcher.add_point( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
 }
 
 void Launcher::render(sf::RenderWindow &window, sf::Color color){

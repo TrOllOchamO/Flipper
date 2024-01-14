@@ -14,13 +14,15 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(400, 800), "Flipper");
     sf::Clock clock;
 
-    Ball ball(Vector2D(100, 500), 8);
+    Ball ball(Vector2D(200, 200), 8);
+
+    Polygone concave;
+    concave.add_point( {Vector2D(50,480), Vector2D(90,440), Vector2D(85,510), Vector2D(150,465), 
+    Vector2D(85,520), Vector2D(140,520), Vector2D(160,530), Vector2D(75,530), Vector2D(75,480)} );
+
 
     Polygone p;
-    p.add_point(Vector2D(100, 510));
-    p.add_point(Vector2D(115, 550));
-    p.add_point(Vector2D(117, 565));
-    p.add_point(Vector2D(100, 540));
+    p.add_point( {Vector2D(220,200), Vector2D(280,200), Vector2D(280,210), Vector2D(220,210)} );
 
     Input input;
     Flipper flipper;
@@ -37,7 +39,8 @@ int main() {
         launcher.upate(input.up_launcher, input.down_launcher, input.enter_launcher);
 
         //move things
-        p.rotate(1, Vector2D(100, 525), dt);
+        concave.rotate(1, Vector2D(80, 525), dt);
+        p.rotate(-3, Vector2D(230, 205), dt);
         // ball.move(dt);
 
         //change color if collide
@@ -49,6 +52,7 @@ int main() {
         //render things
         flipper.render(window, sf::Color::Yellow);
         launcher.render(window, sf::Color::Magenta);
+        concave.render(window, sf::Color::White);
         p.render(window, c);
         ball.render(window, c);
 

@@ -19,10 +19,7 @@ private:
 
 public:
     Launcher() : launcher(Polygone()) {
-        launcher.add_point(Vector2D(370, 790));
-        launcher.add_point(Vector2D(390, 790));
-        launcher.add_point(Vector2D(390, 750));
-        launcher.add_point(Vector2D(370, 750));
+        launcher.add_point( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
     };
 
     void upate(bool up, bool down, bool enter);

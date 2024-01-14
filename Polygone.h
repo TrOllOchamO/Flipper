@@ -9,7 +9,8 @@
 class Polygone: public Shape {
 private:
     std::vector<Vector2D> points;
-
+    std::vector<Polygone> concave_points;
+    bool convex = true;
 
 public:
     Polygone(): Shape(Vector2D(0,0)) {};
@@ -23,7 +24,8 @@ public:
     // CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
     // CONSTRUIRE LES POLYGONES DANS LE SENS HORRAIRES !!!!!
     void add_point(Vector2D point);
-    
+    void add_point(std::vector<Vector2D> point);
+
     void clear();
     void print();    
     void render(sf::RenderWindow &window, sf::Color color);
@@ -37,3 +39,5 @@ public:
 };
 
 #endif /* !POLYGONE_H_ */
+
+
