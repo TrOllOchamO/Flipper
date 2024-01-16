@@ -22,11 +22,13 @@ add_executable(Flipper
     Collision.cc
     Wall.cc
     Bumper.cc
-    Input.cc
+    Inputs.cc
     Flipper.cc
     Physics.cc
     PhysicsProperties.cc
     Launcher.cc
+    Game.cc
+    Map.cc
 )
 
 target_include_directories(Flipper

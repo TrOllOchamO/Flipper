@@ -7,12 +7,6 @@
 
 /* https://perso.liris.cnrs.fr/nicolas.pronost/UUCourses/GamePhysics/lectures/lecture%207%20Collision%20Resolution.pdf */
 
-class Resolvable {
-public:
-  virtual Shape * get_shape() = 0;
-  virtual PhysicsProperties& get_physics_props() = 0;
-};
-
 class Physics {
 public:
   // if the two convex shapes are colliding, try to resolve the collision

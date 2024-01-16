@@ -21,6 +21,7 @@ void Wall::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Wall::render(sf::RenderWindow &window) const {
+    std::cout << "je suis pas render =)" << std::endl;
     this->shape->render(window, sf::Color::Blue);
 }
 

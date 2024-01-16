@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Vector2D.h"
-#include "Renderable.h"
 
 #ifndef SHAPE_H_
 #define SHAPE_H_
+
+#include "Interfaces.h"
 
 class Shape : public Renderable {
 private:

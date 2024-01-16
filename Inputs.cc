@@ -1,4 +1,4 @@
-#include "Input.h"
+#include "Inputs.h"
 
 #define LEFT_FLIPPER sf::Keyboard::Q
 #define RIGHT_FLIPPER sf::Keyboard::D
@@ -7,7 +7,7 @@
 #define UP_LAUNCHER sf::Keyboard::Down
 #define ENTER_LAUNCHER sf::Keyboard::Enter
 
-void Input::update(sf::RenderWindow &window) {
+void Inputs::update(sf::RenderWindow &window) {
     sf::Event event;
     while (window.pollEvent(event)) {
 
@@ -30,7 +30,7 @@ void Input::update(sf::RenderWindow &window) {
     }
 }
 
-void Input::key_down(sf::Keyboard::Key key){
+void Inputs::key_down(sf::Keyboard::Key key){
     switch (key) {
         case LEFT_FLIPPER:
             left_flipper = true;
@@ -57,7 +57,7 @@ void Input::key_down(sf::Keyboard::Key key){
     }
 }
 
-void Input::key_up(sf::Keyboard::Key key){
+void Inputs::key_up(sf::Keyboard::Key key){
     switch (key) {
         case LEFT_FLIPPER:
             left_flipper = false;

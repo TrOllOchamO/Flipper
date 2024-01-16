@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class Wall : public Resolvable, public Renderable {
+class Wall : public Resolvable, public Renderable, public Entity {
 private:
   std::unique_ptr<Shape> shape;
   PhysicsProperties props;

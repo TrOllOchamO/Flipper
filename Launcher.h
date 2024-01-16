@@ -5,7 +5,7 @@
 #ifndef LAUNCHER_H_
 #define LAUNCHER_H_
 
-class Launcher {
+class Launcher : public Entity, public Resolvable, public Renderable, public Interactable {
 private:
     Polygone launcher;
     float force = 0;
