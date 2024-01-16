@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Shape.h"
+#include "Renderable.h"
 
 #ifndef CIRCLE_H_
 #define CIRCLE_H_
 
-class Circle: public Shape{
+class Circle: public Shape {
 private:
   float radius;
 

@@ -7,7 +7,7 @@
 #ifndef POLYGONE_H_
 #define POLYGONE_H_
 
-class Polygone: public Shape, public Renderable {
+class Polygone: public Shape {
 private:
     std::vector<Vector2D> points;
     std::vector<Polygone> concave_points;
