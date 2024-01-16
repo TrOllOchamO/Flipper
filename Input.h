@@ -12,6 +12,10 @@ public:
     bool left_flipper = false;
     bool right_flipper = false;
 
+    bool up_launcher = false;
+    bool down_launcher = false;
+    bool enter_launcher = false;
+
     void update(sf::RenderWindow &m_window);
 };
 

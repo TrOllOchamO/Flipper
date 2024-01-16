@@ -15,3 +15,11 @@ int Shape::get_z_ordering() const {
 void Shape::set_z_ordering(int new_z_ordering) {
   z_ordering = new_z_ordering;
 }
+
+bool Shape::is_shape_convex() const{
+  return convex;
+}
+
+void Shape::set_convex(bool value) {
+  convex = value;
+}

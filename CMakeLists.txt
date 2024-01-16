@@ -26,6 +26,7 @@ add_executable(Flipper
     Flipper.cc
     Physics.cc
     PhysicsProperties.cc
+    Launcher.cc
 )
 
 target_include_directories(Flipper
