@@ -8,7 +8,7 @@ void Polygone::clear(){
   points.clear();
 }
 
-bool Polygone::is_convex(){
+bool Polygone::is_convex() const {
   int n = points.size();
   if(n<4){
     return true;
@@ -72,7 +72,7 @@ Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
   return futhest_point;
 }
 
-void Polygone::render(sf::RenderWindow &window, sf::Color color){
+void Polygone::render(sf::RenderWindow &window, sf::Color color) const {
   if(!is_convex()){
     std::cerr << "Polygone non convex\n";
     return;

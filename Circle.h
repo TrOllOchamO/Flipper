@@ -5,7 +5,7 @@
 #ifndef CIRCLE_H_
 #define CIRCLE_H_
 
-class Circle: public Shape {
+class Circle: public Shape{
 private:
   float radius;
 
@@ -16,7 +16,7 @@ public:
   Vector2D get_futhest_point(const Vector2D &direction) const override;
   float get_radius() const;
 
-  void render(sf::RenderWindow &window, sf::Color color);
+  void render(sf::RenderWindow &window, sf::Color color) const override;
 };
 
 #endif /* !CIRCLE_H_ */

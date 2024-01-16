@@ -30,7 +30,7 @@ std::vector<Vector2D> Rectangle::get_vertices() const {
           Vector2D(pos.x + width, pos.y + height)};
 }
 
-void Rectangle::render(sf::RenderWindow &window, sf::Color color){
+void Rectangle::render(sf::RenderWindow &window, sf::Color color) const {
   sf::Vector2f size(width, height);
   sf::RectangleShape shape(size);
   shape.setFillColor(color);

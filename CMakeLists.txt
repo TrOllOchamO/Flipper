@@ -21,8 +21,11 @@ add_executable(Flipper
     Shape.cc
     Collision.cc
     Wall.cc
+    Bumper.cc
     Input.cc
     Flipper.cc
+    Physics.cc
+    PhysicsProperties.cc
 )
 
 target_include_directories(Flipper

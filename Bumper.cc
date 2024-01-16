@@ -1,8 +1,8 @@
-#include "Wall.h"
+#include "Bumper.h"
 #include <SFML/Graphics/Color.hpp>
 #include <iostream>
 
-Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape(std::move(shape)) {
+Bumper::Bumper(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape(std::move(shape)) {
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
@@ -12,22 +12,22 @@ Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D::zero();
     props.angular_velocity = 0;
-    props.bounciness = 0.6;
+    props.bounciness = 1.1;
     props.mass = 10000000000;
 }
 
-void Wall::render(sf::RenderWindow &window, sf::Color color) const {
+void Bumper::render(sf::RenderWindow &window, sf::Color color) const {
     this->shape->render(window, color);
 }
 
-void Wall::render(sf::RenderWindow &window) const {
-    this->shape->render(window, sf::Color::Blue);
+void Bumper::render(sf::RenderWindow &window) const {
+    this->shape->render(window, sf::Color::Red);
 }
 
-Shape * Wall::get_shape() {
+Shape * Bumper::get_shape() {
     return this->shape.get();
 }
 
-PhysicsProperties& Wall::get_physics_props() {
+PhysicsProperties& Bumper::get_physics_props() {
     return this->props;
 }

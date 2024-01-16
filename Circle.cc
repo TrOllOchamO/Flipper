@@ -13,7 +13,7 @@ Vector2D Circle::get_futhest_point(const Vector2D &direction) const {
   return futhest_point;
 }
 
-void Circle::render(sf::RenderWindow &window, sf::Color color){
+void Circle::render(sf::RenderWindow &window, sf::Color color) const {
   sf::CircleShape shape(radius);
   shape.setFillColor(color);
   shape.setPosition(get_pos());

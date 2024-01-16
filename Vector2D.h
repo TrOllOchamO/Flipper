@@ -9,6 +9,7 @@ public:
   float x;
   float y;
 
+  Vector2D();
   Vector2D(float inputX, float inputY) : x(inputX), y(inputY) {};
 
   Vector2D& normalize();
@@ -48,7 +49,7 @@ public:
   friend bool operator!=(const Vector2D &v1, const Vector2D &v2);
   friend std::ostream &operator<<(std::ostream &os, const Vector2D &v);
   friend std::ostream &operator<<(std::ostream& os, const std::vector<Vector2D> &vector);
-  operator sf::Vector2f();
+  operator sf::Vector2f() const;
 };
 
 #endif /* !VECTOR2D_H_ */

@@ -7,3 +7,11 @@ Vector2D Shape::get_pos() const {
 void Shape::set_pos(Vector2D new_pos) {
   pos = new_pos;
 }
+
+int Shape::get_z_ordering() const {
+  return z_ordering;
+}
+
+void Shape::set_z_ordering(int new_z_ordering) {
+  z_ordering = new_z_ordering;
+}

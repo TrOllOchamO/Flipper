@@ -81,7 +81,7 @@ float Collision::EPA(const Shape *s1, const Shape *s2, Vector2D &direction, std:
   }
 
   float closest_edge_distance;
-  Vector2D closest_edge_normal = Vector2D::zero();
+  Vector2D closest_edge_normal;
 
   // while the precision is too low copared to the goal minDistance will be set to INFINIT_DISTANCE
   while (true) {
