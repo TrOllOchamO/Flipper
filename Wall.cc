@@ -21,14 +21,5 @@ void Wall::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Wall::render(sf::RenderWindow &window) const {
-    std::cout << "je suis pas render =)" << std::endl;
     this->shape->render(window, sf::Color::Blue);
-}
-
-Shape * Wall::get_shape() {
-    return this->shape.get();
-}
-
-PhysicsProperties& Wall::get_physics_props() {
-    return this->props;
 }

@@ -1,8 +1,13 @@
 #include "Launcher.h"
 #include "Polygone.h"
 #include "Vector2D.h"
+#include <SFML/Graphics/Color.hpp>
 
-void Launcher::upate(bool up, bool down, bool enter){
+Launcher::Launcher() : launcher(Polygone()) {
+    launcher.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
+};
+
+void Launcher::upate(bool up, bool down, bool enter) {
     if(up && can_move_up){
         can_move_up = false;
         update_value(1);
@@ -26,7 +31,7 @@ void Launcher::upate(bool up, bool down, bool enter){
     }
 }
 
-void Launcher::update_value(int value){
+void Launcher::update_value(int value) {
     if (force+value*3>30 || force+value*3<0) return;
 
     force += value*3;
@@ -34,12 +39,16 @@ void Launcher::update_value(int value){
     launcher.add_points( {Vector2D(370, 750+force), Vector2D(390, 750+force), Vector2D(390, 790), Vector2D(370, 790)} );
 }
 
-void Launcher::launch(){
+void Launcher::launch() {
     force = 0;
     launcher.clear();
     launcher.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
 }
 
-void Launcher::render(sf::RenderWindow &window, sf::Color color){
-    launcher.render(window,color);
+void Launcher::render(sf::RenderWindow &window, sf::Color color) const {
+    launcher.render(window, color);
+}
+
+void Launcher::render(sf::RenderWindow &window) const {
+    launcher.render(window, sf::Color::Magenta);
 }

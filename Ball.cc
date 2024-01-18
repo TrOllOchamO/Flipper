@@ -25,11 +25,3 @@ void Ball::render(sf::RenderWindow &window) const {
     shape.setPosition(this->shape.get_pos());
     window.draw(shape);
 }
-
-Shape * Ball::get_shape() {
-    return &this->shape;
-}
-
-PhysicsProperties& Ball::get_physics_props() {
-    return this->props;
-}

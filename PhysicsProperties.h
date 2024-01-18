@@ -1,7 +1,7 @@
-#include "Shape.h"
-
 #ifndef PHYSICS_PROPERTIES_H_
 #define PHYSICS_PROPERTIES_H_
+
+#include "Vector2D.h"
 
 struct PhysicsProperties {
   bool should_react_with_other;

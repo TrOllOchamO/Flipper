@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "Shape.h"
-#include "Renderable.h"
 #include <math.h> 
 
 #ifndef POLYGONE_H_

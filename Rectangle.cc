@@ -31,7 +31,6 @@ std::vector<Vector2D> Rectangle::get_vertices() const {
 }
 
 void Rectangle::render(sf::RenderWindow &window, sf::Color color) const {
-  std::cout << "je suis pas render =(" << std::endl;
   sf::Vector2f size(width, height);
   sf::RectangleShape shape(size);
   shape.setFillColor(color);

@@ -1,10 +1,9 @@
 #include <iostream>
 #include "Vector2D.h"
+#include "Interfaces.h"
 
 #ifndef SHAPE_H_
 #define SHAPE_H_
-
-#include "Interfaces.h"
 
 class Shape : public Renderable {
 private:
@@ -14,6 +13,7 @@ private:
 
 public:
   Shape(Vector2D pos) : pos(pos) {};
+  virtual ~Shape() = default;
 
   Vector2D get_pos() const;
   void set_pos(Vector2D new_pos);

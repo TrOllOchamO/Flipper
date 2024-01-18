@@ -6,6 +6,7 @@
 
 #include "Inputs.h"
 #include "Game.h"
+#include "Map.h"
 #include "Wall.h"
 #include "Rectangle.h"
 
@@ -16,25 +17,20 @@ int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOWS_WIDTH, WINDOWS_HEIGHT), "Flipper");
   sf::Clock clock;
   Inputs inputs;
-  Game game;
 
   // on créer la map
   Map map;
-  std::unique_ptr<Shape> bar = std::make_unique<Rectangle>(Rectangle(Vector2D(0, WINDOWS_HEIGHT - 10), WINDOWS_WIDTH, 10));
-  std::unique_ptr<Entity> wall = std::make_unique<Wall>(Wall(std::move(bar), "Test.jpg"));
-  struct EntityProperties wall_props;
-  wall_props.is_renderable = true;
-  wall_props.is_resolvable = true;
-  map.make_entity(std::move(wall), wall_props);
+  std::unique_ptr<Shape> bar = std::make_unique<Rectangle>(Vector2D(0, WINDOWS_HEIGHT - 10), WINDOWS_WIDTH, 10);
+  std::unique_ptr<Entity> wall = std::make_unique<Wall>(std::move(bar), "Test.jpg");
 
-  game.set_map(map);
+  map.make_entity(std::move(wall));
+  Game game(std::move(map));
     
   while (window.isOpen()) {
     float dt = clock.restart().asSeconds();
     inputs.update(window);
     window.clear(sf::Color::Black);
 
-    // ca explose
     game.update(window, inputs, dt);
 
     window.display();

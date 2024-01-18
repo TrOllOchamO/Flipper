@@ -4,12 +4,11 @@
 #include "Physics.h"
 #include "PhysicsProperties.h"
 #include "Polygone.h"
-#include "Renderable.h"
 #include "Shape.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class Bumper: public Resolvable, public Renderable, public Entity {
+class Bumper: public Entity {
 private:
   std::unique_ptr<Shape> shape;
   PhysicsProperties props;
@@ -19,8 +18,10 @@ private:
 public:
   Bumper(std::unique_ptr<Shape> shape, const std::string &texturePath);
 
-  Shape *get_shape() override;
-  PhysicsProperties &get_physics_props() override;
+  bool is_resolvable() override { return true; } ;
+  Shape* get_shape() override { return this->shape.get(); }
+  PhysicsProperties& get_physics_props() override { return this->props; }
+
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };

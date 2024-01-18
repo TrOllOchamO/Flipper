@@ -1,10 +1,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <iostream>
-#include <memory>
 #include <SFML/Graphics.hpp>
 
-#include "Renderable.h"
-#include "Physics.h"
 #include "Inputs.h"
 #include "Map.h"
 
@@ -17,6 +13,7 @@ private:
   Map map;
 
 public:
+  Game(Map map) : map(std::move(map)) {}
   void set_map(Map new_map);
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
 };

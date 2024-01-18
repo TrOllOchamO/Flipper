@@ -23,11 +23,3 @@ void Bumper::render(sf::RenderWindow &window, sf::Color color) const {
 void Bumper::render(sf::RenderWindow &window) const {
     this->shape->render(window, sf::Color::Red);
 }
-
-Shape * Bumper::get_shape() {
-    return this->shape.get();
-}
-
-PhysicsProperties& Bumper::get_physics_props() {
-    return this->props;
-}

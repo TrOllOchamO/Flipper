@@ -25,7 +25,6 @@ add_executable(Flipper
     Inputs.cc
     Flipper.cc
     Physics.cc
-    PhysicsProperties.cc
     Launcher.cc
     Game.cc
     Map.cc

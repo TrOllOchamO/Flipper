@@ -1,5 +1,5 @@
-#ifndef INTERFACES_H_
-#define INTERFACES_H_
+#ifndef ENTITY_H_
+#define ENTITY_H_
 
 #include <assert.h>
 #include <SFML/Graphics.hpp>
@@ -8,23 +8,27 @@
 class Shape; // forward declaration
 struct PhysicsProperties; // forward declaration
 
-class Entity {};
+class Renderable {
+public:
+  virtual void render([[maybe_unused]] sf::RenderWindow &window, [[maybe_unused]] sf::Color color) const { }
+  virtual void render([[maybe_unused]] sf::RenderWindow &window) const { }
+};
 
 class Resolvable {
 public:
-  virtual Shape* get_shape() = 0;
-  virtual PhysicsProperties& get_physics_props() = 0;
-};
-
-class Renderable {
-public:
-  virtual void render([[maybe_unused]] sf::RenderWindow &window, [[maybe_unused]] sf::Color color) const { assert(false); };
-  virtual void render([[maybe_unused]] sf::RenderWindow &window) const { assert(false); };
+  virtual bool is_resolvable() { return false; }
+  virtual Shape* get_shape() { assert(false); }
+  virtual PhysicsProperties& get_physics_props() { assert(false); }
 };
 
 class Interactable {
-  public:
-  virtual void use_inputs(const Inputs& player_inputs) = 0;
+public:
+  virtual void use_inputs([[maybe_unused]] const Inputs& player_inputs) {}
 };
 
-#endif /* !INTERFACES_H_*/
+class Entity : public Renderable, public Resolvable, public Interactable {
+public:
+  // virtual ~Entity() = default;
+};
+
+#endif /* !ENTITY_H_*/

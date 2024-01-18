@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "Polygone.h"
+#include "Interfaces.h"
 
 
 #ifndef LAUNCHER_H_
 #define LAUNCHER_H_
 
-class Launcher : public Entity, public Resolvable, public Renderable, public Interactable {
+class Launcher : public Entity {
 private:
     Polygone launcher;
     float force = 0;
@@ -18,12 +19,11 @@ private:
     void launch();
 
 public:
-    Launcher() : launcher(Polygone()) {
-        launcher.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
-    };
+    Launcher();
 
     void upate(bool up, bool down, bool enter);
-    void render(sf::RenderWindow &window, sf::Color color);
+    void render(sf::RenderWindow &window, sf::Color color) const override;
+    void render(sf::RenderWindow &window) const override;
 };
 
 #endif /* !LAUNCHER_H_ */
