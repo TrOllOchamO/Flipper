@@ -13,7 +13,6 @@ private:
   std::unique_ptr<Shape> shape;
   PhysicsProperties props;
   sf::Texture texture;
-  sf::Sprite sprite;
 
 public:
   Bumper(std::unique_ptr<Shape> shape, const std::string &texturePath);

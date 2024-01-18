@@ -18,6 +18,7 @@ public:
   std::vector<Vector2D> get_vertices() const;
 
   void render(sf::RenderWindow &window, sf::Color color) const override;
+  void render(sf::RenderWindow &window, const sf::Texture &texture) const override;
 };
 
 #endif /* !RECTANGLE_H_ */

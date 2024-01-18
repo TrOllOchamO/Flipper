@@ -12,9 +12,10 @@ private:
     Polygone right;
     float left_rotation = 0;
     float right_rotation = 0;
+    sf::Texture texture;
 
 public:
-    Flipper();
+    Flipper( const std::string& texturePath);
 
     void upate(bool left, bool right);
     void render(sf::RenderWindow &window, sf::Color color) const override;

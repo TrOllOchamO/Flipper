@@ -6,7 +6,6 @@ Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
-    sprite.setTexture(texture);
 
     props.should_react_with_other = false;
     props.velocity = Vector2D::zero();
@@ -17,9 +16,9 @@ Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape
 }
 
 void Wall::render(sf::RenderWindow &window, sf::Color color) const {
-    this->shape->render(window, color);
+    shape->render(window, color);
 }
 
 void Wall::render(sf::RenderWindow &window) const {
-    this->shape->render(window, sf::Color::Blue);
+    shape->render(window, texture);
 }

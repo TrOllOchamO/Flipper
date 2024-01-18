@@ -114,6 +114,25 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color) const {
   }
 }
 
+void Polygone::render(sf::RenderWindow &window, const sf::Texture &texture) const {
+  if(convex){
+    int n = points.size();
+    sf::ConvexShape convex;
+    convex.setPointCount(n);
+    convex.setTexture(&texture);
+    convex.setPosition(get_pos());
+    for (int i=0; i<n; ++i) {
+      convex.setPoint(i, points[i]);
+    }
+    window.draw(convex);
+      
+  } else {
+    for(auto p : concave_points){
+      p.render(window, texture);   
+    }
+  }
+}
+
 void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
   if(convex){
     std::vector<Vector2D> new_points;

@@ -3,7 +3,12 @@
 #include "Vector2D.h"
 #include <SFML/Graphics/Color.hpp>
 
-Launcher::Launcher() : launcher(Polygone()) {
+Launcher::Launcher(const std::string& texturePath) : launcher(Polygone()) {
+    if (!texture.loadFromFile(texturePath)) {
+        std::cerr << "Error loading texture from file: " << texturePath << std::endl;
+    }
+    texture.setRepeated(true);
+
     launcher.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
 };
 
@@ -50,5 +55,5 @@ void Launcher::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Launcher::render(sf::RenderWindow &window) const {
-    launcher.render(window, sf::Color::Magenta);
+    launcher.render(window, texture);
 }

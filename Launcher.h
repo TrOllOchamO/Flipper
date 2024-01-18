@@ -9,8 +9,9 @@
 class Launcher : public Entity {
 private:
     Polygone launcher;
+    sf::Texture texture;
     float force = 0;
-
+    
     bool can_move_up = true;
     bool can_move_down = true;
     bool can_launch = true;
@@ -19,7 +20,7 @@ private:
     void launch();
 
 public:
-    Launcher();
+    Launcher( const std::string& texturePath);
 
     void upate(bool up, bool down, bool enter);
     void render(sf::RenderWindow &window, sf::Color color) const override;

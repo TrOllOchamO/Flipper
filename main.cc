@@ -9,6 +9,9 @@
 #include "Map.h"
 #include "Wall.h"
 #include "Rectangle.h"
+#include "Ball.h"
+#include "Bumper.h"
+#include "Vector2D.h"
 
 #define WINDOWS_WIDTH 400
 #define WINDOWS_HEIGHT 800
@@ -20,10 +23,29 @@ int main() {
 
   // on créer la map
   Map map;
-  std::unique_ptr<Shape> bar = std::make_unique<Rectangle>(Vector2D(0, WINDOWS_HEIGHT - 10), WINDOWS_WIDTH, 10);
-  std::unique_ptr<Entity> wall = std::make_unique<Wall>(std::move(bar), "Test.jpg");
 
-  map.make_entity(std::move(wall));
+  std::unique_ptr<Shape> bottom_bar = std::make_unique<Circle>(Vector2D(0, 600), WINDOWS_WIDTH/2);
+  std::unique_ptr<Shape> upper_bar = std::make_unique<Rectangle>(Vector2D(0, 0), WINDOWS_WIDTH, 100);
+  std::unique_ptr<Shape> left_bar = std::make_unique<Rectangle>(Vector2D(0, 0), 10, WINDOWS_HEIGHT);
+  std::unique_ptr<Shape> right_bar = std::make_unique<Rectangle>(Vector2D(WINDOWS_WIDTH -10, 0), 10, WINDOWS_HEIGHT);
+
+  // std::unique_ptr<Entity> bottom_wall = std::make_unique<Wall>(std::move(bottom_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
+  std::unique_ptr<Entity> upper_wall = std::make_unique<Wall>(std::move(upper_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
+  std::unique_ptr<Entity> left_wall = std::make_unique<Wall>(std::move(left_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
+  std::unique_ptr<Entity> right_wall = std::make_unique<Wall>(std::move(right_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
+  std::unique_ptr<Entity> bumper = std::make_unique<Bumper>(std::move(bottom_bar), "");
+
+  std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(200,400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
+
+
+
+  // map.make_entity(std::move(bottom_wall));
+  map.make_entity(std::move(upper_wall));
+  map.make_entity(std::move(left_wall));
+  map.make_entity(std::move(right_wall));
+  map.make_entity(std::move(bumper));
+  map.make_entity(std::move(ball));
+
   Game game(std::move(map));
     
   while (window.isOpen()) {

@@ -11,6 +11,7 @@ struct PhysicsProperties; // forward declaration
 class Renderable {
 public:
   virtual void render([[maybe_unused]] sf::RenderWindow &window, [[maybe_unused]] sf::Color color) const { }
+  virtual void render([[maybe_unused]] sf::RenderWindow &window, [[maybe_unused]] const sf::Texture &texture) const { }
   virtual void render([[maybe_unused]] sf::RenderWindow &window) const { }
 };
 

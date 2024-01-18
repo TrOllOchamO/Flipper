@@ -11,14 +11,15 @@
 
 class Ball : public Entity {
 private:
-  Circle shape;
+  std::unique_ptr<Shape> shape;
   PhysicsProperties props;
+  sf::Texture texture;
 
 public:
-  Ball(Vector2D pos, float radius);
+  Ball(Vector2D pos, float radius, const std::string& texturePath);
 
   bool is_resolvable() override { return true; } ;
-  Shape* get_shape() override { return &this->shape; }
+  Shape* get_shape() override { return this->shape.get(); }
   PhysicsProperties& get_physics_props() override { return this->props; }
 
   void render(sf::RenderWindow &window, sf::Color color) const override;

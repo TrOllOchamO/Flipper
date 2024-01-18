@@ -6,7 +6,7 @@ Bumper::Bumper(std::unique_ptr<Shape> shape, const std::string& texturePath) : s
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
-    sprite.setTexture(texture);
+    texture.setRepeated(true);
 
     props.should_react_with_other = false;
     props.velocity = Vector2D::zero();
@@ -21,5 +21,5 @@ void Bumper::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Bumper::render(sf::RenderWindow &window) const {
-    this->shape->render(window, sf::Color::Red);
+    this->shape->render(window, texture);
 }

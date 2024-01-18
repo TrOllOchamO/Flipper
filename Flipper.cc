@@ -6,7 +6,12 @@
 #define ROTATE 0.01
 #define ROTATE_LIMITE 0.5
 
-Flipper::Flipper() : left(Polygone()), right(Polygone()) {
+Flipper::Flipper(const std::string& texturePath) : left(Polygone()), right(Polygone()) {
+    if (!texture.loadFromFile(texturePath)) {
+        std::cerr << "Error loading texture from file: " << texturePath << std::endl;
+    }
+    texture.setRepeated(true);
+
     left.add_points( {Vector2D(160, 735), Vector2D(180, 740), Vector2D(160, 745), Vector2D(80, 750), Vector2D(75, 745), Vector2D(75, 735), Vector2D(80, 730)} );
     left.rotate(0.3, Vector2D(85,740));
 
@@ -40,5 +45,6 @@ void Flipper::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Flipper::render(sf::RenderWindow &window) const {
-    this->render(window, sf::Color::Cyan);
+    left.render(window, texture);
+    right.render(window, texture);
 }

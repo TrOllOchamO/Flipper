@@ -37,3 +37,12 @@ void Rectangle::render(sf::RenderWindow &window, sf::Color color) const {
   shape.setPosition(get_pos());
   window.draw(shape);
 }
+
+void Rectangle::render(sf::RenderWindow &window, const sf::Texture &texture) const {
+  sf::Vector2f size(width, height);
+  sf::RectangleShape shape(size);
+  shape.setTexture(&texture);
+  shape.setTextureRect(sf::IntRect(0, 0, width, height));
+  shape.setPosition(get_pos());
+  window.draw(shape);
+}

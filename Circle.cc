@@ -20,6 +20,14 @@ void Circle::render(sf::RenderWindow &window, sf::Color color) const {
   window.draw(shape);
 }
 
+void Circle::render(sf::RenderWindow &window, const sf::Texture &texture) const {
+  sf::CircleShape shape(radius);
+  shape.setTexture(&texture);
+  shape.setTextureRect(sf::IntRect(0, 0, radius*2, radius*2));
+  shape.setPosition(get_pos());
+  window.draw(shape);
+}
+
 float Circle::get_radius() const {
   return this->radius;
 }
