@@ -5,6 +5,7 @@
 #include "Interfaces.h"
 #include "Circle.h"
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 #ifndef BALL_H_
 #define BALL_H_
@@ -17,6 +18,10 @@ private:
 
 public:
   Ball(Vector2D pos, float radius, const std::string& texturePath);
+
+  // pour debug
+  void set_velocity(Vector2D velocity) { props.velocity = velocity; }
+  void set_acceleration(Vector2D acceleration) { props.acceleration = acceleration; }
 
   bool is_resolvable() override { return true; } ;
   Shape* get_shape() override { return this->shape.get(); }

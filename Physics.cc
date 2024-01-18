@@ -1,9 +1,10 @@
 #include "Physics.h"
+#include <iostream>
 #include <type_traits>
 
 #define SEPARATION_MAX_ITERATION 300
-#define SEPARATION_THRESHOLD 0.01
-#define RESTING_CONTACT_EPSILON 0.0001 
+#define SEPARATION_THRESHOLD 0.001
+#define RESTING_CONTACT_EPSILON 0.00001 
 
 void Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
   std::vector<Vector2D> simplex;
@@ -47,19 +48,18 @@ void Physics::resolve_velocities(PhysicsProperties &data1, PhysicsProperties &da
   Vector2D new_velocity1 = data1.velocity;
   Vector2D new_velocity2 = data2.velocity;
 
-
   if (data1.should_react_with_other) {
     const float impulse = get_impulse_value(data1, data2, direction);
-    // if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
-      new_velocity1 = data1.velocity + (impulse/data1.mass) * direction;
-    // }
+    if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
+      new_velocity1 = (impulse/data1.mass) * direction;
+    }
   }
 
   if (data2.should_react_with_other) {
     const float impulse = get_impulse_value(data2, data1, direction);
-    // if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
-      new_velocity2 = data2.velocity + (impulse/data2.mass) * direction;
-    // }
+    if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
+      new_velocity2 = (impulse/data2.mass) * direction;
+    }
   }
 
   data1.velocity = new_velocity1;

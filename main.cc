@@ -35,7 +35,6 @@ int main() {
   std::unique_ptr<Entity> right_wall = std::make_unique<Wall>(std::move(right_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
   std::unique_ptr<Entity> bumper = std::make_unique<Bumper>(std::move(bottom_bar), "");
 
-  std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(200,400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
 
 
 
@@ -44,7 +43,20 @@ int main() {
   map.make_entity(std::move(left_wall));
   map.make_entity(std::move(right_wall));
   map.make_entity(std::move(bumper));
-  map.make_entity(std::move(ball));
+
+  for (int x = 50; x < 451; x += 50) {
+    std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(x, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
+    map.make_entity(std::move(ball));
+  }
+
+  // std::unique_ptr<Ball> ball1 = std::make_unique<Ball>(Vector2D(200, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
+  // ball1->set_velocity(Vector2D(300, 0));
+  // ball1->set_acceleration(Vector2D::zero());
+  // map.make_entity(std::move(ball1));
+  // std::unique_ptr<Ball> ball2 = std::make_unique<Ball>(Vector2D(300, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
+  // ball2->set_velocity(Vector2D(-100, 0));
+  // ball2->set_acceleration(Vector2D::zero());
+  // map.make_entity(std::move(ball2));
 
   Game game(std::move(map));
     

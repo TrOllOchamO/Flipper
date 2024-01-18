@@ -12,9 +12,7 @@ Ball::Ball(Vector2D pos, float radius, const std::string& texturePath) : shape(s
     props.should_react_with_other = true;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D(0, 750);
-    props.angular_velocity = 0;
-    props.bounciness = 0.8;
-    props.mass = 10;
+    props.bounciness = 0.9;
 }
   
 void Ball::render(sf::RenderWindow &window, sf::Color color) const {
