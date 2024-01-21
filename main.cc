@@ -33,7 +33,7 @@ int main() {
   std::unique_ptr<Entity> upper_wall = std::make_unique<Wall>(std::move(upper_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
   std::unique_ptr<Entity> left_wall = std::make_unique<Wall>(std::move(left_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
   std::unique_ptr<Entity> right_wall = std::make_unique<Wall>(std::move(right_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
-  std::unique_ptr<Entity> bumper = std::make_unique<Bumper>(std::move(bottom_bar), "");
+  std::unique_ptr<Entity> bumper = std::make_unique<Bumper>(std::move(bottom_bar), "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
 
 
 
@@ -44,7 +44,7 @@ int main() {
   map.make_entity(std::move(right_wall));
   map.make_entity(std::move(bumper));
 
-  for (int x = 50; x < 451; x += 50) {
+  for (int x = 50; x < 51; x += 50) {
     std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(x, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
     map.make_entity(std::move(ball));
   }
