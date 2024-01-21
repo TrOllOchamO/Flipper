@@ -10,8 +10,7 @@
 #include "Wall.h"
 #include "Rectangle.h"
 #include "Ball.h"
-#include "FlipperLeft.h"
-#include "FlipperRight.h"
+#include "Flipper.h"
 #include "Launcher.h"
 #include "Bumper.h"
 #include "Vector2D.h"
@@ -51,10 +50,6 @@ int main() {
   std::unique_ptr<Polygone> right_angle_shape = std::make_unique<Polygone>(Polygone());
   right_angle_shape->add_points({Vector2D(300,0), Vector2D(400,0), Vector2D(400,100)});
 
-  std::unique_ptr<Polygone> bot_left_angle_shape = std::make_unique<Polygone>(Polygone());
-  bot_left_angle_shape->add_points({Vector2D(50,790), Vector2D(10,790), Vector2D(10,690), Vector2D(50,730)});
-  std::unique_ptr<Polygone> bot_right_angle_shape = std::make_unique<Polygone>(Polygone());
-  bot_right_angle_shape->add_points({Vector2D(340,790), Vector2D(300,790), Vector2D(300,730), Vector2D(340,690)});
 
   // entity
   std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "");
@@ -76,16 +71,13 @@ int main() {
   std::unique_ptr<Wall> left_angle = std::make_unique<Wall>(std::move(left_angle_shape), "resources/Test.jpg");
   std::unique_ptr<Wall> right_angle = std::make_unique<Wall>(std::move(right_angle_shape), "resources/Test.jpg");
 
-  std::unique_ptr<Wall> bot_left_angle = std::make_unique<Wall>(std::move(bot_left_angle_shape), "resources/Test.jpg");
-  std::unique_ptr<Wall> bot_right_angle = std::make_unique<Wall>(std::move(bot_right_angle_shape), "resources/Test.jpg");
-
   std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(362, 730), 8, "./resources/ballTest.png");
 
   ball->set_velocity(Vector2D(0, -1000));
 
   std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
-  std::unique_ptr<FlipperLeft> left_flipper = std::make_unique<FlipperLeft>("");
-  std::unique_ptr<FlipperRight> right_flipper = std::make_unique<FlipperRight>("");
+  std::unique_ptr<Flipper> left_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::LEFT);
+  std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
 
   // make entity
   map.make_entity(std::move(bumper_1));
@@ -106,9 +98,6 @@ int main() {
 
   map.make_entity(std::move(left_angle));
   map.make_entity(std::move(right_angle));
-
-  map.make_entity(std::move(bot_left_angle));
-  map.make_entity(std::move(bot_right_angle));
 
   map.make_entity(std::move(ball));
   map.make_entity(std::move(launcher));

@@ -25,8 +25,7 @@ add_executable(Flipper
     Wall.cc
     Bumper.cc
     Inputs.cc
-    FlipperLeft.cc
-    FlipperRight.cc
+    Flipper.cc
     Physics.cc
     Launcher.cc
     Game.cc

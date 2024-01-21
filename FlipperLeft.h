@@ -3,18 +3,24 @@
 #include <SFML/Graphics.hpp>
 #include "PhysicsProperties.h"
 
-#ifndef FLIPPER_LEFT_H_
-#define FLIPPER_LEFT_H_
+#ifndef FLIPPER_H_
+#define FLIPPER_H_
 
-class FlipperLeft : public Entity {
+enum FLIPPER_ORIENTATION {
+  LEFT,
+  RIGHT,
+};
+
+class Flipper: public Entity {
 private:
   Polygone shape;
+  FLIPPER_ORIENTATION orientation;
   PhysicsProperties props;
   float rotation = 0;
   sf::Texture texture;
 
 public:
-  FlipperLeft(const std::string &texturePath);
+  Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation);
 
   bool is_resolvable() override { return true; };
   Shape *get_shape() override { return &shape; }
@@ -25,4 +31,4 @@ public:
   void render(sf::RenderWindow &window) const override;
 };
 
-#endif /* !FLIPPER_LEFT_H_ */
+#endif /* !FLIPPER_H_ */
