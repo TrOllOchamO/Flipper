@@ -11,7 +11,7 @@ Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape
     props.mass = 10000000000;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D::zero();
-    props.bounciness = 0.8;
+    props.bounciness = 0.4;
 }
 
 void Wall::render(sf::RenderWindow &window, sf::Color color) const {
