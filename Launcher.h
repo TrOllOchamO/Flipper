@@ -27,7 +27,7 @@ public:
   Shape *get_shape() override { return &shape; }
   PhysicsProperties &get_physics_props() override { return props; }
 
-  void upate(bool up, bool down, bool enter);
+  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };
