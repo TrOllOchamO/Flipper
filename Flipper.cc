@@ -7,7 +7,7 @@
 #define ROTATE_LIMITE_ACTIVATED 0.5
 #define ROTATE_LIMITE_DESACTIVATED 0.0
 #define DEFAULT_BOUNCINESS 0.2
-#define BOUNCINESS_WHEN_ACTIVATED 1.3
+#define BOUNCINESS_WHEN_ACTIVATED 1.1
 
 Flipper::Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation) : shape(Polygone()), orientation(orientation) {
   if (!texture.loadFromFile(texturePath)) {
