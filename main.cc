@@ -10,6 +10,9 @@
 #include "Wall.h"
 #include "Rectangle.h"
 #include "Ball.h"
+#include "FlipperLeft.h"
+#include "FlipperRight.h"
+#include "Launcher.h"
 #include "Bumper.h"
 #include "Vector2D.h"
 
@@ -24,47 +27,86 @@ int main() {
   // on créer la map
   Map map;
 
-  std::unique_ptr<Shape> bottom_bar = std::make_unique<Circle>(Vector2D(0, 600), WINDOWS_WIDTH/2);
-  std::unique_ptr<Shape> upper_bar = std::make_unique<Rectangle>(Vector2D(0, 0), WINDOWS_WIDTH, 100);
-  std::unique_ptr<Shape> left_bar = std::make_unique<Rectangle>(Vector2D(0, 0), 10, WINDOWS_HEIGHT);
-  std::unique_ptr<Shape> right_bar = std::make_unique<Rectangle>(Vector2D(WINDOWS_WIDTH -10, 0), 10, WINDOWS_HEIGHT);
+  // shape
+  std::unique_ptr<Circle> bumper_1_shape = std::make_unique<Circle>(Vector2D(40, 300), 16);
+  std::unique_ptr<Circle> bumper_2_shape = std::make_unique<Circle>(Vector2D(150, 300), 16);
+  std::unique_ptr<Circle> bumper_3_shape = std::make_unique<Circle>(Vector2D(260, 300), 16);
 
-  // std::unique_ptr<Entity> bottom_wall = std::make_unique<Wall>(std::move(bottom_bar), "/home/riz/Bureau/flipper/Flipper/resources/Test.jpg");
-  std::unique_ptr<Entity> upper_wall = std::make_unique<Wall>(std::move(upper_bar), "./resources/Test.jpg");
-  std::unique_ptr<Entity> left_wall = std::make_unique<Wall>(std::move(left_bar), "./resources/Test.jpg");
-  std::unique_ptr<Entity> right_wall = std::make_unique<Wall>(std::move(right_bar), "./resources/Test.jpg");
-  std::unique_ptr<Entity> bumper = std::make_unique<Bumper>(std::move(bottom_bar), "./resources/ballTest.png");
+  std::unique_ptr<Circle> bumper_4_shape = std::make_unique<Circle>(Vector2D(40, 500), 16);
+  std::unique_ptr<Circle> bumper_5_shape = std::make_unique<Circle>(Vector2D(150, 500), 16);
+  std::unique_ptr<Circle> bumper_6_shape = std::make_unique<Circle>(Vector2D(260, 500), 16);
+
+  std::unique_ptr<Circle> bumper_7_shape = std::make_unique<Circle>(Vector2D(80, 400), 16);
+  std::unique_ptr<Circle> bumper_8_shape = std::make_unique<Circle>(Vector2D(215, 400), 16);
+  
+  std::unique_ptr<Rectangle> bottom_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, WINDOWS_HEIGHT - 10), WINDOWS_WIDTH, 10));
+  std::unique_ptr<Rectangle> top_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), WINDOWS_WIDTH, 10));
+  std::unique_ptr<Rectangle> left_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 10, WINDOWS_HEIGHT));
+  std::unique_ptr<Rectangle> right_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(WINDOWS_WIDTH -10, 0), 10, WINDOWS_HEIGHT));
+  
+  std::unique_ptr<Rectangle> separation_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(340, 150), 10, 750));
+
+  std::unique_ptr<Polygone> left_angle_shape = std::make_unique<Polygone>(Polygone());
+  left_angle_shape->add_points({Vector2D(0,0), Vector2D(100,0), Vector2D(0,100)});
+  std::unique_ptr<Polygone> right_angle_shape = std::make_unique<Polygone>(Polygone());
+  right_angle_shape->add_points({Vector2D(300,0), Vector2D(400,0), Vector2D(400,100)});
 
 
+  // entity
+  std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "");
+  std::unique_ptr<Bumper> bumper_2 = std::make_unique<Bumper>(std::move(bumper_2_shape), "");
+  std::unique_ptr<Bumper> bumper_3 = std::make_unique<Bumper>(std::move(bumper_3_shape), "");
+  std::unique_ptr<Bumper> bumper_4 = std::make_unique<Bumper>(std::move(bumper_4_shape), "");
+  std::unique_ptr<Bumper> bumper_5 = std::make_unique<Bumper>(std::move(bumper_5_shape), "");
+  std::unique_ptr<Bumper> bumper_6 = std::make_unique<Bumper>(std::move(bumper_6_shape), "");
+  std::unique_ptr<Bumper> bumper_7 = std::make_unique<Bumper>(std::move(bumper_7_shape), "");
+  std::unique_ptr<Bumper> bumper_8 = std::make_unique<Bumper>(std::move(bumper_8_shape), "");
 
+  std::unique_ptr<Wall> bottom_wall = std::make_unique<Wall>(std::move(bottom_wall_shape), "resources/Test.jpg");
+  std::unique_ptr<Wall> top_wall = std::make_unique<Wall>(std::move(top_wall_shape), "resources/Test.jpg");
+  std::unique_ptr<Wall> left_wall = std::make_unique<Wall>(std::move(left_wall_shape), "resources/Test.jpg");
+  std::unique_ptr<Wall> right_wall = std::make_unique<Wall>(std::move(right_wall_shape), "resources/Test.jpg");
 
-  // map.make_entity(std::move(bottom_wall));
-  map.make_entity(std::move(upper_wall));
+  std::unique_ptr<Wall> separation_wall = std::make_unique<Wall>(std::move(separation_wall_shape), "resources/Test.jpg");
+
+  std::unique_ptr<Wall> left_angle = std::make_unique<Wall>(std::move(left_angle_shape), "resources/Test.jpg");
+  std::unique_ptr<Wall> right_angle = std::make_unique<Wall>(std::move(right_angle_shape), "resources/Test.jpg");
+
+  std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(362, 730), 8, "./resources/ballTest.png");
+
+  ball->set_velocity(Vector2D(0, -2000));
+
+  std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
+  std::unique_ptr<FlipperLeft> left_flipper = std::make_unique<FlipperLeft>("");
+  std::unique_ptr<FlipperRight> right_flipper = std::make_unique<FlipperRight>("");
+
+  // make entity
+  map.make_entity(std::move(bumper_1));
+  map.make_entity(std::move(bumper_2));
+  map.make_entity(std::move(bumper_3));
+  map.make_entity(std::move(bumper_4));
+  map.make_entity(std::move(bumper_5));
+  map.make_entity(std::move(bumper_6));
+  map.make_entity(std::move(bumper_7));
+  map.make_entity(std::move(bumper_8));
+
+  map.make_entity(std::move(bottom_wall));
+  map.make_entity(std::move(top_wall));
   map.make_entity(std::move(left_wall));
   map.make_entity(std::move(right_wall));
-  map.make_entity(std::move(bumper));
 
-  // std::unique_ptr<Ball> ball1 = std::make_unique<Ball>(Vector2D(200, 400), 8, "");
-  // ball1->set_acceleration(Vector2D::zero());
-  // ball1->set_velocity(Vector2D(0, 0));
-  // ball1->set_angular_velocity(1);
-  // ball1->get_props()->bounciness = 1;
-  // ball1->get_props()->mass = 1000000000;
-  // map.make_entity(std::move(ball1));
+  map.make_entity(std::move(separation_wall));
+
+  map.make_entity(std::move(left_angle));
+  map.make_entity(std::move(right_angle));
+
+  map.make_entity(std::move(ball));
+  map.make_entity(std::move(launcher));
+  map.make_entity(std::move(left_flipper));
+  map.make_entity(std::move(right_flipper));
 
 
-  // std::unique_ptr<Ball> ball2 = std::make_unique<Ball>(Vector2D(500, 400), 8, "./resources/ballTest.png");
-  // ball2->set_acceleration(Vector2D::zero());
-  // ball2->set_velocity(Vector2D(-200, 0));
-  // ball2->set_angular_velocity(2);
-  // ball2->get_props()->bounciness = 1;
-  // map.make_entity(std::move(ball2));
-
-  for (int x = 50; x < 451; x += 50) {
-    std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(x, 400), 8, "./resources/ballTest.png");
-    map.make_entity(std::move(ball));
-  }
-
+  // load map
   Game game(std::move(map));
     
   while (window.isOpen()) {
@@ -78,38 +120,3 @@ int main() {
     window.display();
   }
 }
-
-
-  // for (int x = 50; x < 451; x += 50) {
-  //   Ball *ball = new Ball(Vector2D(x, 30), 8);
-  //   elements_to_render.push_back(ball);
-  //   elements_with_pysics.push_back(ball);
-  // }
-
-  // std::unique_ptr<Shape> bottom_bar = std::make_unique<Rectangle>(Rectangle(Vector2D(0, WINDOWS_HEIGHT - 10), WINDOWS_WIDTH, 10));
-  // std::unique_ptr<Shape> upper_bar = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), WINDOWS_WIDTH, 10));
-  // std::unique_ptr<Shape> left_bar = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 10, WINDOWS_HEIGHT));
-  // std::unique_ptr<Shape> right_bar = std::make_unique<Rectangle>(Rectangle(Vector2D(WINDOWS_WIDTH -10, 0), 10, WINDOWS_HEIGHT));
-
-  // Wall *bottom_wall = new Wall(std::move(bottom_bar), "Test.jpg");
-  // elements_to_render.push_back(bottom_wall);
-  // elements_with_pysics.push_back(bottom_wall);
-  // Wall *upper_wall = new Wall(std::move(upper_bar), "Test.jpg");
-  // elements_to_render.push_back(upper_wall);
-  // elements_with_pysics.push_back(upper_wall);
-  // Wall *left_wall = new Wall(std::move(left_bar), "Test.jpg");
-  // elements_to_render.push_back(left_wall);
-  // elements_with_pysics.push_back(left_wall);
-  // Wall *right_wall = new Wall(std::move(right_bar), "Test.jpg");
-  // elements_to_render.push_back(right_wall);
-  // elements_with_pysics.push_back(right_wall);
-
-  // std::unique_ptr<Shape> circle1 = std::make_unique<Circle>(Circle(Vector2D(0, WINDOWS_HEIGHT*3/4), WINDOWS_WIDTH/3));
-  // Bumper* bumper1 = new Bumper(std::move(circle1), "Test.jpg");
-  // elements_to_render.push_back(bumper1);
-  // elements_with_pysics.push_back(bumper1);
-
-  // std::unique_ptr<Shape> circle2 = std::make_unique<Circle>(Circle(Vector2D(WINDOWS_WIDTH/2, WINDOWS_HEIGHT*3/4), WINDOWS_WIDTH/3));
-  // Bumper* bumper2 = new Bumper(std::move(circle2), "Test.jpg");
-  // elements_to_render.push_back(bumper2);
-  // elements_with_pysics.push_back(bumper2);

@@ -16,7 +16,6 @@ private:
 
 public:
   Wall(std::unique_ptr<Shape> shape, const std::string& texturePath);
-  ~Wall();
 
   bool is_resolvable() override { return true; } ;
   Shape* get_shape() override { return this->shape.get(); }

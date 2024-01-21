@@ -1,35 +1,28 @@
 #include "Interfaces.h"
 #include "Polygone.h"
-#include "PhysicsProperties.h"
 #include <SFML/Graphics.hpp>
+#include "PhysicsProperties.h"
 
-#ifndef LAUNCHER_H_
-#define LAUNCHER_H_
+#ifndef FLIPPER_LEFT_H_
+#define FLIPPER_LEFT_H_
 
-class Launcher : public Entity {
+class FlipperLeft : public Entity {
 private:
   Polygone shape;
-  sf::Texture texture;
-  float force = 0;
   PhysicsProperties props;
-
-  bool can_move_up = true;
-  bool can_move_down = true;
-  bool can_launch = true;
-
-  void update_value(int value);
-  void launch();
+  float rotation = 0;
+  sf::Texture texture;
 
 public:
-  Launcher(const std::string &texturePath);
+  FlipperLeft(const std::string &texturePath);
 
   bool is_resolvable() override { return true; };
   Shape *get_shape() override { return &shape; }
   PhysicsProperties &get_physics_props() override { return props; }
 
-  void upate(bool up, bool down, bool enter);
+  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };
 
-#endif /* !LAUNCHER_H_ */
+#endif /* !FLIPPER_LEFT_H_ */
