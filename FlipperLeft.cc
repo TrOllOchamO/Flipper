@@ -22,23 +22,23 @@ FlipperLeft::FlipperLeft(const std::string &texturePath) : shape(Polygone()) {
   props.acceleration = Vector2D::zero();
   props.bounciness = 1.3;
 
-  shape.add_points({Vector2D(160, 735), Vector2D(180, 740), Vector2D(160, 745), Vector2D(80, 750), Vector2D(75, 745), Vector2D(75, 735), Vector2D(80, 730)});
-  shape.rotate(0.3, Vector2D(85, 740));
+    shape.add_points( {Vector2D(135, 735), Vector2D(155, 740), Vector2D(135, 745), Vector2D(55, 750), Vector2D(50, 745), Vector2D(50, 735), Vector2D(55, 730)} );
+    shape.rotate(0.3, Vector2D(60,740));
 };
 
 void FlipperLeft::use_inputs([[maybe_unused]] const Inputs &player_inputs) {
   props.bounciness = DEFAULT_BOUNCINESS;
   if (player_inputs.left_flipper && rotation < ROTATE_LIMITE_ACTIVATED) {
     props.bounciness = BOUNCINESS_WHEN_ACTIVATED;
-    shape.rotate(-ROTATE, Vector2D(85, 740));
+    shape.rotate(-ROTATE, Vector2D(60,740));
     rotation += ROTATE;
   }
   if (!player_inputs.left_flipper && rotation > ROTATE_LIMITE_DESACTIVATED) {
     props.bounciness = BOUNCINESS_WHEN_ACTIVATED;
-    shape.rotate(ROTATE, Vector2D(85, 740));
+    shape.rotate(ROTATE, Vector2D(60,740));
     rotation -= ROTATE;
   }
-}
+};
 
 void FlipperLeft::render(sf::RenderWindow &window, sf::Color color) const {
   shape.render(window, color);

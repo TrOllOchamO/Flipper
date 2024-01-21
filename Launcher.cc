@@ -9,29 +9,28 @@ Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
     }
     texture.setRepeated(true);
 
-    shape.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
+    shape.add_points( {Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)} );
 };
-
-void Launcher::upate(bool up, bool down, bool enter) {
-    if(up && can_move_up){
+void Launcher::use_inputs([[maybe_unused]] const Inputs &player_inputs) {
+    if(player_inputs.up_launcher && can_move_up){
         can_move_up = false;
         update_value(1);
     }
-    if(down && can_move_down){
+    if(player_inputs.down_launcher && can_move_down){
         can_move_down = false;
         update_value(-1);
     }
-    if(enter && can_launch){
+    if(player_inputs.enter_launcher && can_launch){
         can_launch = false;
         launch();
     }
-    if(!up){
+    if(!player_inputs.up_launcher){
         can_move_up = true;
     }
-    if(!down){
+    if(!player_inputs.down_launcher){
         can_move_down = true;
     }
-    if(!enter){
+    if(!player_inputs.enter_launcher){
         can_launch = true;
     }
 }
@@ -41,13 +40,13 @@ void Launcher::update_value(int value) {
 
     force += value*3;
     shape.clear();
-    shape.add_points( {Vector2D(370, 750+force), Vector2D(390, 750+force), Vector2D(390, 790), Vector2D(370, 790)} );
+    shape.add_points( {Vector2D(360, 750+force), Vector2D(380, 750+force), Vector2D(380, 790), Vector2D(360, 790)} );
 }
 
 void Launcher::launch() {
     force = 0;
     shape.clear();
-    shape.add_points( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
+    shape.add_points( {Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)} );
 }
 
 void Launcher::render(sf::RenderWindow &window, sf::Color color) const {
