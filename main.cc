@@ -74,7 +74,7 @@ int main() {
 
   std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(362, 730), 8, "./resources/ballTest.png");
 
-  ball->set_velocity(Vector2D(0, -2000));
+  ball->set_velocity(Vector2D(0, -1000));
 
   std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
   std::unique_ptr<FlipperLeft> left_flipper = std::make_unique<FlipperLeft>("");

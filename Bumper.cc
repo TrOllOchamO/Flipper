@@ -12,7 +12,7 @@ Bumper::Bumper(std::unique_ptr<Shape> shape, const std::string& texturePath) : s
     props.mass = 10000000000;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D::zero();
-    props.bounciness = 1.2;
+    props.bounciness = 1.1;
 }
 
 void Bumper::render(sf::RenderWindow &window, sf::Color color) const {
