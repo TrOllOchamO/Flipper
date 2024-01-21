@@ -44,23 +44,31 @@ int main() {
   map.make_entity(std::move(right_wall));
   map.make_entity(std::move(bumper));
 
-  for (int x = 50; x < 51; x += 50) {
+  // std::unique_ptr<Ball> ball1 = std::make_unique<Ball>(Vector2D(200, 400), 8, "");
+  // ball1->set_acceleration(Vector2D::zero());
+  // ball1->set_velocity(Vector2D(0, 0));
+  // ball1->set_angular_velocity(1);
+  // ball1->get_props()->bounciness = 1;
+  // ball1->get_props()->mass = 1000000000;
+  // map.make_entity(std::move(ball1));
+
+
+  // std::unique_ptr<Ball> ball2 = std::make_unique<Ball>(Vector2D(500, 400), 8, "./resources/ballTest.png");
+  // ball2->set_acceleration(Vector2D::zero());
+  // ball2->set_velocity(Vector2D(-200, 0));
+  // ball2->set_angular_velocity(2);
+  // ball2->get_props()->bounciness = 1;
+  // map.make_entity(std::move(ball2));
+
+  for (int x = 50; x < 451; x += 50) {
     std::unique_ptr<Entity> ball = std::make_unique<Ball>(Vector2D(x, 400), 8, "./resources/ballTest.png");
     map.make_entity(std::move(ball));
   }
 
-  // std::unique_ptr<Ball> ball1 = std::make_unique<Ball>(Vector2D(200, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
-  // ball1->set_velocity(Vector2D(300, 0));
-  // ball1->set_acceleration(Vector2D::zero());
-  // map.make_entity(std::move(ball1));
-  // std::unique_ptr<Ball> ball2 = std::make_unique<Ball>(Vector2D(300, 400), 8, "/home/riz/Bureau/flipper/Flipper/resources/ballTest.png");
-  // ball2->set_velocity(Vector2D(-100, 0));
-  // ball2->set_acceleration(Vector2D::zero());
-  // map.make_entity(std::move(ball2));
-
   Game game(std::move(map));
     
   while (window.isOpen()) {
+  // for (size_t i = 0; i < 40; ++i) {
     float dt = clock.restart().asSeconds();
     inputs.update(window);
     window.clear(sf::Color::Black);

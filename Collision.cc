@@ -6,7 +6,7 @@
 #include <ostream>
 
 #define INFINIT_DISTANCE std::numeric_limits<float>::max()
-#define EPA_PRECISION_WANTED 0.001
+#define EPA_PRECISION_WANTED 0.0001
 #define EPA_MAX_ITERATION 300
 
 bool Collision::are_colliding(const Shape *s1, const Shape *s2) {

@@ -22,6 +22,9 @@ public:
   // pour debug
   void set_velocity(Vector2D velocity) { props.velocity = velocity; }
   void set_acceleration(Vector2D acceleration) { props.acceleration = acceleration; }
+  void set_angular_velocity(float angular_velocity) { props.angular_velocity = angular_velocity; }
+
+  PhysicsProperties* get_props() { return &props; }
 
   bool is_resolvable() override { return true; } ;
   Shape* get_shape() override { return this->shape.get(); }

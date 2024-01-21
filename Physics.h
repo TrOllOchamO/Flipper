@@ -23,8 +23,6 @@ private:
   //
   static void resolve_velocities(PhysicsProperties &data1, PhysicsProperties &data2, const Vector2D &direction);
 
-  static float get_impulse_value(const PhysicsProperties &data1, const PhysicsProperties &data2, const Vector2D &direction);
-
   static void update_pos_based_on_velocity(Shape *s, const Vector2D &velocity, float dt);
 };
 

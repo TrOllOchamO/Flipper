@@ -8,7 +8,7 @@ struct PhysicsProperties {
   Vector2D velocity = Vector2D::zero();
   Vector2D acceleration = Vector2D::zero();
   float bounciness = 0.7;
-  float mass = 10000;
+  float mass = 1;
   float angular_velocity = 0;
 };
 

@@ -1,4 +1,5 @@
 #include "Physics.h"
+#include <cmath>
 #include <iostream>
 #include <type_traits>
 
@@ -34,36 +35,22 @@ void Physics::update_pos_based_on_velocity(Shape *s, const Vector2D &velocity, f
   s->set_pos(new_position);
 }
 
-// simply implement the formula on slide 18
-// https://perso.liris.cnrs.fr/nicolas.pronost/UUCourses/GamePhysics/lectures/lecture%207%20Collision%20Resolution.pdf
-float Physics::get_impulse_value(const PhysicsProperties &data1, const PhysicsProperties &data2, const Vector2D &direction) {
-  // the bounciness factor is not a mistake, it's intentional so that objects bounciness affect the ball velocity
-  // and not there own velocity
-  return -(1 + data2.bounciness) * (data1.velocity - data2.velocity).dot(direction) / (1/data1.mass + 1/data2.mass);
-}
-
 // simply implement the formula on slide 19
 // https://perso.liris.cnrs.fr/nicolas.pronost/UUCourses/GamePhysics/lectures/lecture%207%20Collision%20Resolution.pdf
 void Physics::resolve_velocities(PhysicsProperties &data1, PhysicsProperties &data2, const Vector2D &direction) {
-  Vector2D new_velocity1 = data1.velocity;
-  Vector2D new_velocity2 = data2.velocity;
+  float mass1 = data1.mass;
+  float mass2 = data2.mass;
+  if (!data1.should_react_with_other) { mass1 = std::numeric_limits<float>::infinity(); }
+  if (!data2.should_react_with_other) { mass2 = std::numeric_limits<float>::infinity(); }
+  
+  const Vector2D relative_velocities = data1.velocity - data2.velocity;
+  const float impulse_without_bounciness = relative_velocities.dot(direction) / (1/mass1 + 1/mass2);
 
-  if (data1.should_react_with_other) {
-    const float impulse = get_impulse_value(data1, data2, direction);
-    if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
-      new_velocity1 = (impulse/data1.mass) * direction;
-    }
-  }
+  const float impulse1 = -(1 + data2.bounciness) * impulse_without_bounciness;
+  data1.velocity += (impulse1/mass1) * direction;
 
-  if (data2.should_react_with_other) {
-    const float impulse = get_impulse_value(data2, data1, direction);
-    if (std::abs(impulse) > RESTING_CONTACT_EPSILON) {
-      new_velocity2 = (impulse/data2.mass) * direction;
-    }
-  }
-
-  data1.velocity = new_velocity1;
-  data2.velocity = new_velocity2;
+  const float impulse2 = -(1 + data1.bounciness) * impulse_without_bounciness;
+  data2.velocity -= (impulse2/data2.mass) * direction;
 }
 
 bool Physics::separate_shapes(Shape *s1, Vector2D &v1, Shape *s2, Vector2D &v2, float dt) {
