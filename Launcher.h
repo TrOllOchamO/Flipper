@@ -1,6 +1,8 @@
 #include "Interfaces.h"
 #include "Polygone.h"
 #include "PhysicsProperties.h"
+#include "Ball.h"
+#include "Game.h"
 #include <SFML/Graphics.hpp>
 
 #ifndef LAUNCHER_H_
@@ -13,12 +15,16 @@ private:
   float force = 0;
   PhysicsProperties props;
 
+  Ball *ball;
+
   bool can_move_up = true;
   bool can_move_down = true;
   bool can_launch = true;
 
   void update_value(int value);
   void launch();
+
+  void add_ball();
 
 public:
   Launcher(const std::string &texturePath);

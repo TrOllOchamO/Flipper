@@ -14,8 +14,9 @@ private:
   Map map;
 
 public:
-  Game(Map map) : map(std::move(map)) {}
+  Game(Map map);
   void set_map(Map new_map);
+  Map& get_map();
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
 };
 

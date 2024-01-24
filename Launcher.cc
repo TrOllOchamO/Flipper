@@ -1,7 +1,11 @@
 #include "Launcher.h"
 #include "Polygone.h"
 #include "Vector2D.h"
+#include "Ball.h"
+#include "Game.h"
+#include <memory>
 #include <SFML/Graphics/Color.hpp>
+
 
 Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
     if (!texture.loadFromFile(texturePath)) {
@@ -18,7 +22,11 @@ Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
     shape.add_points( {Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)} );
 };
 
+// TODO BVERIFIER NB VIE
 void Launcher::use_inputs(const Inputs &player_inputs) {
+    if(player_inputs.space_launcher && ball == nullptr){
+        add_ball();
+    }
     if(player_inputs.up_launcher && can_move_up){
         can_move_up = false;
         update_value(1);
@@ -62,4 +70,12 @@ void Launcher::render(sf::RenderWindow &window, sf::Color color) const {
 
 void Launcher::render(sf::RenderWindow &window) const {
     shape.render(window, texture);
+}
+
+void Launcher::add_ball() {
+    std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
+    this->ball = new_ball.get();
+    game->get_map().make_entity(std::move(new_ball));
+    std::cout << "non\n"; 
+
 }

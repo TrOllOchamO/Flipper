@@ -19,7 +19,7 @@ public:
 
   void make_entity(std::unique_ptr<Entity> new_entity);
 
-  const std::vector<std::unique_ptr<Entity>>& get_elements() const;
+  std::vector<std::unique_ptr<Entity>>& get_elements();
 };
 
 #endif /* !MAP_H_ */

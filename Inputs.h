@@ -15,6 +15,7 @@ public:
     bool up_launcher = false;
     bool down_launcher = false;
     bool enter_launcher = false;
+    bool space_launcher = false;
 
     void update(sf::RenderWindow &m_window);
 };

@@ -3,11 +3,20 @@
 #include <cstddef>
 #include <iostream>
 
+Game::Game(Map map) {
+  set_map(std::move(map));
+}
+
+
 void Game::set_map(Map new_map) { 
-  this->map = std::move(new_map); 
   for (auto& element : this->map.get_elements()) {
     element->set_game(this);
   }
+  this->map = std::move(new_map); 
+}
+
+Map& Game::get_map(){
+  return map;
 }
 
 void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float dt) {

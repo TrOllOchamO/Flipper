@@ -6,6 +6,8 @@
 #define DOWN_LAUNCHER sf::Keyboard::Up
 #define UP_LAUNCHER sf::Keyboard::Down
 #define ENTER_LAUNCHER sf::Keyboard::Enter
+#define SPACE_LAUNCHER sf::Keyboard::Space
+
 
 void Inputs::update(sf::RenderWindow &window) {
     sf::Event event;
@@ -52,6 +54,10 @@ void Inputs::key_down(sf::Keyboard::Key key){
             enter_launcher = true;
             break;
 
+        case SPACE_LAUNCHER:
+            space_launcher = true;
+            break;
+
         default:
             break;
     }
@@ -77,6 +83,10 @@ void Inputs::key_up(sf::Keyboard::Key key){
 
         case ENTER_LAUNCHER:
             enter_launcher = false;
+            break;
+
+        case SPACE_LAUNCHER:
+            space_launcher = false;
             break;
 
         default:

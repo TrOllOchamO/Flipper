@@ -1,11 +1,11 @@
 #include "Map.h"
 #include "Wall.h"
 #include "Rectangle.h"
-#include "Ball.h"
 #include "Flipper.h"
 #include "Launcher.h"
 #include "Bumper.h"
 #include "Vector2D.h"
+#include "Circle.h"
 
 #ifndef LOADER_H_
 #define LOADER_H_
@@ -66,16 +66,11 @@ public:
         std::unique_ptr<Wall> bot_left_angle = std::make_unique<Wall>(std::move(bot_left_angle_shape), "resources/Test.jpg");
         std::unique_ptr<Wall> bot_right_angle = std::make_unique<Wall>(std::move(bot_right_angle_shape), "resources/Test.jpg");
 
-        std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
-
-        // ball->set_velocity(Vector2D(0, -1000));
-
         std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
         std::unique_ptr<Flipper> left_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::LEFT);
         std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
 
         // make entity
-        map.make_entity(std::move(ball));
         map.make_entity(std::move(launcher));
         map.make_entity(std::move(left_flipper));
         map.make_entity(std::move(right_flipper));
