@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <type_traits>
+#include <limits>
 
 #define SEPARATION_MAX_ITERATION 300
 #define SEPARATION_THRESHOLD 0.001
@@ -18,6 +19,8 @@ void Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsPrope
   if (!Collision::GJK(s1, s2, simplex)) {
     return;
   }
+
+  std::cout << "ca touche \n";
 
   Vector2D direction = Vector2D::zero();
   Collision::EPA(s1, s2, direction, simplex);

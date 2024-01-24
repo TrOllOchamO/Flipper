@@ -25,6 +25,7 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
       auto& element2 = elements[j];
       if (!element2->is_resolvable()) { continue; }
       if (element1 == element2) { continue; }
+      std::cout << i << " avec " << j << "\n";
       Physics::solve(element1->get_shape(), element1->get_physics_props(),
                      element2->get_shape(), element2->get_physics_props(),
                      dt);
