@@ -9,7 +9,7 @@ Game::Game(Map map) {
 }
 
 void Game::set_map(Map new_map) { 
-  for (auto& element : this->map.get_elements()) {
+  for (auto& element : new_map.get_elements()) {
     element->set_game(this);
   }
   this->map = std::move(new_map); 

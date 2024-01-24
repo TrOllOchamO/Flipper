@@ -24,8 +24,6 @@ int main() {
   // load map
   Game game(std::move(map));
   
-  
-    
   while (window.isOpen()) {
     float dt = clock.restart().asSeconds();
     inputs.update(window);

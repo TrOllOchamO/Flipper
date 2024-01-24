@@ -37,7 +37,7 @@ protected:
   Game* game = nullptr;
 private:
 public:
-  void set_game(Game* game) { this->game = game; }
+  void set_game(Game* new_game) { this->game = new_game; }
   virtual ~Entity() = default;
 };
 
