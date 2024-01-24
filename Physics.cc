@@ -20,8 +20,6 @@ void Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsPrope
     return;
   }
 
-  std::cout << "ca touche \n";
-
   Vector2D direction = Vector2D::zero();
   Collision::EPA(s1, s2, direction, simplex);
   Physics::separate_shapes(s1, data1.velocity, s2, data2.velocity,  dt);

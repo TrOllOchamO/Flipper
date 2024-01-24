@@ -10,6 +10,7 @@
 class Game {
 private:
   float score;
+  
   Map map;
 
 public:

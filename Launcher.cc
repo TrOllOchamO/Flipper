@@ -13,12 +13,12 @@ Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
     props.mass = 10000000000;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D::zero();
-    props.bounciness = 0.5;
+    props.bounciness = 0.9;
 
     shape.add_points( {Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)} );
 };
 
-void Launcher::use_inputs([[maybe_unused]] const Inputs &player_inputs) {
+void Launcher::use_inputs(const Inputs &player_inputs) {
     if(player_inputs.up_launcher && can_move_up){
         can_move_up = false;
         update_value(1);

@@ -7,6 +7,7 @@
 
 class Shape; // forward declaration
 struct PhysicsProperties; // forward declaration
+class Game; // forward declaration
 
 class Renderable {
 public:
@@ -28,7 +29,10 @@ public:
 };
 
 class Entity : public Renderable, public Resolvable, public Interactable {
+private:
+  Game* game = nullptr;
 public:
+  void set_game(Game* game) { this->game = game; }
   // virtual ~Entity() = default;
 };
 
