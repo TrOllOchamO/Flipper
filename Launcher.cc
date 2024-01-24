@@ -75,7 +75,5 @@ void Launcher::render(sf::RenderWindow &window) const {
 void Launcher::add_ball() {
     std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
     this->ball = new_ball.get();
-    game->get_map().make_entity(std::move(new_ball));
-    std::cout << "non\n"; 
-
+    game->make_entity(std::move(new_ball));
 }

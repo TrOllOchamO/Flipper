@@ -1,7 +1,9 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 #include "Inputs.h"
+#include "Interfaces.h"
 #include "Map.h"
 
 #ifndef GAME_H_
@@ -10,13 +12,12 @@
 class Game {
 private:
   float score;
-  
   Map map;
 
 public:
   Game(Map map);
   void set_map(Map new_map);
-  Map& get_map();
+  void make_entity(std::unique_ptr<Entity> new_element);
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
 };
 

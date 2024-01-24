@@ -2,11 +2,11 @@
 #include "Physics.h"
 #include <cstddef>
 #include <iostream>
+#include <utility>
 
 Game::Game(Map map) {
   set_map(std::move(map));
 }
-
 
 void Game::set_map(Map new_map) { 
   for (auto& element : this->map.get_elements()) {
@@ -15,8 +15,9 @@ void Game::set_map(Map new_map) {
   this->map = std::move(new_map); 
 }
 
-Map& Game::get_map(){
-  return map;
+void Game::make_entity(std::unique_ptr<Entity> new_element) {
+  new_element->set_game(this);
+  this->map.make_entity(std::move(new_element));
 }
 
 void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float dt) {

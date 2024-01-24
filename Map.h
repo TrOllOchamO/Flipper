@@ -8,9 +8,9 @@
 
 class Map {
 private:
-  std::vector<std::unique_ptr<Entity>> elements;
 
 public:
+  std::vector<std::unique_ptr<Entity>> elements;
   Map() = default;
   Map(Map&&) noexcept = default;
 
