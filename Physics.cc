@@ -33,6 +33,7 @@ void Physics::update(Shape *s, PhysicsProperties &data, float dt) {
 
 void Physics::update_pos_based_on_velocity(Shape *s, const Vector2D &velocity, float dt) {
   Vector2D new_position = s->get_pos() + (velocity * dt);
+
   s->set_pos(new_position);
 }
 

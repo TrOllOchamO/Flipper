@@ -23,6 +23,9 @@ public:
   void set_velocity(Vector2D velocity) { props.velocity = velocity; }
   void set_acceleration(Vector2D acceleration) { props.acceleration = acceleration; }
   void set_angular_velocity(float angular_velocity) { props.angular_velocity = angular_velocity; }
+  void set_posiion(Vector2D new_pos);
+
+  Vector2D get_position();
 
   PhysicsProperties* get_props() { return &props; }
 

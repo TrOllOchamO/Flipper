@@ -29,6 +29,7 @@ private:
 public:
   Launcher(const std::string &texturePath);
 
+  bool ball_ok();
   bool is_resolvable() override { return true; };
   Shape *get_shape() override { return &shape; }
   PhysicsProperties &get_physics_props() override { return props; }

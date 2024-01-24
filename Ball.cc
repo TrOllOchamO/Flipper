@@ -23,3 +23,11 @@ void Ball::render(sf::RenderWindow &window, sf::Color color) const {
 void Ball::render(sf::RenderWindow &window) const {
     shape->render(window, texture);
 }
+
+ void Ball::set_posiion(Vector2D new_pos){
+    shape->set_pos(new_pos);
+}
+
+Vector2D Ball::get_position() {
+    return shape->get_pos();
+}
