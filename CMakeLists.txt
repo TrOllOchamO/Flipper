@@ -21,6 +21,9 @@ add_executable(Flipper
     Shape.cc
     Collision.cc
     Wall.cc
+    Input.cc
+    Flipper.cc
+    Launcher.cc
 )
 
 target_include_directories(Flipper
@@ -50,9 +53,9 @@ add_executable(TestFlipper
     TestFlipper.cc
     Vector2D.cc 
     Circle.cc 
+    Shape.cc
     Rectangle.cc 
     Polygone.cc 
-    Shape.cc
     Collision.cc
     # Add other test files as needed
 )
@@ -64,19 +67,3 @@ target_include_directories(TestFlipper
 )
 
 target_link_libraries(TestFlipper gtest gtest_main sfml-graphics sfml-window sfml-audio sfml-system)
-
-# Add test executable and link with gtest
-add_executable(TestMain
-    TestMain.cc
-    # Add other test files as needed
-)
-
-target_include_directories(TestMain
-    PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest"
-)
-
-target_link_libraries(TestMain gtest gtest_main)
-
-

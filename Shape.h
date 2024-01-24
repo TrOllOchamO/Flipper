@@ -7,12 +7,16 @@
 class Shape{
 private:
   Vector2D pos;
+  bool convex = true;
 
 public:
   Shape(Vector2D pos) : pos(pos) {};
 
   Vector2D get_pos() const;
   void set_pos(Vector2D new_pos);
+
+  bool is_shape_convex() const;
+  void set_convex(bool value);
 
   virtual Vector2D get_center() const = 0;
   virtual Vector2D get_futhest_point(const Vector2D &direction) const = 0;
