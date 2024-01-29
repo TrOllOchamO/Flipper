@@ -1,23 +1,23 @@
 #include "Wall.h"
+#include <SFML/Graphics/Color.hpp>
 #include <iostream>
 
-Wall::Wall(Vector2D pos, const std::string& texturePath)
-    : Shape(pos) {
+Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape(std::move(shape)) {
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
-    sprite.setTexture(texture);
-    sprite.setPosition(pos.x, pos.y);
+
+    props.should_react_with_other = false;
+    props.mass = 10000000000;
+    props.velocity = Vector2D::zero();
+    props.acceleration = Vector2D::zero();
+    props.bounciness = 0.4;
 }
 
-Vector2D Wall::get_center() const {
-    return get_pos();
+void Wall::render(sf::RenderWindow &window, sf::Color color) const {
+    shape->render(window, color);
 }
 
-Vector2D Wall::get_futhest_point(const Vector2D &direction) const {
-    return get_pos();
-}
-
-void Wall::draw(sf::RenderWindow& window) const {
-    window.draw(sprite);
+void Wall::render(sf::RenderWindow &window) const {
+    shape->render(window, texture);
 }

@@ -1,19 +1,24 @@
 #include <iostream>
 #include "Vector2D.h"
+#include "Interfaces.h"
 
 #ifndef SHAPE_H_
 #define SHAPE_H_
 
-class Shape{
+class Shape : public Renderable {
 private:
   Vector2D pos;
+  int z_ordering = 0;
   bool convex = true;
 
 public:
   Shape(Vector2D pos) : pos(pos) {};
+  virtual ~Shape() = default;
 
   Vector2D get_pos() const;
   void set_pos(Vector2D new_pos);
+  int get_z_ordering() const;
+  void set_z_ordering(int new_z_ordering);
 
   bool is_shape_convex() const;
   void set_convex(bool value);

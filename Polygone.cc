@@ -16,7 +16,7 @@ void Polygone::add_point(Vector2D point) {
   }
 }
 
-void Polygone::add_point(std::vector<Vector2D> point) {
+void Polygone::add_points(std::vector<Vector2D> point) {
   for(auto p : point){
     points.push_back(p);
   }
@@ -33,7 +33,7 @@ void Polygone::clear(){
   points.clear();
 }
 
-bool Polygone::is_convex(){
+bool Polygone::is_convex() const {
   int n = points.size();
   if(n<4) return true;
 
@@ -95,7 +95,7 @@ Vector2D Polygone::get_futhest_point(const Vector2D &direction) const {
   return futhest_point;
 }
 
-void Polygone::render(sf::RenderWindow &window, sf::Color color){
+void Polygone::render(sf::RenderWindow &window, sf::Color color) const {
   if(convex){
     int n = points.size();
     sf::ConvexShape convex;
@@ -110,6 +110,25 @@ void Polygone::render(sf::RenderWindow &window, sf::Color color){
   } else {
     for(auto p : concave_points){
       p.render(window, color);   
+    }
+  }
+}
+
+void Polygone::render(sf::RenderWindow &window, const sf::Texture &texture) const {
+  if(convex){
+    int n = points.size();
+    sf::ConvexShape convex;
+    convex.setPointCount(n);
+    convex.setTexture(&texture);
+    convex.setPosition(get_pos());
+    for (int i=0; i<n; ++i) {
+      convex.setPoint(i, points[i]);
+    }
+    window.draw(convex);
+      
+  } else {
+    for(auto p : concave_points){
+      p.render(window, texture);   
     }
   }
 }
@@ -135,7 +154,7 @@ void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
 
 Polygone create_triangle(Vector2D a, Vector2D b, Vector2D c){
   Polygone p;
-  p.add_point( {a, b, c} );
+  p.add_points( {a, b, c} );
   return p;
 }
 
@@ -161,7 +180,7 @@ std::vector<Polygone> Polygone::triangulate(){
   return all_triangle;
 }
 
-bool Polygone::is_ear(std::vector<Vector2D> polygon, int index) {
+bool Polygone::is_ear(const std::vector<Vector2D>& polygon, int index) {
   int n = polygon.size();
   int previous = (index - 1) % n;
   int next = (index + 1) % n;

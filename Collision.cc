@@ -6,7 +6,8 @@
 #include <ostream>
 
 #define INFINIT_DISTANCE std::numeric_limits<float>::max()
-#define EPA_PRECISION_WANTED 0.001
+#define EPA_PRECISION_WANTED 0.0001
+#define EPA_MAX_ITERATION 300
 
 bool Collision::are_colliding(const Shape *s1, const Shape *s2) {
   std::vector<Vector2D> simplex;
@@ -81,10 +82,10 @@ float Collision::EPA(const Shape *s1, const Shape *s2, Vector2D &direction, std:
   }
 
   float closest_edge_distance;
-  Vector2D closest_edge_normal = Vector2D::zero();
+  Vector2D closest_edge_normal;
 
   // while the precision is too low copared to the goal minDistance will be set to INFINIT_DISTANCE
-  while (true) {
+  for (size_t i = 0; i < EPA_MAX_ITERATION; ++i) {
     int closest_edge_index = Collision::get_closest_edge_infos(polytope, closest_edge_distance, closest_edge_normal);
 
     // once we got the normal of the closest edge to the origin so we can use it to determine a new point
@@ -105,6 +106,9 @@ float Collision::EPA(const Shape *s1, const Shape *s2, Vector2D &direction, std:
     // the point must be inserted bewteen i and j in order to keep the polytope convex
     polytope.insert(polytope.begin() + closest_edge_index, support);
   }
+
+  direction = closest_edge_normal;
+  return -closest_edge_distance;
 }
 
 std::vector<Vector2D> Collision::generate_minimal_polytope(const Shape *s1, const Shape *s2) {

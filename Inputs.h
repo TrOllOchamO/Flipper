@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 
-#ifndef INPUT_H_
-#define INPUT_H_
+#ifndef INPUTS_H_
+#define INPUTS_H_
 
-class Input {
+class Inputs {
 private:
     void key_up(sf::Keyboard::Key key);
     void key_down(sf::Keyboard::Key key);
@@ -15,8 +15,9 @@ public:
     bool up_launcher = false;
     bool down_launcher = false;
     bool enter_launcher = false;
+    bool space_launcher = false;
 
     void update(sf::RenderWindow &m_window);
 };
 
-#endif /* !INPUT_H_ */
+#endif /* !INPUTS_H_ */

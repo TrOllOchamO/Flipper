@@ -1,29 +1,42 @@
-#include <SFML/Graphics.hpp>
+#include "Interfaces.h"
 #include "Polygone.h"
-
+#include "PhysicsProperties.h"
+#include "Ball.h"
+#include "Game.h"
+#include <SFML/Graphics.hpp>
 
 #ifndef LAUNCHER_H_
 #define LAUNCHER_H_
 
-class Launcher {
+class Launcher : public Entity {
 private:
-    Polygone launcher;
-    float force = 0;
+  Polygone shape;
+  sf::Texture texture;
+  float force = 0;
+  PhysicsProperties props;
 
-    bool can_move_up = true;
-    bool can_move_down = true;
-    bool can_launch = true;
+  Ball *ball;
 
-    void update_value(int value);
-    void launch();
+  bool can_move_up = true;
+  bool can_move_down = true;
+  bool can_launch = true;
+
+  void update_value(int value);
+  void launch();
+
+  void add_ball();
 
 public:
-    Launcher() : launcher(Polygone()) {
-        launcher.add_point( {Vector2D(370, 750), Vector2D(390, 750), Vector2D(390, 790), Vector2D(370, 790)} );
-    };
+  Launcher(const std::string &texturePath);
 
-    void upate(bool up, bool down, bool enter);
-    void render(sf::RenderWindow &window, sf::Color color);
+  bool ball_ok();
+  bool is_resolvable() override { return true; };
+  Shape *get_shape() override { return &shape; }
+  PhysicsProperties &get_physics_props() override { return props; }
+
+  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
+  void render(sf::RenderWindow &window, sf::Color color) const override;
+  void render(sf::RenderWindow &window) const override;
 };
 
 #endif /* !LAUNCHER_H_ */

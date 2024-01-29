@@ -2,6 +2,11 @@
 #include <math.h>
 #include <assert.h>
 
+Vector2D::Vector2D() {
+  this->x = 0;
+  this->y = 0;
+}
+
 bool Vector2D::is_zero() {
   return this->x == 0 && this->y == 0;
 }
@@ -150,6 +155,6 @@ bool operator!=(const Vector2D &v1, const Vector2D &v2) {
   return !(v1 == v2);
 }
 
-Vector2D::operator sf::Vector2f(){
+Vector2D::operator sf::Vector2f() const {
   return sf::Vector2f(x, y);
 }

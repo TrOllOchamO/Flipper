@@ -1,28 +1,34 @@
-#include <SFML/Graphics.hpp>
+#include "Interfaces.h"
 #include "Polygone.h"
-
+#include <SFML/Graphics.hpp>
+#include "PhysicsProperties.h"
 
 #ifndef FLIPPER_H_
 #define FLIPPER_H_
 
-class Flipper {
+enum FLIPPER_ORIENTATION {
+  LEFT,
+  RIGHT,
+};
+
+class Flipper: public Entity {
 private:
-    Polygone left;
-    Polygone right;
-    float left_rotation = 0;
-    float right_rotation = 0;
+  Polygone shape;
+  FLIPPER_ORIENTATION orientation;
+  PhysicsProperties props;
+  float rotation = 0;
+  sf::Texture texture;
 
 public:
-    Flipper() : left(Polygone()), right(Polygone()) {
-        left.add_point( {Vector2D(160, 735), Vector2D(180, 740), Vector2D(160, 745), Vector2D(80, 750), Vector2D(75, 745), Vector2D(75, 735), Vector2D(80, 730)} );
-        left.rotate(0.3, Vector2D(85,740));
+  Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation);
 
-        right.add_point( {Vector2D(220, 740), Vector2D(240, 735), Vector2D(320, 730), Vector2D(325, 735), Vector2D(325, 745), Vector2D(320, 750), Vector2D(240, 745)} );
-        right.rotate(-0.3, Vector2D(315,740));
-    };
+  bool is_resolvable() override { return true; };
+  Shape *get_shape() override { return &shape; }
+  PhysicsProperties &get_physics_props() override { return props; }
 
-    void upate(bool left, bool right);
-    void render(sf::RenderWindow &window, sf::Color color);
+  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
+  void render(sf::RenderWindow &window, sf::Color color) const override;
+  void render(sf::RenderWindow &window) const override;
 };
 
 #endif /* !FLIPPER_H_ */

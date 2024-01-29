@@ -1,5 +1,5 @@
-#ifndef WALL_H_
-#define WALL_H_
+#ifndef BUMPER_H_
+#define BUMPER_H_
 
 #include "Physics.h"
 #include "PhysicsProperties.h"
@@ -8,14 +8,14 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class Wall : public Entity {
+class Bumper: public Entity {
 private:
   std::unique_ptr<Shape> shape;
   PhysicsProperties props;
   sf::Texture texture;
 
 public:
-  Wall(std::unique_ptr<Shape> shape, const std::string& texturePath);
+  Bumper(std::unique_ptr<Shape> shape, const std::string &texturePath);
 
   bool is_resolvable() override { return true; } ;
   Shape* get_shape() override { return this->shape.get(); }
@@ -25,4 +25,4 @@ public:
   void render(sf::RenderWindow &window) const override;
 };
 
-#endif /* !WALL_H_ */
+#endif /* !BUMPER_H_ */

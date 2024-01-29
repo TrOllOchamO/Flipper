@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_CXX_COMPILER "clang++")
+
 project(Flipper)
 
 set(SFML_PATH "/usr/include/")
@@ -21,9 +23,13 @@ add_executable(Flipper
     Shape.cc
     Collision.cc
     Wall.cc
-    Input.cc
+    Bumper.cc
+    Inputs.cc
     Flipper.cc
+    Physics.cc
     Launcher.cc
+    Game.cc
+    Map.cc
 )
 
 target_include_directories(Flipper
