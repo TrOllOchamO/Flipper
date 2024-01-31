@@ -7,7 +7,7 @@
 #include <SFML/Graphics/Color.hpp>
 
 
-Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
+Launcher::Launcher(const std::string& texturePath) : shape(Polygone()){
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
@@ -23,7 +23,7 @@ Launcher::Launcher(const std::string& texturePath) : shape(Polygone()) {
 };
 
 // TODO BVERIFIER NB VIE
-void Launcher::use_inputs(const Inputs &player_inputs) {
+void Launcher::update(const Inputs &player_inputs) {
     if(player_inputs.space_launcher && ball == nullptr){
         add_ball();
     }
@@ -47,6 +47,9 @@ void Launcher::use_inputs(const Inputs &player_inputs) {
     }
     if(!player_inputs.enter_launcher){
         can_launch = true;
+    }
+    if(ball!=nullptr){
+        check_if_ball_out();
     }
 }
 
@@ -84,4 +87,11 @@ void Launcher::add_ball() {
 
 bool Launcher::ball_ok(){
     return ball != nullptr && ball->get_position().x > 350;
+}
+
+void Launcher::check_if_ball_out(){
+    if (Collision::are_colliding(ball->get_shape(), &kill_zone)){
+        ball->set_posiion(Vector2D(362, 732));
+        ball->set_velocity(Vector2D::zero());
+    }
 }

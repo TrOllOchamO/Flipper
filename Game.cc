@@ -24,7 +24,7 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
   auto& elements = map.get_elements();
   // react to player inputs
   for (auto& element : elements) {
-    element->use_inputs(player_inputs);
+    element->update(player_inputs);
   }
 
   // update velocity and position

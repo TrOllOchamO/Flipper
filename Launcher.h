@@ -3,6 +3,8 @@
 #include "PhysicsProperties.h"
 #include "Ball.h"
 #include "Game.h"
+#include "Rectangle.h"
+#include "Vector2D.h"
 #include <SFML/Graphics.hpp>
 
 #ifndef LAUNCHER_H_
@@ -14,8 +16,9 @@ private:
   sf::Texture texture;
   float force = 0;
   PhysicsProperties props;
+  Rectangle kill_zone = Rectangle(Vector2D(0,800), 400, 5);
 
-  Ball *ball;
+  Ball *ball = nullptr;
 
   bool can_move_up = true;
   bool can_move_down = true;
@@ -26,6 +29,8 @@ private:
 
   void add_ball();
 
+  void check_if_ball_out();
+
 public:
   Launcher(const std::string &texturePath);
 
@@ -34,7 +39,7 @@ public:
   Shape *get_shape() override { return &shape; }
   PhysicsProperties &get_physics_props() override { return props; }
 
-  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
+  void update([[maybe_unused]] const Inputs &player_inputs) override;
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };

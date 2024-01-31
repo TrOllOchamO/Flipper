@@ -25,15 +25,15 @@ public:
         std::unique_ptr<Circle> bumper_7_shape = std::make_unique<Circle>(Vector2D(80, 400), 16);
         std::unique_ptr<Circle> bumper_8_shape = std::make_unique<Circle>(Vector2D(215, 400), 16);
         
-        std::unique_ptr<Rectangle> bottom_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 790), 400, 10));
+        std::unique_ptr<Rectangle> bottom_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(300, 790), 100, 10));
         std::unique_ptr<Rectangle> top_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 400, 10));
         std::unique_ptr<Rectangle> left_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 10, 800));
         std::unique_ptr<Rectangle> right_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(390, 0), 10, 800));
         
         std::unique_ptr<Polygone> bot_left_angle_shape = std::make_unique<Polygone>(Polygone());
-        bot_left_angle_shape->add_points({Vector2D(50,790), Vector2D(10,790), Vector2D(10,690), Vector2D(50,730)});
+        bot_left_angle_shape->add_points({Vector2D(50,800), Vector2D(10,800), Vector2D(10,690), Vector2D(50,730)});
         std::unique_ptr<Polygone> bot_right_angle_shape = std::make_unique<Polygone>(Polygone());
-        bot_right_angle_shape->add_points({Vector2D(340,790), Vector2D(300,790), Vector2D(300,730), Vector2D(340,690)});
+        bot_right_angle_shape->add_points({Vector2D(340,800), Vector2D(300,800), Vector2D(300,730), Vector2D(340,690)});
 
         std::unique_ptr<Rectangle> separation_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(340, 150), 10, 750));
 
@@ -96,6 +96,17 @@ public:
 
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
+    }
+
+    static void test_ball_clipping_in_bumper(Map& map) {
+        std::unique_ptr<Circle> bumper_shape = std::make_unique<Circle>(Vector2D(150, 350), 50);
+        std::unique_ptr<Bumper> bumper = std::make_unique<Bumper>(std::move(bumper_shape), "");
+        map.make_entity(std::move(bumper));
+
+        std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(200, 370), 8, "");
+        ball->set_acceleration(Vector2D::zero());
+        ball->set_velocity(Vector2D(0, 100));
+        map.make_entity(std::move(ball));
     }
     
 private:

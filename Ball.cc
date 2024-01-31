@@ -1,6 +1,8 @@
 #include "Ball.h"
 #include "Vector2D.h"
 #include <SFML/Graphics/Color.hpp>
+#include <iostream>
+#include <ostream>
 #include <stdio.h>
 
 Ball::Ball(Vector2D pos, float radius, const std::string& texturePath) : shape(std::make_unique<Circle>(pos, radius)) {

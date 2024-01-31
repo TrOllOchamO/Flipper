@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "Inputs.h"
 
 class Shape; // forward declaration
@@ -23,12 +24,11 @@ public:
   virtual Shape* get_shape() { assert(false); }
   virtual PhysicsProperties& get_physics_props() { assert(false); }
   virtual ~Resolvable() = default;
-
 };
 
 class Interactable {
 public:
-  virtual void use_inputs([[maybe_unused]] const Inputs& player_inputs) {}
+  virtual void update([[maybe_unused]] const Inputs& player_inputs) {}
   virtual ~Interactable() = default;
 };
 

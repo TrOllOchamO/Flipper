@@ -6,7 +6,7 @@
 #define ROTATE 0.01
 #define ROTATE_LIMITE_ACTIVATED 0.5
 #define ROTATE_LIMITE_DESACTIVATED 0.0
-#define DEFAULT_BOUNCINESS 0.2
+#define DEFAULT_BOUNCINESS 0.6
 #define BOUNCINESS_WHEN_ACTIVATED 1.1
 
 Flipper::Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation) : shape(Polygone()), orientation(orientation) {
@@ -33,7 +33,7 @@ Flipper::Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation
   }
 };
 
-void Flipper::use_inputs([[maybe_unused]] const Inputs &player_inputs) {
+void Flipper::update([[maybe_unused]] const Inputs &player_inputs) {
   props.bounciness = DEFAULT_BOUNCINESS;
 
   switch (orientation) {
