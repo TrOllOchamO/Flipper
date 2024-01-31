@@ -31,6 +31,7 @@ add_executable(Flipper
     Game.cc
     Map.cc
     Menu.cc
+    GameInfo.cc
 )
 
 target_include_directories(Flipper

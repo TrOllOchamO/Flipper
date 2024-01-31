@@ -6,6 +6,8 @@
 
 Game::Game(Map map) {
   set_map(std::move(map));
+  score = 0.0;
+  vie = 3;
 }
 
 void Game::set_map(Map new_map) { 
@@ -29,6 +31,7 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
 
   // update velocity and position
   for (auto& element : elements) {
+    if (!element->is_resolvable()) { continue; }
     Physics::update(element->get_shape(), element->get_physics_props(), dt);
   }
 
@@ -51,3 +54,11 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
     element->render(window);
   }
 }
+
+  float Game::get_score(){
+    return score;
+  }
+
+  void Game::update_score(float add) {
+    score += add;
+  }

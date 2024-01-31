@@ -6,6 +6,7 @@
 #include "Bumper.h"
 #include "Vector2D.h"
 #include "Circle.h"
+#include "GameInfo.h"
 
 #ifndef LOADER_H_
 #define LOADER_H_
@@ -26,21 +27,21 @@ public:
         std::unique_ptr<Circle> bumper_8_shape = std::make_unique<Circle>(Vector2D(215, 400), 16);
         
         std::unique_ptr<Rectangle> bottom_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(300, 790), 100, 10));
-        std::unique_ptr<Rectangle> top_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 400, 10));
-        std::unique_ptr<Rectangle> left_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 0), 10, 800));
-        std::unique_ptr<Rectangle> right_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(390, 0), 10, 800));
+        std::unique_ptr<Rectangle> top_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 100), 400, 10));
+        std::unique_ptr<Rectangle> left_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 100), 10, 700));
+        std::unique_ptr<Rectangle> right_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(390, 100), 10, 700));
         
         std::unique_ptr<Polygone> bot_left_angle_shape = std::make_unique<Polygone>(Polygone());
         bot_left_angle_shape->add_points({Vector2D(50,800), Vector2D(10,800), Vector2D(10,690), Vector2D(50,730)});
         std::unique_ptr<Polygone> bot_right_angle_shape = std::make_unique<Polygone>(Polygone());
         bot_right_angle_shape->add_points({Vector2D(340,800), Vector2D(300,800), Vector2D(300,730), Vector2D(340,690)});
 
-        std::unique_ptr<Rectangle> separation_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(340, 150), 10, 750));
+        std::unique_ptr<Rectangle> separation_wall_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(340, 250), 10, 650));
 
         std::unique_ptr<Polygone> left_angle_shape = std::make_unique<Polygone>(Polygone());
-        left_angle_shape->add_points({Vector2D(0,0), Vector2D(100,0), Vector2D(0,100)});
+        left_angle_shape->add_points({Vector2D(0,100), Vector2D(100,100), Vector2D(0,200)});
         std::unique_ptr<Polygone> right_angle_shape = std::make_unique<Polygone>(Polygone());
-        right_angle_shape->add_points({Vector2D(300,0), Vector2D(400,0), Vector2D(400,100)});
+        right_angle_shape->add_points({Vector2D(300,100), Vector2D(400,100), Vector2D(400,200)});
 
 
         // entity
@@ -69,8 +70,10 @@ public:
         std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
         std::unique_ptr<Flipper> left_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::LEFT);
         std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
+        std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
 
         // make entity
+        map.make_entity(std::move(game_info));
         map.make_entity(std::move(launcher));
         map.make_entity(std::move(left_flipper));
         map.make_entity(std::move(right_flipper));
