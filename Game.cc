@@ -7,6 +7,7 @@
 Game::Game(Map map) {
   set_map(std::move(map));
   score = 0.0;
+  multiplicateur = 1.0;
   vie = 3;
 }
 
@@ -43,9 +44,13 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
       auto& element2 = elements[j];
       if (!element2->is_resolvable()) { continue; }
       if (element1 == element2) { continue; }
-      Physics::solve(element1->get_shape(), element1->get_physics_props(),
+      auto res = Physics::solve(element1->get_shape(), element1->get_physics_props(),
                      element2->get_shape(), element2->get_physics_props(),
                      dt);
+      if (res) {
+        score += element1->get_points_to_add();
+        score += element2->get_points_to_add();
+      }
     }
   }
 
@@ -61,4 +66,16 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
 
   void Game::update_score(float add) {
     score += add;
+  }
+
+  void Game::loose_life(){
+    vie -= 1;
+  }  
+  
+  int Game::get_life(){
+    return vie;
+  }
+
+  float Game::get_multiplicateur(){
+    return multiplicateur;
   }

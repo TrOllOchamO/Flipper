@@ -22,7 +22,6 @@ Launcher::Launcher(const std::string& texturePath) : shape(Polygone()){
     shape.add_points( {Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)} );
 };
 
-// TODO BVERIFIER NB VIE
 void Launcher::update(const Inputs &player_inputs) {
     if(player_inputs.space_launcher && ball == nullptr){
         add_ball();
@@ -90,8 +89,13 @@ bool Launcher::ball_ok(){
 }
 
 void Launcher::check_if_ball_out(){
-    if (Collision::are_colliding(ball->get_shape(), &kill_zone)){
-        ball->set_posiion(Vector2D(362, 732));
-        ball->set_velocity(Vector2D::zero());
+    if (Collision::are_colliding(ball->get_shape(), &kill_zone) && game->get_life()>0){
+        game->loose_life();
+        if(game->get_life()>0){
+            ball->set_posiion(Vector2D(362, 732));
+            ball->set_velocity(Vector2D::zero());
+        }else{
+            //faudra faire des trucs ici
+        }
     }
 }

@@ -35,8 +35,10 @@ public:
 class Entity : public Renderable, public Resolvable, public Interactable {
 protected: 
   Game* game = nullptr;
+  float points_add = 0;
 private:
 public:
+  float get_points_to_add() {return points_add;}
   void set_game(Game* new_game) { this->game = new_game; }
   virtual ~Entity() = default;
 };
