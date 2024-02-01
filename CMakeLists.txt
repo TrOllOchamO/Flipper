@@ -30,6 +30,7 @@ add_executable(Flipper
     Launcher.cc
     Game.cc
     Map.cc
+    Multiplicateur.cc
     Menu.cc
     GameInfo.cc
 )

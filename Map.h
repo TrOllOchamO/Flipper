@@ -1,5 +1,6 @@
 #include <memory>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 #include "Interfaces.h"
 
@@ -8,6 +9,7 @@
 
 class Map {
 private:
+  const char * level;
 
 public:
   std::vector<std::unique_ptr<Entity>> elements; 
@@ -21,6 +23,9 @@ public:
   void kill_entity(Entity* entity); // WARNING killing an entity invalidate indexes in elements array
 
   std::vector<std::unique_ptr<Entity>>& get_elements();
+
+  void set_name(const char * s) {level = s;}
+  const char * get_name() {return level;}
 };
 
 #endif /* !MAP_H_ */

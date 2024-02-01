@@ -49,8 +49,10 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
                      element2->get_shape(), element2->get_physics_props(),
                      dt);
       if (res) {
-        score += element1->get_points_to_add();
-        score += element2->get_points_to_add();
+        multiplicateur += element1->get_mult();
+        multiplicateur += element2->get_mult();
+        score += element1->get_points_to_add() * multiplicateur;
+        score += element2->get_points_to_add() * multiplicateur;
       }
     }
   }

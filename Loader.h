@@ -6,6 +6,7 @@
 #include "Bumper.h"
 #include "Vector2D.h"
 #include "Circle.h"
+#include "Multiplicateur.h"
 #include "GameInfo.h"
 
 #ifndef LOADER_H_
@@ -45,14 +46,14 @@ public:
 
 
         // entity
-        std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "");
-        std::unique_ptr<Bumper> bumper_2 = std::make_unique<Bumper>(std::move(bumper_2_shape), "");
-        std::unique_ptr<Bumper> bumper_3 = std::make_unique<Bumper>(std::move(bumper_3_shape), "");
-        std::unique_ptr<Bumper> bumper_4 = std::make_unique<Bumper>(std::move(bumper_4_shape), "");
-        std::unique_ptr<Bumper> bumper_5 = std::make_unique<Bumper>(std::move(bumper_5_shape), "");
-        std::unique_ptr<Bumper> bumper_6 = std::make_unique<Bumper>(std::move(bumper_6_shape), "");
-        std::unique_ptr<Bumper> bumper_7 = std::make_unique<Bumper>(std::move(bumper_7_shape), "");
-        std::unique_ptr<Bumper> bumper_8 = std::make_unique<Bumper>(std::move(bumper_8_shape), "");
+        std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "resources/star.png");
+        std::unique_ptr<Bumper> bumper_2 = std::make_unique<Bumper>(std::move(bumper_2_shape), "resources/star.png");
+        std::unique_ptr<Bumper> bumper_3 = std::make_unique<Bumper>(std::move(bumper_3_shape), "resources/star.png");
+        std::unique_ptr<Bumper> bumper_4 = std::make_unique<Bumper>(std::move(bumper_4_shape), "resources/star.png");
+        std::unique_ptr<Bumper> bumper_5 = std::make_unique<Bumper>(std::move(bumper_5_shape), "resources/star.png");
+        std::unique_ptr<Bumper> bumper_6 = std::make_unique<Bumper>(std::move(bumper_6_shape), "resources/star.png");
+        std::unique_ptr<Multiplicateur> bumper_7 = std::make_unique<Multiplicateur>(std::move(bumper_7_shape), "resources/keur.png");
+        std::unique_ptr<Multiplicateur> bumper_8 = std::make_unique<Multiplicateur>(std::move(bumper_8_shape), "resources/keur.png");
 
         std::unique_ptr<Wall> bottom_wall = std::make_unique<Wall>(std::move(bottom_wall_shape), "resources/Test.jpg");
         std::unique_ptr<Wall> top_wall = std::make_unique<Wall>(std::move(top_wall_shape), "resources/Test.jpg");
@@ -99,6 +100,8 @@ public:
 
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
+
+        map.set_name("Niveau 1");
     }
 
     static void test_ball_clipping_in_bumper(Map& map) {
@@ -110,6 +113,8 @@ public:
         ball->set_acceleration(Vector2D::zero());
         ball->set_velocity(Vector2D(0, 100));
         map.make_entity(std::move(ball));
+
+        map.set_name("Test");
     }
     
 private:

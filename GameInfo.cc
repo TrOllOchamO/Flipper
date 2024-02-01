@@ -26,7 +26,7 @@ void GameInfo::render(sf::RenderWindow &window) const {
     pb << "Meilleur score : 0";
 
     std::ostringstream niveau;
-    niveau << "Carte : Niveau 1";
+    niveau << "Carte : " << game->get_name();
 
     sf::Text text;
     text.setFont(font);

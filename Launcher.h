@@ -16,7 +16,7 @@ private:
   sf::Texture texture;
   float force = 0;
   PhysicsProperties props;
-  Rectangle kill_zone = Rectangle(Vector2D(0,800), 400, 5);
+  Rectangle kill_zone = Rectangle(Vector2D(0,816), 400, 5);
 
   bool can_move_up = true;
   bool can_move_down = true;

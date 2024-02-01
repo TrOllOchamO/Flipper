@@ -32,6 +32,7 @@ public:
   float get_score();
   float get_multiplicateur();
   int get_life();
+  const char * get_name() { return map.get_name(); }
 };
 
 #endif /* !GAME_H_ */
