@@ -18,8 +18,6 @@ private:
   PhysicsProperties props;
   Rectangle kill_zone = Rectangle(Vector2D(0,800), 400, 5);
 
-  Ball *ball = nullptr;
-
   bool can_move_up = true;
   bool can_move_down = true;
   bool can_launch = true;

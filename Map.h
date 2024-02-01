@@ -10,7 +10,7 @@ class Map {
 private:
 
 public:
-  std::vector<std::unique_ptr<Entity>> elements;
+  std::vector<std::unique_ptr<Entity>> elements; 
   Map() = default;
   Map(Map&&) noexcept = default;
 
@@ -18,6 +18,7 @@ public:
   Map& operator=(Map&&) noexcept = default;
 
   void make_entity(std::unique_ptr<Entity> new_entity);
+  void kill_entity(Entity* entity); // WARNING killing an entity invalidate indexes in elements array
 
   std::vector<std::unique_ptr<Entity>>& get_elements();
 };

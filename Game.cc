@@ -13,6 +13,7 @@ void Game::set_map(Map new_map) {
     element->set_game(this);
   }
   this->map = std::move(new_map); 
+  this->ball_handle = nullptr;
 }
 
 void Game::make_entity(std::unique_ptr<Entity> new_element) {
@@ -50,4 +51,19 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
   for (auto& element : map.get_elements()) {
     element->render(window);
   }
+}
+
+void Game::make_ball(std::unique_ptr<Ball> new_ball) {
+  assert(ball_handle == nullptr);
+  ball_handle = new_ball.get();
+  map.make_entity(std::move(new_ball));
+}
+
+void Game::kill_ball() {
+  if (this->ball_handle == nullptr) {
+    return;
+  }
+  
+  map.kill_entity(ball_handle);
+  this->ball_handle = nullptr;
 }
