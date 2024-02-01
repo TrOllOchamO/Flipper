@@ -8,22 +8,23 @@
 #define SEPARATION_THRESHOLD 0.001
 #define RESTING_CONTACT_EPSILON 0.00001 
 
-void Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
+bool Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
   std::vector<Vector2D> simplex;
 
   if (!data1.should_react_with_other && !data2.should_react_with_other) {
-    return;
+    return false;
   }
 
   // if there is no collision to begin with, there is nothing to do
   if (!Collision::GJK(s1, s2, simplex)) {
-    return;
+    return false;
   }
 
   Vector2D direction = Vector2D::zero();
   Collision::EPA(s1, s2, direction, simplex);
   Physics::separate_shapes(s1, data1.velocity, s2, data2.velocity,  dt);
   Physics::resolve_velocities(data1, data2, direction);
+  return true;
 }
 
 void Physics::update(Shape *s, PhysicsProperties &data, float dt) {

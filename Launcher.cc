@@ -8,7 +8,8 @@
 
 Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   if (!texture.loadFromFile(texturePath)) {
-    std::cerr << "Error loading texture from file: " << texturePath << std::endl;
+    std::cerr << "Error loading texture from file: " << texturePath
+              << std::endl;
   }
   texture.setRepeated(true);
 
@@ -21,7 +22,6 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   shape.add_points({Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)});
 };
 
-// TODO BVERIFIER NB VIE
 void Launcher::update(const Inputs &player_inputs) {
   Ball *ball_handle = game->get_ball_handle();
   if (player_inputs.space_launcher && ball_handle == nullptr) {
@@ -59,7 +59,7 @@ void Launcher::update_value(int value) {
   }
 
   if (ball_ok() && value < 0) {
-    Ball* ball_handle = game->get_ball_handle();
+    Ball *ball_handle = game->get_ball_handle();
     ball_handle->set_posiion(ball_handle->get_position() - Vector2D(0, 4));
   }
 
@@ -70,7 +70,7 @@ void Launcher::update_value(int value) {
 
 void Launcher::launch() {
   if (ball_ok()) {
-    Ball* ball_handle = game->get_ball_handle();
+    Ball *ball_handle = game->get_ball_handle();
     ball_handle->set_posiion(Vector2D(362, 732));
     ball_handle->set_velocity(Vector2D(0, -force * 50));
   }
@@ -88,7 +88,8 @@ void Launcher::render(sf::RenderWindow &window) const {
 }
 
 void Launcher::add_ball() {
-  std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
+  std::unique_ptr<Ball> new_ball =
+      std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
   game->make_ball(std::move(new_ball));
 }
 
@@ -99,8 +100,13 @@ bool Launcher::ball_ok() {
 
 void Launcher::check_if_ball_out() {
   Ball *ball_handle = game->get_ball_handle();
-  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone)) {
-    ball_handle->set_posiion(Vector2D(362, 732));
-    ball_handle->set_velocity(Vector2D::zero());
+  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone) && game->get_life() > 0) {
+    game->loose_life();
+    if (game->get_life() > 0) {
+      ball_handle->set_posiion(Vector2D(362, 732));
+      ball_handle->set_velocity(Vector2D::zero());
+    } else {
+      // faudra faire des trucs ici
+    }
   }
 }

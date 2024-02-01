@@ -14,6 +14,8 @@ class Game {
 private:
   Ball* ball_handle = nullptr;
   float score;
+  float multiplicateur;
+  int vie;
   Map map;
 
 public:
@@ -24,6 +26,12 @@ public:
   Ball* get_ball_handle() { return ball_handle; }
   void make_entity(std::unique_ptr<Entity> new_element);
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
+
+  void update_score(float add);
+  void loose_life();
+  float get_score();
+  float get_multiplicateur();
+  int get_life();
 };
 
 #endif /* !GAME_H_ */
