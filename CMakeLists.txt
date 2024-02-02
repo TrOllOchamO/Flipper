@@ -33,6 +33,7 @@ add_executable(Flipper
     Multiplicateur.cc
     Menu.cc
     GameInfo.cc
+    Score.cc
 )
 
 target_include_directories(Flipper

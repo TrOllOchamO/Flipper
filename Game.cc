@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Physics.h"
+#include "Score.h"
+
 #include <cstddef>
 #include <iostream>
 #include <utility>
@@ -61,6 +63,10 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
   for (auto& element : map.get_elements()) {
     element->render(window);
   }
+
+  if(vie==0){
+    end();
+  }
 }
 
 void Game::make_ball(std::unique_ptr<Ball> new_ball) {
@@ -96,4 +102,11 @@ int Game::get_life(){
 
 float Game::get_multiplicateur(){
   return multiplicateur;
+}
+
+void Game::end(){
+//   float best = Score::load_best_score(map.get_name());
+//   if (score > best){
+//     Score::store_best_score(score,map.get_name());
+//   }  
 }

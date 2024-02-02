@@ -27,12 +27,14 @@ public:
   void make_entity(std::unique_ptr<Entity> new_element);
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
 
+  void end();
+
   void update_score(float add);
   void loose_life();
   float get_score();
   float get_multiplicateur();
   int get_life();
-  const char * get_name() { return map.get_name(); }
+  std::string get_name() { return map.get_name(); }
 };
 
 #endif /* !GAME_H_ */

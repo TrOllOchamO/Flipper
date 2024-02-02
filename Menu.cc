@@ -3,8 +3,7 @@
 
 
    
-  Menu::Menu(sf::RenderWindow& window) {
-    
+Menu::Menu(sf::RenderWindow& window) { 
     if (!font.loadFromFile("resources/arial.ttf")) {
         std::cerr << "Error loading font file" << std::endl;
     }
