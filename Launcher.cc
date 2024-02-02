@@ -8,8 +8,7 @@
 
 Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   if (!texture.loadFromFile(texturePath)) {
-    std::cerr << "Error loading texture from file: " << texturePath
-              << std::endl;
+    std::cerr << "Error loading texture from file: " << texturePath << std::endl;
   }
   texture.setRepeated(true);
 
@@ -22,7 +21,7 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   shape.add_points({Vector2D(360, 750), Vector2D(380, 750), Vector2D(380, 790), Vector2D(360, 790)});
 };
 
-void Launcher::update(const Inputs &player_inputs) {
+void Launcher::update(const Inputs &player_inputs, [[maybe_unused]] float dt) {
   Ball *ball_handle = game->get_ball_handle();
   if (player_inputs.space_launcher && ball_handle == nullptr) {
     add_ball();
@@ -100,8 +99,7 @@ bool Launcher::ball_ok() {
 
 void Launcher::check_if_ball_out() {
   Ball *ball_handle = game->get_ball_handle();
-  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone) && game->get_life() > 0) {
-    game->loose_life();
+  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone) && game->get_life() > 0) { game->loose_life();
     if (game->get_life() > 0) {
       ball_handle->set_posiion(Vector2D(362, 732));
       ball_handle->set_velocity(Vector2D::zero());

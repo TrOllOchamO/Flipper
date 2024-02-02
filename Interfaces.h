@@ -28,7 +28,7 @@ public:
 
 class Interactable {
 public:
-  virtual void update([[maybe_unused]] const Inputs& player_inputs) {}
+  virtual void update([[maybe_unused]] const Inputs& player_inputs, [[maybe_unused]] float dt) {}
   virtual ~Interactable() = default;
 };
 

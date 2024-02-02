@@ -133,10 +133,10 @@ void Polygone::render(sf::RenderWindow &window, const sf::Texture &texture) cons
   }
 }
 
-void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
-  if(convex){
+void Polygone::rotate(float angle_rad, Vector2D rotation_point, float dt) {
+  if (convex) {
     std::vector<Vector2D> new_points;
-    float a = angle * dt;
+    float a = angle_rad * dt;
     for (auto p : points){
       float nx = ((p.x-rotation_point.x) * std::cos(a) - (p.y-rotation_point.y) * std::sin(a)) + rotation_point.x;
       float ny = ((p.y-rotation_point.y) * std::cos(a) + (p.x-rotation_point.x) * std::sin(a)) + rotation_point.y;    
@@ -147,7 +147,7 @@ void Polygone::rotate(float angle, Vector2D rotation_point, float dt) {
 
   } else {
     for(auto &p : concave_points){
-      p.rotate(angle, rotation_point, dt);
+      p.rotate(angle_rad, rotation_point, dt);
     }
   }
 }
