@@ -13,7 +13,7 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   }
   texture.setRepeated(true);
 
-  props.should_react_with_other = false;
+  props.should_be_affected_by_others = false;
   props.mass = 10000000000;
   props.velocity = Vector2D::zero();
   props.acceleration = Vector2D::zero();
@@ -106,7 +106,7 @@ void Launcher::check_if_ball_out() {
       ball_handle->set_posiion(Vector2D(362, 732));
       ball_handle->set_velocity(Vector2D::zero());
     } else {
-      // faudra faire des trucs ici
+      game->kill_ball();
     }
   }
 }

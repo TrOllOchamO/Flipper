@@ -35,12 +35,15 @@ public:
 class Entity : public Renderable, public Resolvable, public Interactable {
 protected: 
   Game* game = nullptr;
+  bool should_get_killed = false;
   float points_add = 0;
   float mult_add = 0;
 private:
 public:
   float get_points_to_add() {return points_add;}
   float get_mult() {return mult_add;}
+  void kill() { should_get_killed = true; }
+  bool has_to_be_killed() { return should_get_killed; }
   void set_game(Game* new_game) { this->game = new_game; }
   virtual ~Entity() = default;
 };

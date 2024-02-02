@@ -11,7 +11,6 @@ Ball::Ball(Vector2D pos, float radius, const std::string& texturePath) : shape(s
     }
     texture.setRepeated(true);
 
-    props.should_react_with_other = true;
     props.mass = 1;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D(0, 500);

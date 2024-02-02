@@ -11,7 +11,9 @@
 bool Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
   std::vector<Vector2D> simplex;
 
-  if (!data1.should_react_with_other && !data2.should_react_with_other) {
+  const bool both_object_are_not_affected = (!data1.should_be_affected_by_others && !data2.should_be_affected_by_others);
+  const bool one_object_doesnt_interact = !data1.should_affect_others || !data2.should_affect_others;
+  if (both_object_are_not_affected || one_object_doesnt_interact) {
     return false;
   }
 
@@ -43,8 +45,8 @@ void Physics::update_pos_based_on_velocity(Shape *s, const Vector2D &velocity, f
 void Physics::resolve_velocities(PhysicsProperties &data1, PhysicsProperties &data2, const Vector2D &direction) {
   float mass1 = data1.mass;
   float mass2 = data2.mass;
-  if (!data1.should_react_with_other) { mass1 = std::numeric_limits<float>::infinity(); }
-  if (!data2.should_react_with_other) { mass2 = std::numeric_limits<float>::infinity(); }
+  if (!data1.should_be_affected_by_others) { mass1 = std::numeric_limits<float>::infinity(); }
+  if (!data2.should_be_affected_by_others) { mass2 = std::numeric_limits<float>::infinity(); }
   
   const Vector2D relative_velocities = data1.velocity - data2.velocity;
   const float impulse_without_bounciness = relative_velocities.dot(direction) / (1/mass1 + 1/mass2);
