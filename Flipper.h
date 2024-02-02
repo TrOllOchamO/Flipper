@@ -29,6 +29,8 @@ private:
   Vector2D rotation_point;
   FLIPPER_ROTATION_DIRECTION rotation_direction;
 
+  void bump_the_ball(); 
+
 public:
   Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation);
 
