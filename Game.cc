@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Physics.h"
+#include "Score.h"
+
 #include <cstddef>
 #include <iostream>
 #include <utility>
@@ -64,6 +66,10 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
   for (auto& element : elements) {
     element->render(window);
   }
+
+  if(vie==0){
+    end();
+  }
 }
 
 void Game::make_ball(std::unique_ptr<Ball> new_ball) {
@@ -76,13 +82,16 @@ void Game::kill_ball() {
   if (this->ball_handle == nullptr) {
     return;
   }
-  
   ball_handle->kill();
   this->ball_handle = nullptr;
 }
 
 float Game::get_score(){
   return score;
+}
+
+float Game::get_max_score(){
+  return Score::load_best_score(get_name());
 }
 
 void Game::update_score(float add) {
@@ -99,4 +108,11 @@ int Game::get_life(){
 
 float Game::get_multiplicateur(){
   return multiplicateur;
+}
+
+void Game::end(){
+  float best = Score::load_best_score(map.get_name());
+  if (score > best){
+    Score::store_best_score(score,map.get_name());
+  }  
 }

@@ -9,7 +9,7 @@
 
 class Map {
 private:
-  const char * level;
+  std::string level;
 
 public:
   std::vector<std::unique_ptr<Entity>> elements; 
@@ -25,8 +25,8 @@ public:
 
   std::vector<std::unique_ptr<Entity>>& get_elements();
 
-  void set_name(const char * s) {level = s;}
-  const char * get_name() {return level;}
+  void set_name(std::string s) {level = s;}
+  std::string get_name() {return level;}
 };
 
 #endif /* !MAP_H_ */
