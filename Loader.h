@@ -116,6 +116,19 @@ public:
 
         map.set_name("Test");
     }
+
+    static void test_flipper(Map& map) {
+        std::unique_ptr<Circle> bumper_shape = std::make_unique<Circle>(Vector2D(150, 350), 50);
+        std::unique_ptr<Bumper> bumper = std::make_unique<Bumper>(std::move(bumper_shape), "");
+        map.make_entity(std::move(bumper));
+
+        std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(200, 370), 8, "");
+        ball->set_acceleration(Vector2D::zero());
+        ball->set_velocity(Vector2D(0, 100));
+        map.make_entity(std::move(ball));
+
+        map.set_name("Test");
+    }
     
 private:
 

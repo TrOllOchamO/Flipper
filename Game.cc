@@ -57,8 +57,11 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
     }
   }
 
+  // remove entitys that have been marked killed in the update
+  map.remove_killed_entitys();
+
   // render
-  for (auto& element : map.get_elements()) {
+  for (auto& element : elements) {
     element->render(window);
   }
 }
@@ -74,7 +77,7 @@ void Game::kill_ball() {
     return;
   }
   
-  map.kill_entity(ball_handle);
+  ball_handle->kill();
   this->ball_handle = nullptr;
 }
 

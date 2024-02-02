@@ -8,7 +8,7 @@ Multiplicateur::Multiplicateur(std::unique_ptr<Shape> shape, const std::string& 
     }
     texture.setRepeated(true);
 
-    props.should_react_with_other = false;
+    props.should_be_affected_by_others = false;
     props.mass = 10000000000;
     props.velocity = Vector2D::zero();
     props.acceleration = Vector2D::zero();
