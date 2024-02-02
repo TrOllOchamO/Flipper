@@ -101,7 +101,7 @@ public:
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
 
-        map.set_name("Niveau 1");
+        map.set_name("Niveau_1");
     }
 
     static void test_ball_clipping_in_bumper(Map& map) {

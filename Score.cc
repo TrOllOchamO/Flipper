@@ -6,8 +6,8 @@
 
 float Score::load_best_score(std::string level){
     std::ostringstream path;
-    path << "score/" << level;
-    std::fstream s(path.str());
+    path << "../score/" << level << ".txt";
+    std::ifstream s(path.str());
     std::string line;
     if (s.is_open()){
         getline(s,line);
@@ -19,8 +19,8 @@ float Score::load_best_score(std::string level){
 
 void Score::store_best_score(float score, std::string level){
     std::ostringstream path;
-    path << "score/" << level;
-    std::fstream s(path.str());
+    path << "../score/" << level << ".txt";
+    std::ofstream s(path.str());
     if (s.is_open()){
         s << score;
         s.close();

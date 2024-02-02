@@ -32,6 +32,7 @@ public:
   void update_score(float add);
   void loose_life();
   float get_score();
+  float get_max_score();
   float get_multiplicateur();
   int get_life();
   std::string get_name() { return map.get_name(); }

@@ -23,7 +23,7 @@ void GameInfo::render(sf::RenderWindow &window) const {
     multiplicateur << "Multiplicateur : x" << game->get_multiplicateur();
 
     std::ostringstream pb;
-    pb << "Meilleur score : 0";
+    pb << "Meilleur score : " << game->get_max_score();
 
     std::ostringstream niveau;
     niveau << "Carte : " << game->get_name();

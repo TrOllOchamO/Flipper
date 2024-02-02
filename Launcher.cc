@@ -24,7 +24,7 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
 
 void Launcher::update(const Inputs &player_inputs) {
   Ball *ball_handle = game->get_ball_handle();
-  if (player_inputs.space_launcher && ball_handle == nullptr) {
+  if (player_inputs.space_launcher && ball_handle == nullptr && game->get_life()>0) {
     add_ball();
   }
   if (player_inputs.up_launcher && can_move_up) {
@@ -100,7 +100,7 @@ bool Launcher::ball_ok() {
 
 void Launcher::check_if_ball_out() {
   Ball *ball_handle = game->get_ball_handle();
-  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone) && game->get_life() > 0) {
+  if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone)) {
     game->loose_life();
     if (game->get_life() > 0) {
       ball_handle->set_posiion(Vector2D(362, 732));

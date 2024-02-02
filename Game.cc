@@ -82,13 +82,16 @@ void Game::kill_ball() {
   if (this->ball_handle == nullptr) {
     return;
   }
-  
   ball_handle->kill();
   this->ball_handle = nullptr;
 }
 
 float Game::get_score(){
   return score;
+}
+
+float Game::get_max_score(){
+  return Score::load_best_score(get_name());
 }
 
 void Game::update_score(float add) {
@@ -108,8 +111,8 @@ float Game::get_multiplicateur(){
 }
 
 void Game::end(){
-//   float best = Score::load_best_score(map.get_name());
-//   if (score > best){
-//     Score::store_best_score(score,map.get_name());
-//   }  
+  float best = Score::load_best_score(map.get_name());
+  if (score > best){
+    Score::store_best_score(score,map.get_name());
+  }  
 }
