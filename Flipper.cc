@@ -5,6 +5,7 @@
 #include "Polygone.h"
 #include "Vector2D.h"
 #include <SFML/Graphics/Color.hpp>
+#include <cmath>
 #include <vector>
 
 #define ROTATION_STEP 17
@@ -78,11 +79,12 @@ void Flipper::bump_the_ball() {
   }
 
   // FIXME améliorer le hack ?
-  // Vector2D direction;
-  // Collision::EPA(ball_shape, &shape, direction, simplex);
+  Vector2D direction;
+  Collision::EPA(ball_shape, &shape, direction, simplex);
 
+  const Vector2D ball_current_velocity = ball_handle->get_props()->velocity;
   const float dist_from_rotation_point = (ball_shape->get_center() - rotation_point).length();
-  const Vector2D new_velocity = Vector2D(0, -20) * dist_from_rotation_point;
+  const Vector2D new_velocity = ball_current_velocity - (direction * (70 + std::sqrt(dist_from_rotation_point)));
   ball_handle->set_velocity(new_velocity);
 }
 
