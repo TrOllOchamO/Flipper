@@ -111,7 +111,7 @@ public:
 
         std::unique_ptr<Ball> ball = std::make_unique<Ball>(Vector2D(200, 370), 8, "");
         ball->set_acceleration(Vector2D::zero());
-        ball->set_velocity(Vector2D(0, 100));
+        ball->set_velocity(Vector2D(0, 10));
         map.make_entity(std::move(ball));
 
         map.set_name("Test");

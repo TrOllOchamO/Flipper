@@ -84,7 +84,7 @@ void Flipper::bump_the_ball() {
 
   const Vector2D ball_current_velocity = ball_handle->get_props()->velocity;
   const float dist_from_rotation_point = (ball_shape->get_center() - rotation_point).length();
-  const Vector2D new_velocity = ball_current_velocity - (direction * (70 + std::sqrt(dist_from_rotation_point)));
+  const Vector2D new_velocity = ball_current_velocity - (direction * (20 + log(dist_from_rotation_point)));
   ball_handle->set_velocity(new_velocity);
 }
 

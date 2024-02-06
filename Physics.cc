@@ -25,8 +25,14 @@ bool Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsPrope
   Vector2D direction = Vector2D::zero();
   Collision::EPA(s1, s2, direction, simplex);
   Physics::separate_shapes(s1, data1.velocity, s2, data2.velocity,  dt);
-  Physics::resolve_velocities(data1, data2, direction);
-  return true;
+  const Vector2D relative_velocity = data1.velocity - data2.velocity;
+  const bool are_already_separating = relative_velocity.dot(direction) < 0;
+  if (!are_already_separating) {
+    Physics::resolve_velocities(data1, data2, direction);
+    return true;
+  }
+
+  return false;
 }
 
 void Physics::update(Shape *s, PhysicsProperties &data, float dt) {
@@ -65,13 +71,11 @@ bool Physics::separate_shapes(Shape *s1, Vector2D &v1, Shape *s2, Vector2D &v2, 
 
   const float dist = Collision::get_minimum_dist(s1, s2);
   if (dist < SEPARATION_THRESHOLD) {
-    // they were already colliding then it's hopeless to separate them so return
-    if (dist <= 0) {
-      return false;
-    }
+    Physics::update_pos_based_on_velocity(s1, v1, dt);
+    Physics::update_pos_based_on_velocity(s2, v2, dt);
 
-    // if they were already touching before the update
-    return true;
+    // they were already colliding then it's hopeless to separate them so return
+    return false;
   }
 
   dt /= 2;
@@ -87,7 +91,7 @@ bool Physics::separate_shapes(Shape *s1, Vector2D &v1, Shape *s2, Vector2D &v2, 
       Physics::update_pos_based_on_velocity(s1, v1, -dt);
       Physics::update_pos_based_on_velocity(s2, v2, -dt);
     } else if (dist < SEPARATION_THRESHOLD) { // if we are touching
-      return true;
+      return false;
     }
 
     dt /= 2;
