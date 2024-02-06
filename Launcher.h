@@ -29,6 +29,12 @@ private:
 
   void check_if_ball_out();
 
+  sf::SoundBuffer bufferLaunch;
+  sf::Sound soundLaunch;
+  
+  sf::SoundBuffer bufferLoose;
+  sf::Sound soundLoose;
+
 public:
   Launcher(const std::string &texturePath);
 

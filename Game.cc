@@ -55,6 +55,8 @@ void Game::update(sf::RenderWindow& window, const Inputs& player_inputs, float d
         multiplicateur += element2->get_mult();
         score += element1->get_points_to_add() * multiplicateur;
         score += element2->get_points_to_add() * multiplicateur;
+        element1->play_audio();
+        element2->play_audio();
       }
     }
   }

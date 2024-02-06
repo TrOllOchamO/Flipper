@@ -2,6 +2,7 @@
 #include "Polygone.h"
 #include "Inputs.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "PhysicsProperties.h"
 
 #ifndef FLIPPER_H_

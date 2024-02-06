@@ -6,6 +6,7 @@
 #include "Polygone.h"
 #include "Shape.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <memory>
 
 class Bumper: public Entity {

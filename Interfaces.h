@@ -3,8 +3,10 @@
 
 #include <assert.h>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "Inputs.h"
+#include <iostream>
 
 class Shape; // forward declaration
 class Game; // forward declaration
@@ -38,8 +40,18 @@ protected:
   bool should_get_killed = false;
   float points_add = 0;
   float mult_add = 0;
+
 private:
-public:
+
+public: 
+  sf::SoundBuffer buffer;
+  sf::Sound sound;
+  void play_audio(){
+    sound.setBuffer(buffer);
+    if(buffer.getDuration().asSeconds()>0){
+      sound.play();
+    }
+  };
   float get_points_to_add() {return points_add;}
   float get_mult() {return mult_add;}
   void kill() { should_get_killed = true; }
