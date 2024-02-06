@@ -8,6 +8,7 @@
 #include "Circle.h"
 #include "Multiplicateur.h"
 #include "GameInfo.h"
+#include "Door.h"
 
 #ifndef LOADER_H_
 #define LOADER_H_
@@ -71,6 +72,7 @@ public:
         std::unique_ptr<Launcher> launcher = std::make_unique<Launcher>("");
         std::unique_ptr<Flipper> left_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::LEFT);
         std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
+        std::unique_ptr<Door> door = std::make_unique<Door>("resources/Test.jpg");
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
 
         // make entity
@@ -78,6 +80,7 @@ public:
         map.make_entity(std::move(launcher));
         map.make_entity(std::move(left_flipper));
         map.make_entity(std::move(right_flipper));
+        map.make_entity(std::move(door));
         
         map.make_entity(std::move(bumper_1));
         map.make_entity(std::move(bumper_2));
