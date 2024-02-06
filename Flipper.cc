@@ -26,6 +26,10 @@ Flipper::Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation
   }
   texture.setRepeated(true);
 
+  if (!buffer.loadFromFile("../resources/ressort.wav")) {
+    std::cerr << "Error loading sound from file: ../resources/ressort.wav" << std::endl;
+  }
+
   props.should_be_affected_by_others = false;
   props.velocity = Vector2D::zero();
   props.acceleration = Vector2D::zero();

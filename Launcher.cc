@@ -12,6 +12,18 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   }
   texture.setRepeated(true);
 
+  if (!bufferLaunch.loadFromFile("../resources/launch.wav")) {
+    std::cerr << "Error loading sound from file: ../resources/launch.wav" << std::endl;
+  } else {
+    soundLaunch.setBuffer(bufferLaunch);
+  }
+
+  if (!bufferLoose.loadFromFile("../resources/chval.wav")) {
+    std::cerr << "Error loading sound from file: ../resources/chval.wav" << std::endl;
+  } else {
+    soundLoose.setBuffer(bufferLoose);
+  }
+
   props.should_be_affected_by_others = false;
   props.mass = 10000000000;
   props.velocity = Vector2D::zero();
@@ -72,6 +84,7 @@ void Launcher::launch() {
     Ball *ball_handle = game->get_ball_handle();
     ball_handle->set_posiion(Vector2D(362, 732));
     ball_handle->set_velocity(Vector2D(0, -force * 50));
+    soundLaunch.play();
   }
   force = 0;
   shape.clear();
@@ -100,6 +113,7 @@ bool Launcher::ball_ok() {
 void Launcher::check_if_ball_out() {
   Ball *ball_handle = game->get_ball_handle();
   if (Collision::are_colliding(ball_handle->get_shape(), &kill_zone)) {
+    soundLoose.play();
     game->loose_life();
     if (game->get_life() > 0) {
       ball_handle->set_posiion(Vector2D(362, 732));
