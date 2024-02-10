@@ -8,22 +8,31 @@
 #define SEPARATION_THRESHOLD 0.001
 #define RESTING_CONTACT_EPSILON 0.00001 
 
-void Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
+bool Physics::solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt) {
   std::vector<Vector2D> simplex;
 
-  if (!data1.should_react_with_other && !data2.should_react_with_other) {
-    return;
+  const bool both_object_are_not_affected = (!data1.should_be_affected_by_others && !data2.should_be_affected_by_others);
+  const bool one_object_doesnt_interact = !data1.should_affect_others || !data2.should_affect_others;
+  if (both_object_are_not_affected || one_object_doesnt_interact) {
+    return false;
   }
 
   // if there is no collision to begin with, there is nothing to do
   if (!Collision::GJK(s1, s2, simplex)) {
-    return;
+    return false;
   }
 
   Vector2D direction = Vector2D::zero();
   Collision::EPA(s1, s2, direction, simplex);
   Physics::separate_shapes(s1, data1.velocity, s2, data2.velocity,  dt);
-  Physics::resolve_velocities(data1, data2, direction);
+  const Vector2D relative_velocity = data1.velocity - data2.velocity;
+  const bool are_already_separating = relative_velocity.dot(direction) < 0;
+  if (!are_already_separating) {
+    Physics::resolve_velocities(data1, data2, direction);
+    return true;
+  }
+
+  return false;
 }
 
 void Physics::update(Shape *s, PhysicsProperties &data, float dt) {
@@ -42,8 +51,8 @@ void Physics::update_pos_based_on_velocity(Shape *s, const Vector2D &velocity, f
 void Physics::resolve_velocities(PhysicsProperties &data1, PhysicsProperties &data2, const Vector2D &direction) {
   float mass1 = data1.mass;
   float mass2 = data2.mass;
-  if (!data1.should_react_with_other) { mass1 = std::numeric_limits<float>::infinity(); }
-  if (!data2.should_react_with_other) { mass2 = std::numeric_limits<float>::infinity(); }
+  if (!data1.should_be_affected_by_others) { mass1 = std::numeric_limits<float>::infinity(); }
+  if (!data2.should_be_affected_by_others) { mass2 = std::numeric_limits<float>::infinity(); }
   
   const Vector2D relative_velocities = data1.velocity - data2.velocity;
   const float impulse_without_bounciness = relative_velocities.dot(direction) / (1/mass1 + 1/mass2);
@@ -62,13 +71,11 @@ bool Physics::separate_shapes(Shape *s1, Vector2D &v1, Shape *s2, Vector2D &v2, 
 
   const float dist = Collision::get_minimum_dist(s1, s2);
   if (dist < SEPARATION_THRESHOLD) {
-    // they were already colliding then it's hopeless to separate them so return
-    if (dist <= 0) {
-      return false;
-    }
+    Physics::update_pos_based_on_velocity(s1, v1, dt);
+    Physics::update_pos_based_on_velocity(s2, v2, dt);
 
-    // if they were already touching before the update
-    return true;
+    // they were already colliding then it's hopeless to separate them so return
+    return false;
   }
 
   dt /= 2;
@@ -84,7 +91,7 @@ bool Physics::separate_shapes(Shape *s1, Vector2D &v1, Shape *s2, Vector2D &v2, 
       Physics::update_pos_based_on_velocity(s1, v1, -dt);
       Physics::update_pos_based_on_velocity(s2, v2, -dt);
     } else if (dist < SEPARATION_THRESHOLD) { // if we are touching
-      return true;
+      return false;
     }
 
     dt /= 2;

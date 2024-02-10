@@ -29,7 +29,7 @@ public:
     void render(sf::RenderWindow &window, sf::Color color) const override;
     void render(sf::RenderWindow &window, const sf::Texture &texture) const override;
     void print();
-    void rotate(float angle, Vector2D rotation_point, float dt = 1);
+    void rotate(float angle_rad, Vector2D rotation_point, float dt = 1);
 
     std::vector<Polygone> triangulate();
 

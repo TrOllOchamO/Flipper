@@ -1,29 +1,30 @@
-#ifndef BUMPER_H_
-#define BUMPER_H_
+#ifndef DOOR_H_
+#define DOOR_H_
 
 #include "Physics.h"
 #include "PhysicsProperties.h"
 #include "Polygone.h"
 #include "Shape.h"
+#include "Game.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <memory>
 
-class Bumper: public Entity {
+class Door : public Entity {
 private:
-  std::unique_ptr<Shape> shape;
+  Polygone shape;
   PhysicsProperties props;
   sf::Texture texture;
 
 public:
-  Bumper(std::unique_ptr<Shape> shape, const std::string &texturePath);
+  Door(const std::string& texturePath);
 
-  bool is_resolvable() override { return true; } ;
-  Shape* get_shape() override { return this->shape.get(); }
+  bool is_resolvable() override;
+
+  Shape* get_shape() override { return &shape; }
   PhysicsProperties& get_physics_props() override { return this->props; }
 
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };
 
-#endif /* !BUMPER_H_ */
+#endif /* !DOOR_H_ */

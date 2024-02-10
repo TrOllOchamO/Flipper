@@ -1,6 +1,8 @@
 #include "Interfaces.h"
 #include "Polygone.h"
+#include "Inputs.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "PhysicsProperties.h"
 
 #ifndef FLIPPER_H_
@@ -11,13 +13,24 @@ enum FLIPPER_ORIENTATION {
   RIGHT,
 };
 
+enum FLIPPER_ROTATION_DIRECTION {
+  CLOCKWISE = 1,
+  COUNTERCLOCKWISE = -1,
+};
+
 class Flipper: public Entity {
 private:
   Polygone shape;
   FLIPPER_ORIENTATION orientation;
   PhysicsProperties props;
   float rotation = 0;
+  bool collided_with_ball_on_last_update = false;
   sf::Texture texture;
+  bool const Inputs::* is_activated = nullptr;
+  Vector2D rotation_point;
+  FLIPPER_ROTATION_DIRECTION rotation_direction;
+
+  void bump_the_ball(); 
 
 public:
   Flipper(const std::string &texturePath, FLIPPER_ORIENTATION orientation);
@@ -26,7 +39,7 @@ public:
   Shape *get_shape() override { return &shape; }
   PhysicsProperties &get_physics_props() override { return props; }
 
-  void use_inputs([[maybe_unused]] const Inputs &player_inputs) override;
+  void update([[maybe_unused]] const Inputs &player_inputs, [[maybe_unused]] float dt) override;
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };

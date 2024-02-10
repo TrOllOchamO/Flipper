@@ -1,8 +1,8 @@
-#include "Bumper.h"
+#include "Multiplicateur.h"
 #include <SFML/Graphics/Color.hpp>
 #include <iostream>
 
-Bumper::Bumper(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape(std::move(shape)) {
+Multiplicateur::Multiplicateur(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape(std::move(shape)) {
     if (!texture.loadFromFile(texturePath)) {
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
@@ -18,13 +18,13 @@ Bumper::Bumper(std::unique_ptr<Shape> shape, const std::string& texturePath) : s
     props.acceleration = Vector2D::zero();
     props.bounciness = 1.01;
 
-    points_add = 1;
+    mult_add = 0.1;
 }
 
-void Bumper::render(sf::RenderWindow &window, sf::Color color) const {
+void Multiplicateur::render(sf::RenderWindow &window, sf::Color color) const {
     this->shape->render(window, color);
 }
 
-void Bumper::render(sf::RenderWindow &window) const {
+void Multiplicateur::render(sf::RenderWindow &window) const {
     this->shape->render(window, texture);
 }

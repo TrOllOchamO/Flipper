@@ -11,7 +11,7 @@ class Physics {
 public:
   // if the two convex shapes are colliding, try to resolve the collision
   // by taking in account the pysics properties of both elements
-  static void solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt);
+  static bool solve(Shape *s1, PhysicsProperties &data1, Shape *s2, PhysicsProperties &data2, float dt);
 
   // 
   static void update(Shape *s, PhysicsProperties &data, float dt);

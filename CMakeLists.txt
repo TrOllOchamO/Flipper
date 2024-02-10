@@ -30,7 +30,11 @@ add_executable(Flipper
     Launcher.cc
     Game.cc
     Map.cc
+    Multiplicateur.cc
     Menu.cc
+    GameInfo.cc
+    Score.cc
+    Door.cc
 )
 
 target_include_directories(Flipper

@@ -1,22 +1,20 @@
-#ifndef BUMPER_H_
-#define BUMPER_H_
+#ifndef MULTIPLICATEUR_H_
+#define MULTIPLICATEUR_H_
 
-#include "Physics.h"
-#include "PhysicsProperties.h"
-#include "Polygone.h"
+#include "Circle.h"
 #include "Shape.h"
+#include "PhysicsProperties.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <memory>
 
-class Bumper: public Entity {
+class Multiplicateur: public Entity {
 private:
   std::unique_ptr<Shape> shape;
   PhysicsProperties props;
   sf::Texture texture;
 
 public:
-  Bumper(std::unique_ptr<Shape> shape, const std::string &texturePath);
+  Multiplicateur(std::unique_ptr<Shape> shape, const std::string &texturePath);
 
   bool is_resolvable() override { return true; } ;
   Shape* get_shape() override { return this->shape.get(); }
@@ -26,4 +24,4 @@ public:
   void render(sf::RenderWindow &window) const override;
 };
 
-#endif /* !BUMPER_H_ */
+#endif /* !MULTIPLICATEUR_H_ */
