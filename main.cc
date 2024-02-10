@@ -25,14 +25,14 @@ int main() {
     Inputs inputs;
     MenuState menuState = MenuState::MainMenu;
 
-    // Création des boutons
+    
     sf::Font font;
     //resources/arial.ttf
     if (!font.loadFromFile("resources/arial.ttf")) {
         std::cerr << "Failed to load font!" << std::endl;
         return 1;
     }
-
+  // placement des boutotns 
     sf::Text launchButton("Lancer", font, 24);
     sf::Text quitButton("Quitter", font, 24);
     launchButton.setPosition(WINDOWS_WIDTH / 2 - 50, 300);
@@ -52,10 +52,12 @@ int main() {
 
     while (window.isOpen()) {
         sf::Event event;
+
+        //Etat du jeu 
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-
+            // en jeu si on appuis sur Echap, ouvre un menu pour soit revinir sur le jeu soit au menu principal
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 if (menuState == MenuState::GameRunning) {
                     menuState = MenuState::GameMenu;
@@ -63,7 +65,7 @@ int main() {
                     menuState = MenuState::GameRunning;
                 }
             }
-
+            // Verifiacation des click dans les menu 
             if (event.type == sf::Event::MouseButtonPressed) {
                 if (menuState == MenuState::MainMenu) {
                     if (launchButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
@@ -80,20 +82,31 @@ int main() {
                 }
             }
         }
+   
 
-        float dt = clock.restart().asSeconds();
-        inputs.update(window);
-        window.clear(sf::Color::Black);
+      float dt = clock.restart().asSeconds();
+      
+      window.clear(sf::Color::Black);
+      
+     switch (menuState) {
+        case MenuState::GameRunning:
+            inputs.update(window);
+            game.update(window, inputs, dt);
+            break;
 
-        if (menuState == MenuState::MainMenu) {
+        case MenuState::MainMenu:
             window.draw(launchButton);
             window.draw(quitButton);
-        } else if (menuState == MenuState::GameRunning) {
-            game.update(window, inputs, dt);
-        } else if (menuState == MenuState::GameMenu) {
+            break;
+
+        case MenuState::GameMenu:
             window.draw(resumeButton);
             window.draw(mainMenuButton);
-        }
+            break;
+        default:
+          break;
+}
+      
 
         window.display();
     }
