@@ -28,6 +28,7 @@ public:
   void update(sf::RenderWindow& window, const Inputs& player_inputs, float dt);
 
   void end();
+  void reset();
 
   void update_score(float add);
   void loose_life();

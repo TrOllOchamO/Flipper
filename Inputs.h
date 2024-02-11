@@ -2,6 +2,7 @@
 
 #ifndef INPUTS_H_
 #define INPUTS_H_
+#include "MenuState.h"
 
 class Inputs {
 private:
@@ -17,7 +18,8 @@ public:
     bool enter_launcher = false;
     bool space_launcher = false;
 
-    void update(sf::RenderWindow &m_window);
+    MenuState update(sf::RenderWindow &m_window, MenuState &currentState);
+    
 };
 
 #endif /* !INPUTS_H_ */

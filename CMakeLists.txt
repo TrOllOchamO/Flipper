@@ -35,6 +35,7 @@ add_executable(Flipper
     GameInfo.cc
     Score.cc
     Door.cc
+    ButtonManager.cc
 )
 
 target_include_directories(Flipper
@@ -69,6 +70,7 @@ add_executable(TestFlipper
     Polygone.cc 
     Collision.cc
     Menu.cc
+    MapSelector.cc
     # Add other test files as needed
 )
 

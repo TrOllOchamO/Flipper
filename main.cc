@@ -12,20 +12,12 @@
 #define WINDOWS_WIDTH 400
 #define WINDOWS_HEIGHT 800
 
-enum class MenuState {
-    MainMenu,
-    GameRunning,
-    GameMenu,
-    MapSelection
-};
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOWS_WIDTH, WINDOWS_HEIGHT), "Flipper");
     sf::Clock clock;
     Inputs inputs;
     MenuState menuState = MenuState::MainMenu;
-
-    
     sf::Font font;
     //resources/arial.ttf
     if (!font.loadFromFile("resources/arial.ttf")) {
@@ -51,64 +43,30 @@ int main() {
     Game game(std::move(map));
 
     while (window.isOpen()) {
-        sf::Event event;
 
-        //Etat du jeu 
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            // en jeu si on appuis sur Echap, ouvre un menu pour soit revinir sur le jeu soit au menu principal
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                if (menuState == MenuState::GameRunning) {
-                    menuState = MenuState::GameMenu;
-                } else if (menuState == MenuState::GameMenu) {
-                    menuState = MenuState::GameRunning;
-                }
-            }
-            // Verifiacation des click dans les menu 
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (menuState == MenuState::MainMenu) {
-                    if (launchButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                        menuState = MenuState::GameRunning;
-                    } else if (quitButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                        window.close();
-                    }
-                } else if (menuState == MenuState::GameMenu) {
-                    if (resumeButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                        menuState = MenuState::GameRunning;
-                    } else if (mainMenuButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                        menuState = MenuState::MainMenu;
-                    }
-                }
-            }
-        }
-   
-
-      float dt = clock.restart().asSeconds();
+      float dt = clock.restart().asSeconds();;
       
       window.clear(sf::Color::Black);
-      
+      menuState = inputs.update(window,menuState);
      switch (menuState) {
         case MenuState::GameRunning:
-            inputs.update(window);
+            
             game.update(window, inputs, dt);
             break;
-
         case MenuState::MainMenu:
+            game.reset();
+            game.kill_ball();
             window.draw(launchButton);
             window.draw(quitButton);
             break;
-
         case MenuState::GameMenu:
             window.draw(resumeButton);
             window.draw(mainMenuButton);
             break;
         default:
           break;
-}
-      
-
-        window.display();
+      }
+      window.display();
     }
 
     return 0;

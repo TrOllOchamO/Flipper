@@ -118,3 +118,9 @@ void Game::end(){
     Score::store_best_score(score,map.get_name());
   }  
 }
+void Game::reset() {
+    set_map(std::move(map));
+    score = 0.0;
+    multiplicateur = 1.0;
+    vie = 3;
+}
