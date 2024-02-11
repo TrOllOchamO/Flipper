@@ -11,6 +11,7 @@
 
 
 MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
+    //a changer pour avoir les info des bouttons sans avoir a faire un truc degeu comme çàa 
     sf::Font font;
     font.loadFromFile("resources/arial.ttf");
     sf::Text launchButton("Lancer", font, 24);
