@@ -11,13 +11,16 @@
 
 
 MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
-    //a changer pour avoir les info des bouttons sans avoir a faire un truc degeu comme çàa 
+    //a changer pour avoir les info des bouttons sans avoir a faire un truc degeu comme çà 
     sf::Font font;
     font.loadFromFile("resources/arial.ttf");
     sf::Text launchButton("Lancer", font, 24);
+    sf::Text MapSelectionButton("Selection de cartes", font, 24);
     sf::Text quitButton("Quitter", font, 24);
     launchButton.setPosition(WINDOWS_WIDTH / 2 - 50, 300);
-    quitButton.setPosition(WINDOWS_WIDTH / 2 - 50, 400);
+    MapSelectionButton.setPosition(WINDOWS_WIDTH / 2 - 50, 400);
+    quitButton.setPosition(WINDOWS_WIDTH / 2 - 50, 500);
+
     sf::Text resumeButton("Reprendre", font, 24);
     sf::Text mainMenuButton("Menu principal", font, 24);
     resumeButton.setPosition(WINDOWS_WIDTH / 2 - 80, 300);
@@ -33,6 +36,8 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
                     currentState = MenuState::GameRunning;
                 } else if (quitButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                     window.close();
+                } else if (MapSelectionButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                    currentState = MenuState::MapSelection;
                 }
             } else if (currentState == MenuState::GameMenu) {
                 if (resumeButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
@@ -42,7 +47,7 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
                 }
             }
         }
-
+    
         if (event.type == sf::Event::Closed) {
             window.close();
         }

@@ -112,9 +112,6 @@ public:
         std::unique_ptr<Circle> bumper_2_shape = std::make_unique<Circle>(Vector2D(150, 300), 16);
         std::unique_ptr<Circle> bumper_3_shape = std::make_unique<Circle>(Vector2D(260, 300), 16);
 
-        std::unique_ptr<Circle> bumper_4_shape = std::make_unique<Circle>(Vector2D(40, 500), 16);
-        std::unique_ptr<Circle> bumper_5_shape = std::make_unique<Circle>(Vector2D(150, 500), 16);
-        std::unique_ptr<Circle> bumper_6_shape = std::make_unique<Circle>(Vector2D(260, 500), 16);
 
         std::unique_ptr<Circle> bumper_7_shape = std::make_unique<Circle>(Vector2D(80, 400), 16);
         std::unique_ptr<Circle> bumper_8_shape = std::make_unique<Circle>(Vector2D(215, 400), 16);
@@ -141,9 +138,7 @@ public:
         std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "resources/star.png");
         std::unique_ptr<Bumper> bumper_2 = std::make_unique<Bumper>(std::move(bumper_2_shape), "resources/star.png");
         std::unique_ptr<Bumper> bumper_3 = std::make_unique<Bumper>(std::move(bumper_3_shape), "resources/star.png");
-        std::unique_ptr<Bumper> bumper_4 = std::make_unique<Bumper>(std::move(bumper_4_shape), "resources/star.png");
-        std::unique_ptr<Bumper> bumper_5 = std::make_unique<Bumper>(std::move(bumper_5_shape), "resources/star.png");
-        std::unique_ptr<Bumper> bumper_6 = std::make_unique<Bumper>(std::move(bumper_6_shape), "resources/star.png");
+
         std::unique_ptr<Multiplicateur> bumper_7 = std::make_unique<Multiplicateur>(std::move(bumper_7_shape), "resources/keur.png");
         std::unique_ptr<Multiplicateur> bumper_8 = std::make_unique<Multiplicateur>(std::move(bumper_8_shape), "resources/keur.png");
 
@@ -176,9 +171,7 @@ public:
         map.make_entity(std::move(bumper_1));
         map.make_entity(std::move(bumper_2));
         map.make_entity(std::move(bumper_3));
-        map.make_entity(std::move(bumper_4));
-        map.make_entity(std::move(bumper_5));
-        map.make_entity(std::move(bumper_6));
+
         map.make_entity(std::move(bumper_7));
         map.make_entity(std::move(bumper_8));
 
@@ -199,9 +192,7 @@ public:
     }
     static void load_map_3(Map& map) {
         // shape
-        std::unique_ptr<Circle> bumper_1_shape = std::make_unique<Circle>(Vector2D(40, 300), 16);
-        std::unique_ptr<Circle> bumper_2_shape = std::make_unique<Circle>(Vector2D(150, 300), 16);
-        std::unique_ptr<Circle> bumper_3_shape = std::make_unique<Circle>(Vector2D(260, 300), 16);
+    
 
         std::unique_ptr<Circle> bumper_4_shape = std::make_unique<Circle>(Vector2D(40, 500), 16);
         std::unique_ptr<Circle> bumper_5_shape = std::make_unique<Circle>(Vector2D(150, 500), 16);
@@ -229,9 +220,6 @@ public:
 
 
         // entity
-        std::unique_ptr<Bumper> bumper_1 = std::make_unique<Bumper>(std::move(bumper_1_shape), "resources/star.png");
-        std::unique_ptr<Bumper> bumper_2 = std::make_unique<Bumper>(std::move(bumper_2_shape), "resources/star.png");
-        std::unique_ptr<Bumper> bumper_3 = std::make_unique<Bumper>(std::move(bumper_3_shape), "resources/star.png");
         std::unique_ptr<Bumper> bumper_4 = std::make_unique<Bumper>(std::move(bumper_4_shape), "resources/star.png");
         std::unique_ptr<Bumper> bumper_5 = std::make_unique<Bumper>(std::move(bumper_5_shape), "resources/star.png");
         std::unique_ptr<Bumper> bumper_6 = std::make_unique<Bumper>(std::move(bumper_6_shape), "resources/star.png");
@@ -264,9 +252,6 @@ public:
         map.make_entity(std::move(right_flipper));
         map.make_entity(std::move(door));
         
-        map.make_entity(std::move(bumper_1));
-        map.make_entity(std::move(bumper_2));
-        map.make_entity(std::move(bumper_3));
         map.make_entity(std::move(bumper_4));
         map.make_entity(std::move(bumper_5));
         map.make_entity(std::move(bumper_6));

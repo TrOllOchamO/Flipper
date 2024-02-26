@@ -3,7 +3,6 @@
 #ifndef INPUTS_H_
 #define INPUTS_H_
 #include "MenuState.h"
-
 class Inputs {
 private:
     void key_up(sf::Keyboard::Key key);
