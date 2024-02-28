@@ -89,17 +89,17 @@ int main() {
                     case MapSelection::Map1:
                         Loader::load_map_1(map);
                         game.set_map(std::move(map));
-                        menuState = MenuState::MainMenu;
+                        menuState = MenuState::GameRunning;
                         break;
                     case MapSelection::Map2:
                         Loader::load_map_2(map);
                         game.set_map(std::move(map));
-                        menuState = MenuState::MainMenu;
+                        menuState = MenuState::GameRunning;
                         break;
                     case MapSelection::Map3:
                         Loader::load_map_3(map);
                         game.set_map(std::move(map));
-                        menuState = MenuState::MainMenu;
+                        menuState = MenuState::GameRunning;
                         break;
                     default:
                         break;
