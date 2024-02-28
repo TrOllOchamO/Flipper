@@ -47,7 +47,7 @@ int main() {
     // on crée la map
     Map map;
     Loader::load_map_1(map);
-
+    MapSelection MapSelected = MapSelection::Map1;
     // load map
     Game game(std::move(map));
 
@@ -56,13 +56,14 @@ int main() {
       float dt = clock.restart().asSeconds();;
       
       window.clear(sf::Color::Black);
-      menuState = inputs.update(window,menuState);
+      
      switch (menuState) {
         case MenuState::GameRunning:
-            
+            menuState = inputs.update(window,menuState);
             game.update(window, inputs, dt);
             break;
         case MenuState::MainMenu:
+            menuState = inputs.update(window,menuState);
             game.reset();
             game.kill_ball();
             window.draw(launchButton);
@@ -70,6 +71,7 @@ int main() {
             window.draw(quitButton);
             break;
         case MenuState::GameMenu:
+            menuState = inputs.update(window,menuState);
             window.draw(resumeButton);
             window.draw(mainMenuButton);
             break;
@@ -79,27 +81,28 @@ int main() {
             window.draw(map1Button);
             window.draw(map2Button);
             window.draw(map3Button);
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-                    if (map1Button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            MapSelected = inputs.MapSelector(window);
+                switch (MapSelected) {
+                    case MapSelection::Map1:
                         Loader::load_map_1(map);
                         game.set_map(std::move(map));
                         menuState = MenuState::MainMenu;
-                    } else if (map2Button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                        break;
+                    case MapSelection::Map2:
                         Loader::load_map_2(map);
                         game.set_map(std::move(map));
                         menuState = MenuState::MainMenu;
-                    } else if (map3Button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                        break;
+                    case MapSelection::Map3:
                         Loader::load_map_3(map);
                         game.set_map(std::move(map));
-
                         menuState = MenuState::MainMenu;
-                    }
+                        break;
+                    default:
+                        break;
                 }
-            }
             break;
+
         default:
           break;
       }
