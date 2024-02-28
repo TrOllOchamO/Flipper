@@ -23,7 +23,7 @@ void Circle::render(sf::RenderWindow &window, sf::Color color) const {
 void Circle::render(sf::RenderWindow &window, const sf::Texture &texture) const {
   sf::CircleShape shape(radius);
   shape.setTexture(&texture);
-  shape.setTextureRect(sf::IntRect(0, 0, radius*2, radius*2));
+  // shape.setTextureRect(sf::IntRect(0, 0, radius*2, radius*2));
   shape.setPosition(get_pos());
   window.draw(shape);
 }

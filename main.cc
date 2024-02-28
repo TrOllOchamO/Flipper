@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <ctime>
 
 #include "Inputs.h"
 #include "Game.h"
@@ -14,6 +15,8 @@
 
 
 int main() {
+    srand(time(0));
+    
     sf::RenderWindow window(sf::VideoMode(WINDOWS_WIDTH, WINDOWS_HEIGHT), "Flipper");
     sf::Clock clock;
     Inputs inputs;

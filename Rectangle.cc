@@ -42,7 +42,7 @@ void Rectangle::render(sf::RenderWindow &window, const sf::Texture &texture) con
   sf::Vector2f size(width, height);
   sf::RectangleShape shape(size);
   shape.setTexture(&texture);
-  shape.setTextureRect(sf::IntRect(0, 0, width, height));
+  shape.setTextureRect(sf::IntRect(get_pos().x, get_pos().y, width, height));
   shape.setPosition(get_pos());
   window.draw(shape);
 }

@@ -36,6 +36,7 @@ add_executable(Flipper
     Score.cc
     Door.cc
     ButtonManager.cc
+    Randomizer.cc
 )
 
 target_include_directories(Flipper
