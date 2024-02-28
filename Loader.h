@@ -245,7 +245,7 @@ public:
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
 
-        map.set_name("Niveau_1");
+        map.set_name("Niveau_2");
     }
     static void load_map_3(Map& map) {
         // shape
@@ -328,7 +328,7 @@ public:
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
 
-        map.set_name("Niveau_1");
+        map.set_name("Niveau_3");
     }
 
     static void test_ball_clipping_in_bumper(Map& map) {

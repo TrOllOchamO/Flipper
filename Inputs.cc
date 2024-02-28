@@ -3,7 +3,6 @@
 #define WINDOWS_HEIGHT 800
 #define LEFT_FLIPPER sf::Keyboard::Q
 #define RIGHT_FLIPPER sf::Keyboard::D
-
 #define DOWN_LAUNCHER sf::Keyboard::Up
 #define UP_LAUNCHER sf::Keyboard::Down
 #define ENTER_LAUNCHER sf::Keyboard::Enter
@@ -73,6 +72,32 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
     return currentState;
 }
 
+
+
+ MapSelection Inputs::MapSelector(sf::RenderWindow &window){
+    sf::Font font;
+    font.loadFromFile("resources/arial.ttf");
+     sf::Text map1Button("Map 1", font, 24);
+    sf::Text map2Button("Map 2", font, 24);
+    sf::Text map3Button("Map 3", font, 24);
+    map1Button.setPosition(WINDOWS_WIDTH / 2 - 50, 300);
+    map2Button.setPosition(WINDOWS_WIDTH / 2 - 50, 400);
+    map3Button.setPosition(WINDOWS_WIDTH / 2 - 50, 500);
+     sf::Event event;
+    while (window.pollEvent(event)) {
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (map1Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                    return MapSelection::Map1;    
+                } else if (map2Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                    return MapSelection::Map2;
+                } else if (map3Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                    return MapSelection::Map3;
+                }
+            }
+        }
+    
+        return MapSelection::None;
+}
 void Inputs::key_down(sf::Keyboard::Key key){
     switch (key) {
         case LEFT_FLIPPER:

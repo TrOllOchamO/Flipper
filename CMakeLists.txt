@@ -71,7 +71,6 @@ add_executable(TestFlipper
     Polygone.cc 
     Collision.cc
     Menu.cc
-    MapSelector.cc
     # Add other test files as needed
 )
 

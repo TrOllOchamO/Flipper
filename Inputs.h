@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
-
 #ifndef INPUTS_H_
 #define INPUTS_H_
 #include "MenuState.h"
+#include "MapSelection.h"
+#include <iostream>
+
 class Inputs {
 private:
     void key_up(sf::Keyboard::Key key);
@@ -18,7 +20,7 @@ public:
     bool space_launcher = false;
 
     MenuState update(sf::RenderWindow &m_window, MenuState &currentState);
-    
+    MapSelection MapSelector(sf::RenderWindow &m_window);
 };
 
 #endif /* !INPUTS_H_ */
