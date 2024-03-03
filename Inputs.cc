@@ -14,6 +14,11 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
     mapSelectionTexture.loadFromFile("resources/Selection_de_niveau.png");
     sf::Sprite mapSelectionSprite(mapSelectionTexture);
     mapSelectionSprite.setPosition(WINDOWS_WIDTH / 2 - mapSelectionTexture.getSize().x / 2, 300);
+
+     sf::Texture homeBackgroundTexture;
+    homeBackgroundTexture.loadFromFile("resources/Home_Background.png");
+    sf::Sprite homeBackgroundSprite(homeBackgroundTexture);
+    homeBackgroundSprite.setPosition(0, 0);
     
     sf::Texture quitTexture;
     quitTexture.loadFromFile("resources/quitButton.png");
@@ -32,6 +37,7 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
 
     sf::Event event;
     if (currentState == MenuState::MainMenu){
+        window.draw(homeBackgroundSprite);
         window.draw(mapSelectionSprite);
         window.draw(quitSprite);
 
@@ -107,11 +113,11 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
     sf::Sprite map1Sprite(map1Texture);
     map1Sprite.setPosition(WINDOWS_WIDTH / 2 - map1Texture.getSize().x / 2, 200);
     sf::Texture map2Texture;
-    map2Texture.loadFromFile("resources/map1.png");
+    map2Texture.loadFromFile("resources/map2.png");
     sf::Sprite map2Sprite(map2Texture);
     map2Sprite.setPosition(WINDOWS_WIDTH / 2 - map2Texture.getSize().x / 2, 200);
     sf::Texture map3Texture;
-    map3Texture.loadFromFile("resources/map1.png");
+    map3Texture.loadFromFile("resources/map3.png");
     sf::Sprite map3Sprite(map3Texture);
     map3Sprite.setPosition(WINDOWS_WIDTH / 2 - map3Texture.getSize().x / 2, 200);
     sf::Sprite spritehovered;
@@ -119,6 +125,7 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
     if (button1Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))) {
         window.draw(map1Sprite);
     } else if(button2Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))){
+        window.draw(map2Sprite);
     }else if(button3Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))){
         window.draw(map3Sprite);
     }
