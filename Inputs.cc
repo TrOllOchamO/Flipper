@@ -10,38 +10,50 @@
 
 
 MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
-    //a changer pour avoir les info des bouttons sans avoir a faire un truc degeu comme çà 
-    sf::Font font;
-    font.loadFromFile("resources/arial.ttf");
-    sf::Text launchButton("Lancer", font, 24);
-    sf::Text MapSelectionButton("Selection de cartes", font, 24);
-    sf::Text quitButton("Quitter", font, 24);
-    launchButton.setPosition(WINDOWS_WIDTH / 2 - 50, 300);
-    MapSelectionButton.setPosition(WINDOWS_WIDTH / 2 - 50, 400);
-    quitButton.setPosition(WINDOWS_WIDTH / 2 - 50, 500);
+     sf::Texture mapSelectionTexture;
+    mapSelectionTexture.loadFromFile("resources/Selection_de_niveau.png");
+    sf::Sprite mapSelectionSprite(mapSelectionTexture);
+    mapSelectionSprite.setPosition(WINDOWS_WIDTH / 2 - mapSelectionTexture.getSize().x / 2, 300);
+    
+    sf::Texture quitTexture;
+    quitTexture.loadFromFile("resources/quitButton.png");
+    sf::Sprite quitSprite(quitTexture);
+    quitSprite.setPosition(WINDOWS_WIDTH / 2 - quitTexture.getSize().x / 2, 400);
 
-    sf::Text resumeButton("Reprendre", font, 24);
-    sf::Text mainMenuButton("Menu principal", font, 24);
-    resumeButton.setPosition(WINDOWS_WIDTH / 2 - 80, 300);
-    mainMenuButton.setPosition(WINDOWS_WIDTH / 2 - 100, 400);
+    sf::Texture resumeTexture;
+    resumeTexture.loadFromFile("resources/resumebutton.png");
+    sf::Sprite resumeSprite(resumeTexture);
+    resumeSprite.setPosition(WINDOWS_WIDTH / 2 - resumeTexture.getSize().x / 2, 300);
+
+    sf::Texture mainMenuTexture;
+    mainMenuTexture.loadFromFile("resources/mainmenubutton.png");
+    sf::Sprite mainMenuSprite(mainMenuTexture);
+    mainMenuSprite.setPosition(WINDOWS_WIDTH / 2 - mainMenuTexture.getSize().x / 2, 400);
+
     sf::Event event;
+    if (currentState == MenuState::MainMenu){
+        window.draw(mapSelectionSprite);
+        window.draw(quitSprite);
+
+    }else if(currentState == MenuState::GameMenu ){
+        window.draw(resumeSprite);
+        window.draw(mainMenuSprite);
+    }
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed){
             window.close();
         }
         if (event.type == sf::Event::MouseButtonPressed) {
             if (currentState == MenuState::MainMenu) {
-                if (launchButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    currentState = MenuState::GameRunning;
-                } else if (quitButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                if (quitSprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                     window.close();
-                } else if (MapSelectionButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                } else if (mapSelectionSprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                     currentState = MenuState::MapSelection;
                 }
             } else if (currentState == MenuState::GameMenu) {
-                if (resumeButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                if (resumeSprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                     currentState = MenuState::GameRunning;
-                } else if (mainMenuButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                } else if (mainMenuSprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                     currentState = MenuState::MainMenu;
                 }
             }
@@ -75,28 +87,58 @@ MenuState Inputs::update(sf::RenderWindow &window, MenuState &currentState) {
 
 
  MapSelection Inputs::MapSelector(sf::RenderWindow &window){
-    sf::Font font;
-    font.loadFromFile("resources/arial.ttf");
-     sf::Text map1Button("Map 1", font, 24);
-    sf::Text map2Button("Map 2", font, 24);
-    sf::Text map3Button("Map 3", font, 24);
-    map1Button.setPosition(WINDOWS_WIDTH / 2 - 50, 300);
-    map2Button.setPosition(WINDOWS_WIDTH / 2 - 50, 400);
-    map3Button.setPosition(WINDOWS_WIDTH / 2 - 50, 500);
-     sf::Event event;
+    sf::Texture button1Texture;
+    button1Texture.loadFromFile("resources/1.png");
+    sf::Sprite button1Sprite(button1Texture);
+    button1Sprite.setPosition(50, 50);
+    sf::Texture button2Texture;
+    button2Texture.loadFromFile("resources/2.png");
+    sf::Sprite button2Sprite(button2Texture);
+    button2Sprite.setPosition(150, 50);
+    sf::Texture button3Texture;
+    button3Texture.loadFromFile("resources/3.png");
+    sf::Sprite button3Sprite(button3Texture);
+    button3Sprite.setPosition(250, 50);
+    window.draw(button1Sprite);
+    window.draw(button2Sprite);
+    window.draw(button3Sprite);
+    sf::Texture map1Texture;
+    map1Texture.loadFromFile("resources/map1.png");
+    sf::Sprite map1Sprite(map1Texture);
+    map1Sprite.setPosition(WINDOWS_WIDTH / 2 - map1Texture.getSize().x / 2, 200);
+    sf::Texture map2Texture;
+    map2Texture.loadFromFile("resources/map1.png");
+    sf::Sprite map2Sprite(map2Texture);
+    map2Sprite.setPosition(WINDOWS_WIDTH / 2 - map2Texture.getSize().x / 2, 200);
+    sf::Texture map3Texture;
+    map3Texture.loadFromFile("resources/map1.png");
+    sf::Sprite map3Sprite(map3Texture);
+    map3Sprite.setPosition(WINDOWS_WIDTH / 2 - map3Texture.getSize().x / 2, 200);
+    sf::Sprite spritehovered;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+    if (button1Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))) {
+        window.draw(map1Sprite);
+    } else if(button2Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))){
+    }else if(button3Sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))){
+        window.draw(map3Sprite);
+    }
+    sf::Event event;
     while (window.pollEvent(event)) {
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (map1Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    return MapSelection::Map1;    
-                } else if (map2Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    return MapSelection::Map2;
-                } else if (map3Button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
-                    return MapSelection::Map3;
-                }
-            }
+        if (event.type == sf::Event::Closed) {
+            window.close();
         }
-    
-        return MapSelection::None;
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (button1Sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                return MapSelection::Map1;    
+            } else if (button2Sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                return MapSelection::Map2;
+            } else if (button3Sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+               return MapSelection::Map3;
+            }
+        }   
+           
+    }
+    return MapSelection::None;
 }
 void Inputs::key_down(sf::Keyboard::Key key){
     switch (key) {
