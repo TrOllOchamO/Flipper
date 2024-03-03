@@ -179,7 +179,7 @@ public:
         std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
         std::unique_ptr<Door> door = std::make_unique<Door>(WOOD);
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
-        std::unique_ptr<BallExpander> ball_expander = std::make_unique<BallExpander>(Vector2D(200, 200), 20, "");
+        std::unique_ptr<BallExpander> ball_expander = std::make_unique<BallExpander>(Vector2D(170, 180), 20, "");
 
         constexpr float BRICK_WIDTH = 20; 
         constexpr float BRICK_HEIGTH = 10; 

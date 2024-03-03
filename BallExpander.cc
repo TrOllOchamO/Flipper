@@ -24,7 +24,7 @@ void BallExpander::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void BallExpander::render(sf::RenderWindow &window) const {
-  if (!has_been_taken) {
+  if (!has_been_taken || game->get_ball_handle() == nullptr) {
     shape->render(window, texture);
   }
 }

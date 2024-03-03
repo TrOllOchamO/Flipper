@@ -63,5 +63,6 @@ void Brick::update([[maybe_unused]] const Inputs &player_inputs, float dt) {
     game->update_score(1);
     is_broken = true;
     props.should_affect_others = false;
+    // TODO play a sound 
   }
 }
