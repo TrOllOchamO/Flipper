@@ -15,10 +15,10 @@ class Brick : public Entity {
 private:
   std::unique_ptr<Rectangle> shape;
   PhysicsProperties props;
-  sf::Texture texture;
+  sf::Color color;
 
 public:
-  Brick(Vector2D pos, const std::string& texturePath);
+  Brick(Vector2D pos, float width, float heigth);
 
   PhysicsProperties* get_props() { return &props; }
 
@@ -26,6 +26,7 @@ public:
   Shape* get_shape() override { return this->shape.get(); }
   PhysicsProperties& get_physics_props() override { return this->props; }
 
+  void update([[maybe_unused]] const Inputs &player_inputs, [[maybe_unused]] float dt) override;
   void render(sf::RenderWindow &window, sf::Color color) const override;
   void render(sf::RenderWindow &window) const override;
 };

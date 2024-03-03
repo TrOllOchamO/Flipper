@@ -11,6 +11,7 @@
 #include "Door.h"
 #include "Brick.h"
 #include "Randomizer.h"
+#include <cstddef>
 #include <memory>
 
 
@@ -179,7 +180,24 @@ public:
         std::unique_ptr<Door> door = std::make_unique<Door>(WOOD);
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
 
-        std::unique_ptr<Brick> brick = std::make_unique<Brick>(Vector2D(200, 200), "");
+        constexpr float BRICK_WIDTH = 20; 
+        constexpr float BRICK_HEIGTH = 10; 
+        constexpr size_t NB_LIGNES = 8;
+        constexpr size_t NB_COLS = 14;
+        constexpr float LINE_START_X = 20;
+        constexpr float LINE_START_Y = 250;
+        constexpr float X_SPACE_BETWEEN_BRICKS = 2;
+        constexpr float Y_SPACE_BETWEEN_BRICKS = 2;
+        for (size_t line = 0; line < NB_LIGNES; ++line) {
+            const size_t line_offset = BRICK_WIDTH/2 * (line % 2);
+            for (size_t col = 0; col< NB_COLS; ++col) {
+                const float brick_x = LINE_START_X + line_offset + (BRICK_WIDTH + X_SPACE_BETWEEN_BRICKS) * col;
+                const float brick_y = LINE_START_Y + (BRICK_HEIGTH + Y_SPACE_BETWEEN_BRICKS) * line;
+                const Vector2D brick_pos = Vector2D(brick_x, brick_y);
+                std::unique_ptr<Brick> brick = std::make_unique<Brick>(brick_pos,  BRICK_WIDTH, BRICK_HEIGTH);
+                map.make_entity(std::move(brick));
+            }
+        }
 
         // make entity
         map.make_entity(std::move(game_info));
@@ -201,7 +219,6 @@ public:
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
 
-        map.make_entity(std::move(brick));
 
         map.set_name("BrickWall");
     }
