@@ -36,6 +36,7 @@ add_executable(Flipper
     Score.cc
     Door.cc
     Brick.cc
+    BallExpander.cc
     ButtonManager.cc
     Randomizer.cc
 )

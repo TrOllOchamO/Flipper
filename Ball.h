@@ -12,7 +12,7 @@
 
 class Ball : public Entity {
 private:
-  std::unique_ptr<Shape> shape;
+  std::unique_ptr<Circle> shape;
   PhysicsProperties props;
   sf::Texture texture;
 
@@ -25,7 +25,9 @@ public:
   void set_angular_velocity(float angular_velocity) { props.angular_velocity = angular_velocity; }
   void set_posiion(Vector2D new_pos);
 
-  Vector2D get_position();
+  void set_radius(float new_radius);
+  float get_radius() const;
+  Vector2D get_position() const;
 
   PhysicsProperties* get_props() { return &props; }
 
