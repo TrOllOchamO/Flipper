@@ -9,7 +9,9 @@
 #include "Multiplicateur.h"
 #include "GameInfo.h"
 #include "Door.h"
+#include "Brick.h"
 #include "Randomizer.h"
+#include <memory>
 
 
 #ifndef LOADER_H_
@@ -177,6 +179,8 @@ public:
         std::unique_ptr<Door> door = std::make_unique<Door>(WOOD);
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
 
+        std::unique_ptr<Brick> brick = std::make_unique<Brick>(Vector2D(200, 200), "");
+
         // make entity
         map.make_entity(std::move(game_info));
         map.make_entity(std::move(launcher));
@@ -196,6 +200,8 @@ public:
 
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
+
+        map.make_entity(std::move(brick));
 
         map.set_name("BrickWall");
     }

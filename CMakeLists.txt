@@ -35,6 +35,7 @@ add_executable(Flipper
     GameInfo.cc
     Score.cc
     Door.cc
+    Brick.cc
     ButtonManager.cc
     Randomizer.cc
 )
