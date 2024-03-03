@@ -11,7 +11,7 @@
 #include "Door.h"
 #include "Brick.h"
 #include "Randomizer.h"
-#include <cstddef>
+#include "BallExpander.h"
 #include <memory>
 
 
@@ -179,6 +179,7 @@ public:
         std::unique_ptr<Flipper> right_flipper = std::make_unique<Flipper>("", FLIPPER_ORIENTATION::RIGHT);
         std::unique_ptr<Door> door = std::make_unique<Door>(WOOD);
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
+        std::unique_ptr<BallExpander> ball_expander = std::make_unique<BallExpander>(Vector2D(200, 200), 20, "");
 
         constexpr float BRICK_WIDTH = 20; 
         constexpr float BRICK_HEIGTH = 10; 
@@ -198,6 +199,7 @@ public:
                 map.make_entity(std::move(brick));
             }
         }
+      
 
         // make entity
         map.make_entity(std::move(game_info));
@@ -218,6 +220,8 @@ public:
 
         map.make_entity(std::move(bot_left_angle));
         map.make_entity(std::move(bot_right_angle));
+
+        map.make_entity(std::move(ball_expander));
 
 
         map.set_name("BrickWall");

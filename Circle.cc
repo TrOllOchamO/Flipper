@@ -31,3 +31,7 @@ void Circle::render(sf::RenderWindow &window, const sf::Texture &texture) const 
 float Circle::get_radius() const {
   return this->radius;
 }
+
+void Circle::set_radius(float new_radius) {
+  radius = new_radius;
+}

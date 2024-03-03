@@ -29,6 +29,14 @@ void Ball::render(sf::RenderWindow &window) const {
     shape->set_pos(new_pos);
 }
 
-Vector2D Ball::get_position() {
+void Ball::set_radius(float new_radius) {
+    shape.get()->set_radius(new_radius);
+}
+
+float Ball::get_radius() const {
+    return shape.get()->get_radius();
+}
+
+Vector2D Ball::get_position() const{
     return shape->get_pos();
 }

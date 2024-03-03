@@ -18,6 +18,7 @@ private:
   sf::Color color;
   bool is_broken = false;
   float dt_since_has_been_broken = 0;
+  Vector2D pos;
 
 public:
   Brick(Vector2D pos, float width, float heigth);

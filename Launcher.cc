@@ -6,6 +6,9 @@
 #include <SFML/Graphics/Color.hpp>
 #include <memory>
 
+#define BALL_RADIUS 8
+#define BALL_MASS 1
+
 Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
   if (!texture.loadFromFile(texturePath)) {
     std::cerr << "Error loading texture from file: " << texturePath << std::endl;
@@ -100,8 +103,7 @@ void Launcher::render(sf::RenderWindow &window) const {
 }
 
 void Launcher::add_ball() {
-  std::unique_ptr<Ball> new_ball =
-      std::make_unique<Ball>(Vector2D(362, 732), 8, "./resources/ballTest.png");
+  std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), BALL_RADIUS, "./resources/ballTest.png");
   game->make_ball(std::move(new_ball));
 }
 
@@ -116,6 +118,8 @@ void Launcher::check_if_ball_out() {
     soundLoose.play();
     game->loose_life();
     if (game->get_life() > 0) {
+      ball_handle->set_radius(8);
+      ball_handle->get_physics_props().mass = BALL_MASS;
       ball_handle->set_posiion(Vector2D(362, 732));
       ball_handle->set_velocity(Vector2D::zero());
     } else {
