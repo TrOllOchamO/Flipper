@@ -10,6 +10,8 @@
 #include <ostream>
 #include <stdio.h>
 
+#define RESPAWN_TIME 20
+
 Brick::Brick(Vector2D pos, float width, float height) : shape(std::make_unique<Rectangle>(pos, width, height)) {
   auto max = 255;
   auto red = (rand() % (max - 200)) + 200;
@@ -31,12 +33,22 @@ void Brick::render(sf::RenderWindow &window, sf::Color color) const {
 }
 
 void Brick::render(sf::RenderWindow &window) const {
-  shape->render(window, color);
+  if (!is_broken) {
+    shape->render(window, color);
+  }
 }
 
 void Brick::update([[maybe_unused]] const Inputs &player_inputs, float dt) {
+  if (is_broken) {
+    dt_since_has_been_broken += dt;
+    if (dt_since_has_been_broken > RESPAWN_TIME) {
+      dt_since_has_been_broken = 0;
+      is_broken = false;
+    }
+    return;
+  }
+  
   Ball *ball_handle = game->get_ball_handle();
-
   if (ball_handle == nullptr) {
     return;
   }
@@ -46,10 +58,9 @@ void Brick::update([[maybe_unused]] const Inputs &player_inputs, float dt) {
   if (Collision::are_colliding(brick_shape, ball_shape)) {
     props.should_affect_others = true;
     Physics::solve(brick_shape, props, ball_shape, ball_handle->get_physics_props(), dt);
-
-
     game->update_score(1);
-    this->should_get_killed = true;
+    is_broken = true;
+    props.should_affect_others = false;
   }
 
 }

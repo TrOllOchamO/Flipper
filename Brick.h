@@ -16,6 +16,8 @@ private:
   std::unique_ptr<Rectangle> shape;
   PhysicsProperties props;
   sf::Color color;
+  bool is_broken = false;
+  float dt_since_has_been_broken = 0;
 
 public:
   Brick(Vector2D pos, float width, float heigth);
