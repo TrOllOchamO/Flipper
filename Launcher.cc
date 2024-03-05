@@ -103,7 +103,7 @@ void Launcher::render(sf::RenderWindow &window) const {
 }
 
 void Launcher::add_ball() {
-  std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), BALL_RADIUS, "./resources/ballTest.png");
+  std::unique_ptr<Ball> new_ball = std::make_unique<Ball>(Vector2D(362, 732), BALL_RADIUS, "resources/bille.png");
   game->make_ball(std::move(new_ball));
 }
 

@@ -7,7 +7,7 @@ Wall::Wall(std::unique_ptr<Shape> shape, const std::string& texturePath) : shape
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
 
-  if (!buffer.loadFromFile("../resources/bonk.wav")) {
+  if (!buffer.loadFromFile("../resources/toc.wav")) {
     std::cerr << "Error loading sound from file: ../resources/bonk.wav" << std::endl;
   }
 
