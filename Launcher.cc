@@ -21,8 +21,8 @@ Launcher::Launcher(const std::string &texturePath) : shape(Polygone()) {
     soundLaunch.setBuffer(bufferLaunch);
   }
 
-  if (!bufferLoose.loadFromFile("../resources/chval.wav")) {
-    std::cerr << "Error loading sound from file: ../resources/chval.wav" << std::endl;
+  if (!bufferLoose.loadFromFile("../resources/over.wav")) {
+    std::cerr << "Error loading sound from file: ../resources/over.wav" << std::endl;
   } else {
     soundLoose.setBuffer(bufferLoose);
   }

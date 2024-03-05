@@ -19,17 +19,18 @@ int main() {
     sf::Texture mapSelectionTexture;
     mapSelectionTexture.loadFromFile("resources/Selection_de_niveau.png");
     sf::Sprite mapSelectionSprite(mapSelectionTexture);
-    mapSelectionSprite.setPosition(WINDOWS_WIDTH / 2 - mapSelectionTexture.getSize().x / 2, 350);
-
-     sf::Texture homeBackgroundTexture;
-    homeBackgroundTexture.loadFromFile("resources/Home_Background.png");
-    sf::Sprite homeBackgroundSprite(homeBackgroundTexture);
-    homeBackgroundSprite.setPosition(0, 0);
+    mapSelectionSprite.setPosition(WINDOWS_WIDTH / 2 - mapSelectionTexture.getSize().x / 2, 600);
     
     sf::Texture quitTexture;
     quitTexture.loadFromFile("resources/quitButton.png");
     sf::Sprite quitSprite(quitTexture);
-    quitSprite.setPosition(WINDOWS_WIDTH / 2 - quitTexture.getSize().x / 2, 450);
+    quitSprite.setPosition(WINDOWS_WIDTH / 2 - quitTexture.getSize().x / 2, 700);
+
+
+    sf::Texture homeBackgroundTexture;
+    homeBackgroundTexture.loadFromFile("resources/Home_Background.png");
+    sf::Sprite homeBackgroundSprite(homeBackgroundTexture);
+    homeBackgroundSprite.setPosition(0, 0);
 
     sf::Texture resumeTexture;
     resumeTexture.loadFromFile("resources/resumebutton.png");

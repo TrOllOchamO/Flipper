@@ -11,9 +11,9 @@ Randomizer::Randomizer(std::unique_ptr<Shape> shape, const std::string& textureP
         std::cerr << "Error loading texture from file: " << texturePath << std::endl;
     }
     texture.setRepeated(true);
-
-    if (!buffer.loadFromFile("../resources/ding.wav")) {
-        std::cerr << "Error loading sound from file: ../resources/ding.wav" << std::endl;
+    
+    if (!bufferS.loadFromFile("../resources/poker.wav")) {
+        std::cerr << "Error loading sound from file: ../resources/poker.wav" << std::endl;
     }
 
     props.should_be_affected_by_others = false;
@@ -52,6 +52,7 @@ void Randomizer::new_velocity_for_ball(){
     double new_direction_y = static_cast<double>(rand()) / RAND_MAX * 2.0 - 1.0;
     Vector2D n(new_direction_x, new_direction_y);
     game->get_ball_handle()->set_velocity(n.normalize() * 500);
+    play_audioS();    
 }
 
 
@@ -62,3 +63,10 @@ void Randomizer::render(sf::RenderWindow &window, sf::Color color) const {
 void Randomizer::render(sf::RenderWindow &window) const {
     this->shape->render(window, texture);
 }
+
+void Randomizer::play_audioS(){
+    soundS.setBuffer(bufferS);
+    if(bufferS.getDuration().asSeconds()>0){
+      soundS.play();
+    }
+};
