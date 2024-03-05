@@ -39,6 +39,7 @@ add_executable(Flipper
     BallExpander.cc
     ButtonManager.cc
     Randomizer.cc
+    Background.cc
 )
 
 target_include_directories(Flipper

@@ -12,6 +12,7 @@
 #include "Brick.h"
 #include "Randomizer.h"
 #include "BallExpander.h"
+#include "Background.h"
 #include <memory>
 
 
@@ -22,6 +23,8 @@
 #define BLUE "resources/jeton_bleu.png"
 #define RED "resources/jeton_rouge.png"
 #define ROULETTE "resources/roulette.png"
+#define FEUTRINE "resources/feutrine.jpg"
+
 
 class Loader {
 public:
@@ -59,6 +62,7 @@ public:
         std::unique_ptr<Circle> mult_bumper_3_shape = std::make_unique<Circle>(Circle(Vector2D(68, 600), 16));
         std::unique_ptr<Circle> mult_bumper_4_shape = std::make_unique<Circle>(Circle(Vector2D(250, 600), 16));
 
+        std::unique_ptr<Rectangle> bg_shape = std::make_unique<Rectangle>(Rectangle(Vector2D(0, 100), 400, 700));
 
 
         // entity
@@ -96,9 +100,13 @@ public:
         std::unique_ptr<Door> door = std::make_unique<Door>(WOOD);
         std::unique_ptr<GameInfo> game_info = std::make_unique<GameInfo>();
 
+        std::unique_ptr<Background> bg = std::make_unique<Background>(std::move(bg_shape), FEUTRINE);
+
 
 
         // make entity
+        map.make_entity(std::move(bg));
+
         map.make_entity(std::move(game_info));
         map.make_entity(std::move(launcher));
         map.make_entity(std::move(left_flipper));
