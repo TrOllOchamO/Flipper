@@ -2,7 +2,7 @@
 #ifndef INPUTS_H_
 #define INPUTS_H_
 #include "MenuState.h"
-#include "MapSelection.h"
+
 #include <iostream>
 
 class Inputs {
@@ -13,14 +13,15 @@ private:
 public:
     bool left_flipper = false;
     bool right_flipper = false;
-
+    sf::Vector2i mousePosition;
+    sf::Vector2i mousePositionClicked;
     bool up_launcher = false;
     bool down_launcher = false;
     bool enter_launcher = false;
     bool space_launcher = false;
+    bool escape = false;
 
-    MenuState update(sf::RenderWindow &m_window, MenuState &currentState);
-    MapSelection MapSelector(sf::RenderWindow &m_window);
+    void update(sf::RenderWindow &m_window);
 };
 
 #endif /* !INPUTS_H_ */
