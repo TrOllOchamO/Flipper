@@ -5,7 +5,8 @@ enum class MenuState {
     MainMenu,
     GameRunning,
     GameMenu,
-    MapSelection
+    MapSelection,
+    ScoreScreen
 };
 
 #endif /* !MENUSTATE_H_ */

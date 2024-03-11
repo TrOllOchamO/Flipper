@@ -16,6 +16,8 @@
 
 
 int main() {
+    sf::Font font;
+    font.loadFromFile("resources/pixelfont.TTF");
     sf::Texture mapSelectionTexture;
     mapSelectionTexture.loadFromFile("resources/Selection_de_niveau.png");
     sf::Sprite mapSelectionSprite(mapSelectionTexture);
@@ -27,6 +29,12 @@ int main() {
     quitSprite.setPosition(WINDOWS_WIDTH / 2 - quitTexture.getSize().x / 2, 700);
 
 
+
+    sf::Texture BackgroundDefeatTexture;
+    BackgroundDefeatTexture.loadFromFile("resources/Background_defeat.png");
+    sf::Sprite BackgroundDefeatSprite(BackgroundDefeatTexture);
+    BackgroundDefeatSprite.setPosition(0, 0);
+    
     sf::Texture homeBackgroundTexture;
     homeBackgroundTexture.loadFromFile("resources/Background_menu_principal.png");
     sf::Sprite homeBackgroundSprite(homeBackgroundTexture);
@@ -51,6 +59,15 @@ int main() {
     mainMenuTexture.loadFromFile("resources/mainmenubutton.png");
     sf::Sprite mainMenuSprite(mainMenuTexture);
     mainMenuSprite.setPosition(WINDOWS_WIDTH / 2 - mainMenuTexture.getSize().x / 2, 400);
+     sf::Sprite mainMenuEndGameSprite(mainMenuTexture);
+    mainMenuEndGameSprite.setPosition(WINDOWS_WIDTH / 2 - mainMenuTexture.getSize().x / 2, 450);
+
+    sf::Texture PlayAgainTexture;
+    PlayAgainTexture.loadFromFile("resources/PlayAgainButton.png");
+    sf::Sprite PlayAgainSprite(PlayAgainTexture);
+    PlayAgainSprite.setPosition(WINDOWS_WIDTH / 2 - PlayAgainTexture.getSize().x / 2, 365);
+
+   
 
 
     sf::Texture button1Texture;
@@ -80,6 +97,7 @@ int main() {
     map3Sprite.setPosition(WINDOWS_WIDTH / 2 - map3Texture.getSize().x / 2, 200);
     srand(time(0));
     
+    
     sf::RenderWindow window(sf::VideoMode(WINDOWS_WIDTH, WINDOWS_HEIGHT), "Flipper");
     sf::Clock clock;
     Inputs inputs;
@@ -96,19 +114,29 @@ int main() {
     sf::Vector2i mousePosition = inputs.mousePosition;
     sf::Vector2i mousePositionClicked = inputs.mousePositionClicked;
 
-
-
+    int score;
+    std::string scoreString ;
+    sf::Text scoreText;
+    int bestscore;
+    std::string bestscoreString ;
+    sf::Text bestscoreText;
+    sf::FloatRect scoretextBounds;
+    sf::FloatRect bestscoretextBounds;
+    
   
 
       float dt = clock.restart().asSeconds();;
       
-      window.clear(sf::Color::Black);
-      inputs.update(window);
+    window.clear(sf::Color::Black);
+    inputs.update(window);
      switch (menuState) {
         case MenuState::GameRunning:
             game.update(window, inputs, dt);
             if(inputs.escape){
                 menuState = MenuState::GameMenu;   
+            }
+            if(game.get_life()==0){
+                menuState = MenuState::ScoreScreen;
             }
             break;
         case MenuState::MainMenu:
@@ -118,10 +146,10 @@ int main() {
             game.kill_ball();
             game.reset();
             if (quitSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
-                    window.close();
-                } else if (mapSelectionSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
-                    menuState = MenuState::MapSelection;
-                }
+                window.close();
+            } else if (mapSelectionSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
+                menuState = MenuState::MapSelection;
+            }
             break;
         case MenuState::GameMenu:
             window.draw(PauseBackgroundSprite);
@@ -176,7 +204,39 @@ int main() {
                         break;
                 }
             break;
+        case MenuState::ScoreScreen:
+                scoreText.setFont(font);
+                scoreText.setCharacterSize(36);
+                scoreText.setFillColor(sf::Color::White);
+                
+                score = game.get_score();
+                scoreString = "Score: " + std::to_string(score);
+                scoreText.setString(scoreString);
+                scoretextBounds = scoreText.getLocalBounds();
+                scoreText.setPosition((window.getSize().x - scoretextBounds.width) / 2, 250);
 
+
+                bestscoreText.setFont(font);
+                bestscoreText.setCharacterSize(22);
+                bestscoreText.setFillColor(sf::Color::White);
+                bestscore = game.get_max_score();
+                bestscoreString = "Meilleur Score: " + std::to_string(bestscore);
+                bestscoreText.setString(bestscoreString);
+                bestscoretextBounds = bestscoreText.getLocalBounds();
+                bestscoreText.setPosition((window.getSize().x - bestscoretextBounds.width) / 2, 300);
+                
+                window.draw(BackgroundDefeatSprite);
+                window.draw(mainMenuEndGameSprite);
+                window.draw(PlayAgainSprite);
+                window.draw(scoreText);
+                window.draw(bestscoreText);
+                if (mainMenuEndGameSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
+                    menuState = MenuState::MainMenu;
+                }else if (PlayAgainSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
+                    game.reset();
+                    menuState = MenuState::GameRunning;
+                }
+            break;
         default:
           break;
       }
