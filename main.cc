@@ -28,9 +28,19 @@ int main() {
 
 
     sf::Texture homeBackgroundTexture;
-    homeBackgroundTexture.loadFromFile("resources/Home_Background.png");
+    homeBackgroundTexture.loadFromFile("resources/Background_menu_principal.png");
     sf::Sprite homeBackgroundSprite(homeBackgroundTexture);
     homeBackgroundSprite.setPosition(0, 0);
+
+    sf::Texture MapSelectionBackgroundTexture;
+    MapSelectionBackgroundTexture.loadFromFile("resources/Background_selection_map.png");
+    sf::Sprite MapSelectionBackgroundSprite(MapSelectionBackgroundTexture);
+    MapSelectionBackgroundSprite.setPosition(0, 0);
+
+    sf::Texture PauseBackgroundTexture;
+    PauseBackgroundTexture.loadFromFile("resources/Background_pause.png");
+    sf::Sprite PauseBackgroundSprite(PauseBackgroundTexture);
+    PauseBackgroundSprite.setPosition(0, 0);
 
     sf::Texture resumeTexture;
     resumeTexture.loadFromFile("resources/resumebutton.png");
@@ -46,15 +56,15 @@ int main() {
     sf::Texture button1Texture;
     button1Texture.loadFromFile("resources/1.png");
     sf::Sprite button1Sprite(button1Texture);
-    button1Sprite.setPosition(50, 50);
+    button1Sprite.setPosition(50, 100);
     sf::Texture button2Texture;
     button2Texture.loadFromFile("resources/2.png");
     sf::Sprite button2Sprite(button2Texture);
-    button2Sprite.setPosition(150, 50);
+    button2Sprite.setPosition(150, 100);
     sf::Texture button3Texture;
     button3Texture.loadFromFile("resources/3.png");
     sf::Sprite button3Sprite(button3Texture);
-    button3Sprite.setPosition(250, 50);
+    button3Sprite.setPosition(250, 100);
     
     sf::Texture map1Texture;
     map1Texture.loadFromFile("resources/map1.png");
@@ -114,6 +124,7 @@ int main() {
                 }
             break;
         case MenuState::GameMenu:
+            window.draw(PauseBackgroundSprite);
             window.draw(resumeSprite);
             window.draw(mainMenuSprite);
             if (resumeSprite.getGlobalBounds().contains(sf::Vector2f(mousePositionClicked.x, mousePositionClicked.y))) {
@@ -124,6 +135,7 @@ int main() {
             break;
 
         case MenuState::MapSelection:
+            window.draw(MapSelectionBackgroundSprite);
             window.draw(button1Sprite);
             window.draw(button2Sprite);
             window.draw(button3Sprite);
